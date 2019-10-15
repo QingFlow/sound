@@ -1,0 +1,157 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  user-select: none;
+}
+
+.app-guess-song-my-favorite-header-container {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 微软雅黑;
+
+  .header-info-container {
+    display: flex;
+
+    .header-info-img {
+      width: 199px;
+      height: 199px;
+    }
+
+    .header-info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 30px;
+
+      .header-info-describe {
+        display: flex;
+        align-items: center;
+
+        .header-info-type {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 5px;
+          width: 38px;
+          height: 20px;
+          border: 1px solid #e03f40;
+          color: #e03f40;
+          font-size: 12px;
+        }
+
+        .header-info-name {
+          font-size: 23px;
+        }
+      }
+
+      .header-info-user {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        color: #666;
+
+        .header-info-user-avatar {
+          width: 30px;
+          height: 30px;
+          border: 1px solid #e2e4e2;
+          border-radius: 50%;
+        }
+
+        .header-info-user-name {
+          margin-left: 9px;
+          font-size: 14px;
+        }
+
+        .header-info-user-create-time {
+          margin-left: 16px;
+          font-size: 12px;
+        }
+      }
+
+      .header-info-actions {
+        display: flex;
+        margin-top: 17px;
+
+        button {
+          padding: 0px 9px;
+          background: #fff;
+          color: #000;
+          border: 1px solid #e1e1e2;
+          height: 26px;
+          outline: none;
+          border-radius: 5px;
+          cursor: pointer;
+
+          &:hover {
+            background: #fafafa;
+          }
+
+          &:active {
+            background: #fafafa;
+          }
+
+          &:not(:first-child) {
+            margin-left: 10px;
+          }
+
+          &.emphasize {
+            background: #c62f2f;
+            color: #fff;
+
+            &:hover {
+              background: #a62121;
+            }
+
+            &:active {
+              background: #a62121;
+            }
+          }
+
+          &.mode {
+            color: black;
+          }
+
+          >div {
+            display: flex;
+            margin-top: 4px;
+            position: relative;
+
+            .svg-container {
+              position: absolute;
+
+              app-svg {
+                position: relative;
+                top: -2px;
+              }
+            }
+
+            .button-title {
+              margin-left: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .album-info {
+    display: flex;
+    color: #999;
+    font-size: 12px;
+    height: 33.5px;
+
+    .album-info-songs {
+      padding-right: 9px;
+      border-right: 1px solid #e1e1e2;
+    }
+
+    .album-info-plays {
+      padding-left: 10px;
+    }
+
+    .album-info-number {
+      float: right;
+      font-weight: bold;
+    }
+  }
+}

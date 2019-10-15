@@ -1,0 +1,83 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  user-select: none;
+}
+
+.header-container {
+  display: flex;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+
+    .icon-net-ease-cloud-music {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+
+      &>div {
+        width: 15px;
+        height: 15px;
+        margin-bottom: 2px;
+      }
+    }
+
+    .title {
+      margin-left: 8px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+
+  .direction-container {
+    display: flex;
+    margin-left: 55px;
+
+    .smaller-than-container,
+    .greater-than-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 26px;
+      height: 21px;
+      border: 1px solid #a82828;
+      cursor: pointer;
+
+      &:active {
+        background: #a62121;
+      }
+
+      .greater-than {
+        margin-bottom: 1px;
+        width: 6px;
+        height: 6px;
+        border-top: 1.5px solid #fff;
+        border-right: 1.5px solid #fff;
+        transform: rotate(45deg);
+      }
+
+      .smaller-than {
+        @extend .greater-than;
+        transform: rotate(-135deg);
+      }
+    }
+
+    .smaller-than-container {
+      border-top-left-radius: 10%;
+      border-bottom-left-radius: 10%;
+    }
+
+    .greater-than-container {
+      border-top-right-radius: 10%;
+      border-bottom-right-radius: 10%;
+      border-left: none;
+    }
+  }
+}

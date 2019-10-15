@@ -1,0 +1,60 @@
+<div class="app-guess-song-my-favorite-header-container">
+  <div class="header-info-container">
+    <img class="header-info-img" src="../../../assets/images/music.jpg">
+    <div class="header-info">
+      <div class="header-info-describe">
+        <div class="header-info-type">歌单</div>
+        <div class="header-info-name">我喜欢的音乐</div>
+      </div>
+      <div class="header-info-user">
+        <img class="header-info-user-avatar" src="../../../assets/images/qingflow.png">
+        <div class="header-info-user-name">轻流</div>
+        <div class="header-info-user-create-time">2019-10-04创建</div>
+      </div>
+      <div class="header-info-actions">
+        <button type="button mode" [ngClass]="{'emphasize': mode}" (click)="modeChange()">
+          <div>
+            <div class="svg-container">
+              <app-svg [type]="mode ? 'half-circle' : 'circle'"></app-svg>
+            </div>
+            <span class="button-title">{{ mode ? '副歌模式' : '完整模式' }}</span>
+          </div>
+        </button>
+        <button type="button">
+          <div>
+            <div class="svg-container">
+              <app-svg type="direction"></app-svg>
+            </div>
+            <span class="button-title">游戏规则</span>
+          </div>
+        </button>
+        <button type="button">
+          <div>
+            <div class="svg-container">
+              <app-svg type="strong"></app-svg>
+            </div>
+            <span class="button-title">我要开挂</span>
+          </div>
+        </button>
+        <button type="button">
+          <div>
+            <div class="svg-container">
+              <app-svg type="share"></app-svg>
+            </div>
+            <span class="button-title">分享</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="album-info">
+    <div class="album-info-songs">
+      <div class="album-info-songs-title">歌曲数</div>
+      <div class="album-info-number">570</div>
+    </div>
+    <div class="album-info-plays">
+      <div class="album-info-plays-title">播放数</div>
+      <div class="album-info-number">7920</div>
+    </div>
+  </div>
+</div>
