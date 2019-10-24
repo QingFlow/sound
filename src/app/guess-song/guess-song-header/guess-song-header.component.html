@@ -7,17 +7,17 @@
         <div class="header-info-name">我喜欢的音乐</div>
       </div>
       <div class="header-info-user">
-        <img class="header-info-user-avatar" src="../../../assets/images/qingflow.png">
-        <div class="header-info-user-name">轻流</div>
+        <img class="header-info-user-avatar" src="../../../assets/images/inuyasha.jpg">
+        <div class="header-info-user-name">Eve</div>
         <div class="header-info-user-create-time">2019-10-04创建</div>
       </div>
       <div class="header-info-actions">
-        <button type="button mode" [ngClass]="{'emphasize': mode}" (click)="modeChange()">
+        <button type="button" class="emphasize">
           <div>
             <div class="svg-container">
-              <app-svg [type]="mode ? 'half-circle' : 'circle'"></app-svg>
+              <app-svg type="strong"></app-svg>
             </div>
-            <span class="button-title">{{ mode ? '副歌模式' : '完整模式' }}</span>
+            <span class="button-title">我要开挂</span>
           </div>
         </button>
         <button type="button">
@@ -26,14 +26,6 @@
               <app-svg type="direction"></app-svg>
             </div>
             <span class="button-title">游戏规则</span>
-          </div>
-        </button>
-        <button type="button">
-          <div>
-            <div class="svg-container">
-              <app-svg type="strong"></app-svg>
-            </div>
-            <span class="button-title">我要开挂</span>
           </div>
         </button>
         <button type="button">

@@ -1,8 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { toDoubleInteger, toSeconds } from 'src/app/core/common/common';
+import { isNullOrUndefined } from 'util';
+
+interface Song {
+  title: string; // 标题
+  name: string[]; // 歌名, 使用数组的方式匹配多个歌名, 防止多名歌曲
+  singer: string; // 歌手
+  album: string; // 专辑
+  totalTime: string; // 时长
+  startTime: string; // 副歌开始时间
+  endTime: string; // 副歌结束时间
+  selected: boolean; // 是否为当前鼠标选中项
+  playing: boolean; // 是否处于播放状态
+  guessing: boolean; // 是否正在猜题
+  right: boolean; // 是否已答题
+}
 
 @Component({
   selector: 'app-guess-song-list',
@@ -15,64 +30,146 @@ export class AppGuessSongListComponent implements OnInit {
   private audio = new Audio();
   private playDelay = 0;
   private validCheckTimer: NodeJS.Timer;
-  private mode = true; // true: 副歌模式, false: 完整模式
   private pauseTimer: NodeJS.Timer;
   private fadeOutTimer: NodeJS.Timer;
   private fadeInTimer: NodeJS.Timer;
 
+  public showAlert: boolean;
   public pause: boolean; // true: 播放, false: 暂停
-  public songsList = [
+  public songsList: Song[] = [
     {
-      title: '巧乐兹 - 爱河 (抖音版) (Cover：蒋雪儿).mp3',
+      title: 'Clever勺子 - 如果我变成回忆(吉他女版)（Cover：Tank）.mp3',
+      name: ['如果我变成回忆'],
       singer: '阴阳师',
       album: '我要的(完整版)',
-      totalTime: '02:13',
-      startTime: '00:00',
-      endTime: '00:31',
+      totalTime: '04:46',
+      startTime: '01:13',
+      endTime: '02:13',
       selected: false,
-      playing: false
+      playing: false,
+      guessing: false,
+      right: false
     },
     {
-      title: '糯米Nomi,Babystop_山竹 - 痴心绝对（糯米欢快版）（Cover：李圣杰）.mp3',
+      title: 'FIELD OF VIEW - Dandan心魅かれてく(渐渐被你吸引).mp3',
+      name: ['痴心绝渐渐被你吸引对'],
       singer: '阴阳师',
       album: '我要的(完整版)',
-      totalTime: '02:13',
-      startTime: '00:02',
-      endTime: '00:37',
+      totalTime: '03:34',
+      startTime: '00:04',
+      endTime: '00:21',
       selected: false,
-      playing: false
+      playing: false,
+      guessing: false,
+      right: false
     },
     {
       title: '泥鳅Niko - 樱花草（男版）（Cover：Sweety）.mp3',
+      name: ['樱花草'],
       singer: '阴阳师',
       album: '我要的(完整版)',
       totalTime: '02:13',
       startTime: '1:11',
       endTime: '1:39',
       selected: false,
-      playing: false
+      playing: false,
+      guessing: false,
+      right: false
     },
     {
-      title: '毛阿敏 - 相思.mp3',
+      title: 'Westlife - My Love (Radio Edit).mp3',
+      name: ['相思'],
       singer: '阴阳师',
       album: '我要的(完整版)',
-      totalTime: '02:13',
-      startTime: '00:49',
-      endTime: '01:20',
+      totalTime: '03:53',
+      startTime: '01:58',
+      endTime: '02:38',
       selected: false,
-      playing: false
+      playing: false,
+      guessing: false,
+      right: false
     },
     {
-      title: '陈雪凝 - 绿色.mp3',
+      title: '杨搏 - 遇见.mp3',
+      name: ['遇见'],
       singer: '阴阳师',
       album: '我要的(完整版)',
-      totalTime: '02:13',
-      startTime: '00:56',
-      endTime: '01:27',
+      totalTime: '03:39',
+      startTime: '01:15',
+      endTime: '01:38',
       selected: false,
-      playing: false
+      playing: false,
+      guessing: false,
+      right: false
+    },
+    {
+      title: '水木年华 - 一生有你.mp3',
+      name: ['一生有你'],
+      singer: '阴阳师',
+      album: '我要的(完整版)',
+      totalTime: '04:18',
+      startTime: '03:08',
+      endTime: '03:54',
+      selected: false,
+      playing: false,
+      guessing: false,
+      right: false
+    },
+    {
+      title: '胡歌 - 忘记时间.mp3',
+      name: ['忘记时间'],
+      singer: '阴阳师',
+      album: '我要的(完整版)',
+      totalTime: '04:32',
+      startTime: '01:32',
+      endTime: '02:00',
+      selected: false,
+      playing: false,
+      guessing: false,
+      right: false
+    },
+    {
+      title: '莫文蔚 - 盛夏的果实.mp3',
+      name: ['盛夏的果实'],
+      singer: '阴阳师',
+      album: '我要的(完整版)',
+      totalTime: '04:10',
+      startTime: '02:42',
+      endTime: '03:50',
+      selected: false,
+      playing: false,
+      guessing: false,
+      right: false
+    },
+    {
+      title: 'Backstreet Boys - As Long as You Love Me.mp3',
+      name: ['As Long as You Love Me'],
+      singer: '阴阳师',
+      album: '我要的(完整版)',
+      totalTime: '03:32',
+      startTime: '00:57',
+      endTime: '01:18',
+      selected: false,
+      playing: false,
+      guessing: false,
+      right: false
+    },
+    {
+      title: '蔡依林,周杰伦 - 布拉格广场.mp3',
+      name: ['布拉格广场'],
+      singer: '阴阳师',
+      album: '我要的(完整版)',
+      totalTime: '04:54',
+      startTime: '01:00',
+      endTime: '01:41',
+      selected: false,
+      playing: false,
+      guessing: false,
+      right: false
     }
   ];
+
+  @ViewChild('gussInput', { static: false }) input: ElementRef;
 
   // 保留两位整数, 1 => 01
   public getIndex(index: number): string {
@@ -85,19 +182,13 @@ export class AppGuessSongListComponent implements OnInit {
     this.songsList[index].selected = true;
   }
 
-  constructor(
-    private appService: AppService
-  ) { }
-  check(): void {
-  }
-
   // 播放歌曲
-  public playAudio(item: any): void {
+  public playAudio(item: Song): void {
     const startTime = toSeconds(item.startTime);
     const endTime = toSeconds(item.endTime) - 0.5; // - 0.5是为了适应淡出的时间
     if (this.src === item.title) { // 点击是同一首歌时不操作
       if (this.audio.paused) { // 处于播放状态不操作
-        if (this.mode) {
+        if (!item.right) {
           const currentTime = this.audio.currentTime;
           if (currentTime >= startTime && currentTime <= endTime) { // 当前播放进度处在合法范围内
             this.appService.pauseOrPlay$.next(true);
@@ -124,10 +215,16 @@ export class AppGuessSongListComponent implements OnInit {
     setTimeout(() => {
       this.audio.currentTime = 0;
       this.audio.src = `../../assets/musics/${item.title}`;
-      if (this.mode) {
+      if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画
+        this.showAlert = false;
+      }
+      if (!item.right) {
         this.audio.currentTime = startTime;
         // 当播放进度超出合法范围时, 停止播放
         this.validCheckTimer = setInterval(() => {
+          if (endTime <= (this.audio.currentTime + 5)) {
+            this.showAlert = true;
+          }
           if (this.audio.currentTime > endTime) {
             this.fadeOut();
             clearInterval(this.validCheckTimer);
@@ -193,20 +290,47 @@ export class AppGuessSongListComponent implements OnInit {
     }
   }
 
+  // #region 猜题相关
+  // 点击猜题按钮
+  public guessStart(item: Song): void {
+    item.guessing = true;
+    setTimeout(() => this.input.nativeElement.focus());
+  }
+
+  // 失焦的时候
+  public guessingBluerHandler(): void {
+    this.songsList.forEach((item, _index) => item.guessing = false);
+  }
+
+  // 校验答案
+  public guessSong(answer: string, item: Song): void {
+    if (item.name.includes(answer)) {
+      item.right = true;
+    }
+  }
+  // #endregion
+
+  constructor(
+    private appService: AppService
+  ) { }
+
   ngOnInit(): void {
     // 监听歌曲结束时, 切下一首歌
     this.audio.onpause = () => {
-      if (this.mode) {
-        const playingSong = this.songsList.find(v => v.playing);
+      const playingSong = this.songsList.find(v => v.playing);
+      if (!playingSong.right) {
+        // 要判断当前的暂停是否是超出合法范围引起的, 若为人工暂停则无需下一首
         if (this.audio.currentTime >= toSeconds(playingSong.endTime) - 1) {
           this.nextSong();
         }
       } else {
+        // 已解锁的歌曲, 只有歌曲唱完才下一首
         if (this.audio.currentTime === this.audio.duration) {
           this.nextSong();
         }
       }
     };
+    /** 监听上一首、下一首、暂停的动作 */
     this.appService.previousSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       const playingSongIndex = this.songsList.findIndex(v => v.playing);
       this.songsList.forEach(v => v.playing = false);
@@ -221,6 +345,5 @@ export class AppGuessSongListComponent implements OnInit {
       this.pause = v;
       v ? this.fadeIn() : this.fadeOut();
     });
-    this.appService.modeChange$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => this.mode = v);
   }
 }

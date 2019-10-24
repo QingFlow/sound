@@ -1,6 +1,6 @@
-<div class="app-guess-song-my-favorite-songs-container">
-  <table>
-    <tr class="table-header">
+<table>
+  <thead>
+    <tr>
       <td class="no"></td>
       <td class="operation">操作</td>
       <td class="title">音乐标题</td>
@@ -8,26 +8,43 @@
       <td class="album">专辑</td>
       <td class="time">时长</td>
     </tr>
-    <tbody class="table-body">
-      <ng-container *ngFor="let item of songsList; let index = index;">
-        <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="playAudio(item)">
-          <td class="td-no">
-            <span>
-              <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
-              <ng-container *ngIf="item.playing">
-                <app-svg type="playing"></app-svg>
-                <div *ngIf="pause" class="mute"></div>
-              </ng-container>
-            </span>
-          </td>
-          <td>答题</td>
-          <td>{{ item.title }}</td>
-          <td>{{ item.singer }}</td>
-          <td>{{ item.album }}</td>
-          <td>{{ item.totalTime }}</td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
+  </thead>
+  <tbody class="table-body">
+    <ng-container *ngFor="let item of songsList; let index = index;">
+      <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="playAudio(item)">
+        <td class="td-no">
+          <span>
+            <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
+            <ng-container *ngIf="item.playing">
+              <app-svg type="playing"></app-svg>
+              <div *ngIf="pause" class="mute"></div>
+            </ng-container>
+          </span>
+        </td>
+        <td>
+          <ng-container *ngIf="item.right">
+            <app-svg type="red-heart" class="red-heart"></app-svg>
+          </ng-container>
+          <ng-container *ngIf="!item.right">
+            <span *ngIf="!item.guessing" class="operation" (click)="guessStart(item)">答题</span>
+            <input
+              *ngIf="item.guessing"
+              #gussInput
+              class="guessInput"
+              type="text"
+              (blur)="guessingBluerHandler()"
+              (keyup.enter)="guessSong(gussInput.value, item)">
+          </ng-container>
+        </td>
+        <td [ngClass]="{'right': item.right}">{{ item.title }}</td>
+        <td [ngClass]="{'right': item.right}">{{ item.singer }}</td>
+        <td [ngClass]="{'right': item.right}">{{ item.album }}</td>
+        <td [ngClass]="{'right': item.right}">{{ item.totalTime }}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<div class="alert" [ngClass]="{'slideup': showAlert === true, 'slidedown': showAlert === false}">
+  尚未解锁该歌曲, 仅能听副歌部分, 即将播放下一首~
 </div>
-<!-- <button (click)="check()">zzzzz</button> -->

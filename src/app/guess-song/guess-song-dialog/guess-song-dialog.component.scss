@@ -1,0 +1,23 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  user-select: none;
+}
+
+.app-guess-song-dialog-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 234px;
+  height: 100px;
+  background: rgb(50, 50, 50);
+
+  .title {
+    margin-top: 25px;
+    color: #fff;
+  }
+
+  .input-container {
+    margin-top: 20px;
+  }
+}

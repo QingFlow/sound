@@ -8,5 +8,4 @@ export class AppService {
   public previousSong$ = new Subject<void>();
   public nextSong$ = new Subject<void>();
   public pauseOrPlay$ = new Subject<boolean>(); // true: 播放, false: 暂停
-  public modeChange$ = new Subject<boolean>(); // true: 副歌模式, false: 完整模式
 }
