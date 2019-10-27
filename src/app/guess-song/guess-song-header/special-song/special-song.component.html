@@ -1,0 +1,16 @@
+<div class="app-special-song-container">
+  <div class="header">
+    <div *ngIf="showTitle" class="title">念念不忘, 必有回响</div>
+    <div class="close" (click)="close.emit()"></div>
+  </div>
+  <div class="body">
+    <p>{{ introduction[0] }}</p>
+    <p>{{ introduction[1] }}{{ introduction[2] }}{{ introduction[3] }}</p>
+    <p>{{ introduction[4] }}{{ introduction[5] }}</p>
+    <p>{{ introduction[6] }}{{ introduction[7] }}</p>
+    <p>{{ introduction[8] }}</p>
+  </div>
+  <div class="footer">
+    <input #gussInput *ngIf="showInput" type="text" placeholder="请输入这首BGM的名字即可获得多把钥匙!">
+  </div>
+</div>

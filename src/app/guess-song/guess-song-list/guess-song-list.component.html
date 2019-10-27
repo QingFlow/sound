@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <td class="no"></td>
-      <td class="operation">操作</td>
+      <td class="operation">操作(点击解锁歌曲)</td>
       <td class="title">音乐标题</td>
       <td class="singer">歌手</td>
       <td class="album">专辑</td>
@@ -15,23 +15,27 @@
         <td class="td-no">
           <span>
             <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
+            <!-- 只有播放的那条记录显示播放状态icon -->
             <ng-container *ngIf="item.playing">
               <app-svg type="playing"></app-svg>
-              <div *ngIf="pause" class="mute"></div>
+              <div *ngIf="!pause" class="mute"></div>
             </ng-container>
           </span>
         </td>
-        <td>
+        <td class="operation" (click)="guessStart(item)">
           <ng-container *ngIf="item.right">
-            <app-svg type="red-heart" class="red-heart"></app-svg>
+            <app-svg type="unlock" class="unlock"></app-svg>
           </ng-container>
           <ng-container *ngIf="!item.right">
-            <span *ngIf="!item.guessing" class="operation" (click)="guessStart(item)">答题</span>
+            <span *ngIf="!item.guessing">
+              <app-svg type="lock" color="#c62f2f"></app-svg>
+            </span>
             <input
               *ngIf="item.guessing"
               #gussInput
               class="guessInput"
               type="text"
+              placeholder="请输入歌名"
               (blur)="guessingBluerHandler()"
               (keyup.enter)="guessSong(gussInput.value, item)">
           </ng-container>

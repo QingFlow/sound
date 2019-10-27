@@ -12,4 +12,5 @@ export class AppSvgComponent {
   @Input() right = '0px';
   @Input() bottom = '0px';
   @Input() left = '0px';
+  @Input() color = 'inherit';
 }

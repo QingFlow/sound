@@ -3,8 +3,8 @@
     <img class="header-info-img" src="../../../assets/images/music.jpg">
     <div class="header-info">
       <div class="header-info-describe">
-        <div class="header-info-type">歌单</div>
-        <div class="header-info-name">我喜欢的音乐</div>
+        <div class="header-info-type">游戏</div>
+        <div class="header-info-name">听歌识曲</div>
       </div>
       <div class="header-info-user">
         <img class="header-info-user-avatar" src="../../../assets/images/inuyasha.jpg">
@@ -12,12 +12,12 @@
         <div class="header-info-user-create-time">2019-10-04创建</div>
       </div>
       <div class="header-info-actions">
-        <button type="button" class="emphasize">
+        <button type="button" class="emphasize" (click)="getKey()">
           <div>
             <div class="svg-container">
-              <app-svg type="strong"></app-svg>
+              <app-svg type="key"></app-svg>
             </div>
-            <span class="button-title">我要开挂</span>
+            <span class="button-title">获取钥匙</span>
           </div>
         </button>
         <button type="button">
@@ -49,4 +49,5 @@
       <div class="album-info-number">7920</div>
     </div>
   </div>
+  <app-special-song *ngIf="showSpecialSong" (close)="close()"></app-special-song>
 </div>

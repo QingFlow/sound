@@ -4,20 +4,8 @@ import { takeUntil } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { toDoubleInteger, toSeconds } from 'src/app/core/common/common';
 import { isNullOrUndefined } from 'util';
+import { songsList, Song } from './song';
 
-interface Song {
-  title: string; // 标题
-  name: string[]; // 歌名, 使用数组的方式匹配多个歌名, 防止多名歌曲
-  singer: string; // 歌手
-  album: string; // 专辑
-  totalTime: string; // 时长
-  startTime: string; // 副歌开始时间
-  endTime: string; // 副歌结束时间
-  selected: boolean; // 是否为当前鼠标选中项
-  playing: boolean; // 是否处于播放状态
-  guessing: boolean; // 是否正在猜题
-  right: boolean; // 是否已答题
-}
 
 @Component({
   selector: 'app-guess-song-list',
@@ -33,141 +21,11 @@ export class AppGuessSongListComponent implements OnInit {
   private pauseTimer: NodeJS.Timer;
   private fadeOutTimer: NodeJS.Timer;
   private fadeInTimer: NodeJS.Timer;
+  private canPlay = true; // 是否允许播放歌曲
 
-  public showAlert: boolean;
+  public showAlert: boolean; // 防止一开始就出现动画, 所以该值初始化为false
   public pause: boolean; // true: 播放, false: 暂停
-  public songsList: Song[] = [
-    {
-      title: 'Clever勺子 - 如果我变成回忆(吉他女版)（Cover：Tank）.mp3',
-      name: ['如果我变成回忆'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '04:46',
-      startTime: '01:13',
-      endTime: '02:13',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: 'FIELD OF VIEW - Dandan心魅かれてく(渐渐被你吸引).mp3',
-      name: ['痴心绝渐渐被你吸引对'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '03:34',
-      startTime: '00:04',
-      endTime: '00:21',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: '泥鳅Niko - 樱花草（男版）（Cover：Sweety）.mp3',
-      name: ['樱花草'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '02:13',
-      startTime: '1:11',
-      endTime: '1:39',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: 'Westlife - My Love (Radio Edit).mp3',
-      name: ['相思'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '03:53',
-      startTime: '01:58',
-      endTime: '02:38',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: '杨搏 - 遇见.mp3',
-      name: ['遇见'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '03:39',
-      startTime: '01:15',
-      endTime: '01:38',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: '水木年华 - 一生有你.mp3',
-      name: ['一生有你'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '04:18',
-      startTime: '03:08',
-      endTime: '03:54',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: '胡歌 - 忘记时间.mp3',
-      name: ['忘记时间'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '04:32',
-      startTime: '01:32',
-      endTime: '02:00',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: '莫文蔚 - 盛夏的果实.mp3',
-      name: ['盛夏的果实'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '04:10',
-      startTime: '02:42',
-      endTime: '03:50',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: 'Backstreet Boys - As Long as You Love Me.mp3',
-      name: ['As Long as You Love Me'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '03:32',
-      startTime: '00:57',
-      endTime: '01:18',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    },
-    {
-      title: '蔡依林,周杰伦 - 布拉格广场.mp3',
-      name: ['布拉格广场'],
-      singer: '阴阳师',
-      album: '我要的(完整版)',
-      totalTime: '04:54',
-      startTime: '01:00',
-      endTime: '01:41',
-      selected: false,
-      playing: false,
-      guessing: false,
-      right: false
-    }
-  ];
+  public songsList = songsList;
 
   @ViewChild('gussInput', { static: false }) input: ElementRef;
 
@@ -184,6 +42,13 @@ export class AppGuessSongListComponent implements OnInit {
 
   // 播放歌曲
   public playAudio(item: Song): void {
+    // #region 疯狂切换歌曲有播放异常, 因为使用了大量计时器, 暂时用这种笨办法解决
+    if (!this.canPlay) {
+      return;
+    }
+    this.canPlay = false;
+    setTimeout(() => this.canPlay = true, 1000);
+    // #endregion
     const startTime = toSeconds(item.startTime);
     const endTime = toSeconds(item.endTime) - 0.5; // - 0.5是为了适应淡出的时间
     if (this.src === item.title) { // 点击是同一首歌时不操作
@@ -215,7 +80,7 @@ export class AppGuessSongListComponent implements OnInit {
     setTimeout(() => {
       this.audio.currentTime = 0;
       this.audio.src = `../../assets/musics/${item.title}`;
-      if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画
+      if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画, 所以该值初始化为false
         this.showAlert = false;
       }
       if (!item.right) {
@@ -291,10 +156,13 @@ export class AppGuessSongListComponent implements OnInit {
   }
 
   // #region 猜题相关
-  // 点击猜题按钮
+  // 点击操作栏
   public guessStart(item: Song): void {
-    item.guessing = true;
-    setTimeout(() => this.input.nativeElement.focus());
+    if (!item.right && this.canPlay) {
+      item.guessing = true;
+      setTimeout(() => this.input.nativeElement.focus());
+      this.playAudio(item);
+    }
   }
 
   // 失焦的时候
@@ -344,6 +212,12 @@ export class AppGuessSongListComponent implements OnInit {
     this.appService.pauseOrPlay$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
       this.pause = v;
       v ? this.fadeIn() : this.fadeOut();
+    });
+    // 监听特殊歌曲
+    this.appService.specialSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
+      if (v) {
+        this.appService.pauseOrPlay$.next(false);
+      }
     });
   }
 }

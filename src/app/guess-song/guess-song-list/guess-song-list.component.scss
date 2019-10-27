@@ -14,7 +14,6 @@
   &.slideup {
     bottom: 160px;
     animation: slideup .4s linear;
-
     @keyframes slideup {
       from {
         bottom: 0px;
@@ -28,7 +27,6 @@
   &.slidedown {
     bottom: 0px;
     animation: slidedown .4s linear;
-
     @keyframes slidedown {
       from {
         bottom: 160px;
@@ -65,7 +63,7 @@ table {
       }
 
       .operation {
-        width: 200px;
+        width: 170px;
       }
 
       .title {
@@ -122,36 +120,16 @@ table {
     td {
       height: 28px;
 
-      .operation {
+      &.operation {
         cursor: pointer;
       }
 
       .guessInput {
-        animation: run .2s linear;
-
-        @keyframes run {
-          from {
-            width: 0px;
-          }
-
-          to {
-            width: 160px;
-          }
-        }
+        animation: fade .2s linear;
       }
 
-      .red-heart {
-        animation: run .2s linear;
-
-        @keyframes run {
-          from {
-            opacity: 0;
-          }
-
-          to {
-            opacity: 1;
-          }
-        }
+      .unlock {
+        animation: fade .2s linear;
       }
 
       &:nth-child(n+3) {
@@ -193,5 +171,15 @@ table {
 
   td {
     padding-left: 9px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

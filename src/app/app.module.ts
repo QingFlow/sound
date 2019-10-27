@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { AppSidebarComponent } from './sidebar/sidebar.component';
@@ -13,6 +12,7 @@ import { AppGuessSongProgressComponent } from './guess-song/guess-song-progress/
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppGuessSongDialogComponent } from './guess-song/guess-song-dialog/guess-song-dialog.component';
+import { AppSpecialSongComponent } from './guess-song/guess-song-header/special-song/special-song.component';
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { AppGuessSongDialogComponent } from './guess-song/guess-song-dialog/gues
     AppGuessSongHeaderComponent,
     AppGuessSongListComponent,
     AppGuessSongProgressComponent,
+    AppSpecialSongComponent,
     AppGuessSongDialogComponent
   ],
   entryComponents: [
