@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { from, of, concat, Observable, Subject } from 'rxjs';
 import { delay, concatMap, tap, takeUntil } from 'rxjs/operators';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-special-song',
@@ -9,9 +10,13 @@ import { delay, concatMap, tap, takeUntil } from 'rxjs/operators';
 })
 export class AppSpecialSongComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
+  private audio = new Audio();
 
+  public wrong = false; // 是否答题错误
+  public showKeys = false;
   public showTitle = false;
   public showInput = false;
+  public finish = false; // 结束时收起输入框的动画
   public introduction: string[] = ['', '', '', '', '', '', '', '', ''];
   public _introduction = [
     '在成长的过程中, 我们会遇到成千上万的人.',
@@ -26,13 +31,43 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   ];
 
   @Output() close: EventEmitter<null> = new EventEmitter<null>();  // 关闭弹窗
+  @Output() guessRight: EventEmitter<null> = new EventEmitter<null>();  // 答题成功, 获得钥匙
 
-  @ViewChild('gussInput', { static: false }) input: ElementRef;
+  @ViewChild('guessInput', { static: false }) input: ElementRef;
+
+  public validAnswer(answer: string): void {
+    if (answer === '1') {
+      this.finish = true;
+      setTimeout(() => {
+        this.showKeys = true;
+        setTimeout(() => {
+          this.guessRight.emit();
+        }, 2000);
+        setTimeout(() => {
+          this.close.emit();
+          this.showKeys = false;
+        }, 2500);
+      }, 1000);
+    } else {
+      this.wrong = true;
+    }
+  }
+
+  constructor(
+    private appService: AppService
+  ) { }
 
   ngOnInit(): void {
+    // 播放世界上最好听的BGM
+    this.appService.specialSong$.next(true);
+    this.audio.src = `../../../../assets/musics/穿越时空的思念.mp3`;
+    this.audio.loop = true;
+    // this.audio.play(); // 先注释, 快听吐了
+
     setTimeout(() => this.showTitle = true, 1000);
     const introduction$: Observable<string>[] = [];
-    this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(100))), tap(char => this.introduction[index] += char)).pipe(delay(1000))));
+    this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(1))), tap(char => this.introduction[index] += char)).pipe(delay(10))));
+    // this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(100))), tap(char => this.introduction[index] += char)).pipe(delay(1000))));
     setTimeout(() => {
       // takeUntil没起作用
       concat(...introduction$).pipe(takeUntil(this.unsubscribe$)).subscribe({
@@ -41,10 +76,12 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
           setTimeout(() => this.input.nativeElement.focus());
         }
       });
-    }, 2500);
+    }, 2000);
   }
 
   ngOnDestroy(): void {
+    this.audio.pause();
+    this.appService.specialSong$.next(false);
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

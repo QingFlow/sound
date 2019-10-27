@@ -32,12 +32,12 @@
             </span>
             <input
               *ngIf="item.guessing"
-              #gussInput
+              #guessInput
               class="guessInput"
               type="text"
               placeholder="请输入歌名"
               (blur)="guessingBluerHandler()"
-              (keyup.enter)="guessSong(gussInput.value, item)">
+              (keyup.enter)="guessSong(guessInput.value, item, index)">
           </ng-container>
         </td>
         <td [ngClass]="{'right': item.right}">{{ item.title }}</td>

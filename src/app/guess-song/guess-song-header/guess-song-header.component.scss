@@ -1,14 +1,11 @@
 * {
   margin: 0px;
   padding: 0px;
-  user-select: none;
 }
 
 .app-guess-song-my-favorite-header-container {
   position: relative;
   padding: 30px;
-  display: flex;
-  justify-content: space-between;
   font-family: 微软雅黑;
 
   .header-info-container {
@@ -131,24 +128,45 @@
     }
   }
 
-  .album-info {
+  .data-container {
+    position: absolute;
+    top: 28px;
+    right: 36px;
     display: flex;
     color: #999;
     font-size: 12px;
-    height: 33.5px;
 
-    .album-info-songs {
-      padding-right: 9px;
+    .data {
+      padding: 0px 10px;
       border-right: 1px solid #e1e1e2;
-    }
+      transition: opacity 1s linear;
 
-    .album-info-plays {
-      padding-left: 10px;
-    }
+      &.keys {
+        animation: keysFadeInRun 1s linear;
+      
+        @keyframes keysFadeInRun {
+          from {
+            opacity: 0;
+          }
+      
+          to {
+            opacity: 1;
+          }
+        }
+      }
+      
+      &:last-of-type {
+        border: none;
+      }
 
-    .album-info-number {
-      float: right;
-      font-weight: bold;
+      .title,
+      .info {
+        text-align: right;
+      }
+
+      .info {
+        font-weight: bold;
+      }
     }
   }
 }

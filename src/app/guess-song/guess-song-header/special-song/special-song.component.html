@@ -1,4 +1,4 @@
-<div class="app-special-song-container">
+<div class="app-special-song-container" [ngClass]="{'finish': finish}">
   <div class="header">
     <div *ngIf="showTitle" class="title">念念不忘, 必有回响</div>
     <div class="close" (click)="close.emit()"></div>
@@ -11,6 +11,22 @@
     <p>{{ introduction[8] }}</p>
   </div>
   <div class="footer">
-    <input #gussInput *ngIf="showInput" type="text" placeholder="请输入这首BGM的名字即可获得多把钥匙!">
+    <input
+      *ngIf="showInput"
+      #guessInput
+      type="text"
+      placeholder="输入这首BGM的名字, 即可获得神秘奖励!"
+      class="normal"
+      [ngClass]="{'wrong': wrong}"
+      (keyup.enter)="validAnswer(guessInput.value)">
+  </div>
+</div>
+
+<div *ngIf="showKeys" class="keys-container">
+  <div class="inner">
+    <app-svg
+      type="keys"
+      width="80px"
+      height="80px"></app-svg>
   </div>
 </div>

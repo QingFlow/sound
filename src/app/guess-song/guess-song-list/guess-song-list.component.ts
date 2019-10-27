@@ -27,7 +27,7 @@ export class AppGuessSongListComponent implements OnInit {
   public pause: boolean; // true: 播放, false: 暂停
   public songsList = songsList;
 
-  @ViewChild('gussInput', { static: false }) input: ElementRef;
+  @ViewChild('guessInput', { static: false }) input: ElementRef;
 
   // 保留两位整数, 1 => 01
   public getIndex(index: number): string {
@@ -171,9 +171,11 @@ export class AppGuessSongListComponent implements OnInit {
   }
 
   // 校验答案
-  public guessSong(answer: string, item: Song): void {
+  public guessSong(answer: string, item: Song, index: number): void {
     if (item.name.includes(answer)) {
       item.right = true;
+      this.rightList.push(index);
+      localStorage.setItem('rightList', JSON.stringify(this.rightList));
     }
   }
   // #endregion
@@ -181,8 +183,12 @@ export class AppGuessSongListComponent implements OnInit {
   constructor(
     private appService: AppService
   ) { }
-
+  // tslint:disable-next-line: member-ordering
+  public rightList: number[];
   ngOnInit(): void {
+    // 读取本地已答对歌曲数据
+    this.rightList = JSON.parse(localStorage.getItem('rightList')) || [];
+    this.rightList.forEach(v => this.songsList[v].right = true);
     // 监听歌曲结束时, 切下一首歌
     this.audio.onpause = () => {
       const playingSong = this.songsList.find(v => v.playing);

@@ -7,24 +7,39 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  padding-bottom: 22px;
   margin-left: calc(-250px - 100px);
   width: 500px;
   background: rgb(50, 50, 50);
   color: #fff;
   z-index: 999;
-  animation: specialSongContainerRun 1.5s linear;
+  overflow: hidden;
+  transition: all 2s linear;
+  animation: specialSongContainerRun 1s linear;
 
   @keyframes specialSongContainerRun {
     from {
-      max-height: 0px;
+      height: 0px;
     }
 
     to {
-      max-height: 1000px;
+      height: 65px;
     }
   }
 
+  &.finish {
+    height: 0px;
+    animation: specialSongContainerFinishRun 1s linear;
+
+    @keyframes specialSongContainerFinishRun {
+      from {
+        height: 404px;
+      }
+
+      to {
+        height: 0px;
+      }
+    }
+  }
 
   .header {
     display: flex;
@@ -34,8 +49,10 @@
 
     .title {
       margin-right: 170px;
+      opacity: 0;
       font-weight: bold;
       animation: specialSongHeaderTitleRun .8s linear;
+      animation-fill-mode: forwards;
 
       @keyframes specialSongHeaderTitleRun {
         from {
@@ -50,6 +67,7 @@
 
     .close {
       position: relative;
+      right: 8px;
       width: 20px;
       height: 20px;
       cursor: pointer;
@@ -81,11 +99,9 @@
   }
 
   .footer {
-    position: relative;
-
     input {
       display: block;
-      margin: 30px 0px 0px 35px;
+      margin: 30px 0px 24px 24px;
       width: 430px;
       animation: specialSongRun 1s linear;
 
@@ -97,6 +113,101 @@
         to {
           width: 430px;
         }
+      }
+
+      &.normal {
+        padding: 4px 11px;
+        height: 28px;
+        color: rgba(0, 0, 0, .65);
+        font-size: 14px;
+        border: 1px solid #d9d9d9;
+        border-color: #40a9ff;
+        border-radius: 4px;
+        transition: all .3s;
+        outline: 0;
+
+        &:focus {
+          box-shadow: 0 0 0 1px rgba(24, 144, 255, .8);
+        }
+      }
+
+
+      &.wrong {
+        border-color: #f5222d;
+
+        &:focus {
+          box-shadow: 0 0 0 1px rgba(245, 34, 45, .8);
+        }
+      }
+
+      &.finish {
+        animation: finishRun 1s linear;
+
+        @keyframes finishRun {
+          from {
+            width: 430px;
+          }
+
+          to {
+            width: 0px;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.keys-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -150px;
+  animation: keysFadeInRun 1s linear, keysTopMoveRun 1s linear 1s, keysFadeOutRun .5s linear 2s;
+  animation-fill-mode: forwards;
+
+  @keyframes keysFadeInRun {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes keysTopMoveRun {
+    from {
+      transform: translateX(0px);
+    }
+
+    to {
+      transform: translateX(590px);
+    }
+  }
+
+  @keyframes keysFadeOutRun {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .inner {
+    color: goldenrod;
+    animation: keysRightMoveRun 1s linear 1s;
+    animation-fill-mode: forwards;
+
+    @keyframes keysRightMoveRun {
+      from {
+        transform: translateY(0px);
+      }
+
+      to {
+        transform: translateY(-130px);
       }
     }
   }
