@@ -67,7 +67,7 @@
 
     .close {
       position: relative;
-      right: 8px;
+      right: 16px;
       width: 20px;
       height: 20px;
       cursor: pointer;
@@ -79,6 +79,7 @@
         width: 2px;
         height: 20px;
         background: #fff;
+        left: 8px;
       }
 
       &::before {

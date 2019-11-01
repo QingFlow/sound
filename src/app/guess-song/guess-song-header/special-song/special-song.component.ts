@@ -62,12 +62,13 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     this.appService.specialSong$.next(true);
     this.audio.src = `../../../../assets/musics/穿越时空的思念.mp3`;
     this.audio.loop = true;
-    // this.audio.play(); // 先注释, 快听吐了
+    this.audio.play(); // 先注释, 快听吐了
 
     setTimeout(() => this.showTitle = true, 1000);
     const introduction$: Observable<string>[] = [];
-    this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(1))), tap(char => this.introduction[index] += char)).pipe(delay(10))));
-    // this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(100))), tap(char => this.introduction[index] += char)).pipe(delay(1000))));
+    // 可以加速动画, 调试用
+    // this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(1))), tap(char => this.introduction[index] += char)).pipe(delay(10))));
+    this._introduction.forEach((value, index) => introduction$.push(from(value).pipe(concatMap(char => of(char).pipe(delay(100))), tap(char => this.introduction[index] += char)).pipe(delay(1000))));
     setTimeout(() => {
       // takeUntil没起作用
       concat(...introduction$).pipe(takeUntil(this.unsubscribe$)).subscribe({

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-guess-song-header',

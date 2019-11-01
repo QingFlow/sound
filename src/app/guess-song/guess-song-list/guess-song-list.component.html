@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <td class="no"></td>
-      <td class="operation">操作(点击解锁歌曲)</td>
+      <td class="operation">锁定状态</td>
       <td class="title">音乐标题</td>
       <td class="singer">歌手</td>
       <td class="album">专辑</td>
@@ -11,7 +11,7 @@
   </thead>
   <tbody class="table-body">
     <ng-container *ngFor="let item of songsList; let index = index;">
-      <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="playAudio(item)">
+      <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
         <td class="td-no">
           <span>
             <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
@@ -50,5 +50,5 @@
 </table>
 
 <div class="alert" [ngClass]="{'slideup': showAlert === true, 'slidedown': showAlert === false}">
-  尚未解锁该歌曲, 仅能听副歌部分, 即将播放下一首~
+  {{ tipText }}
 </div>
