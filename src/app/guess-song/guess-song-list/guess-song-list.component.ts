@@ -14,7 +14,7 @@ import { songsList, Song } from './song';
 })
 export class AppGuessSongListComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  private src: string;
+  private playingSong: Song; // 正在播放的歌曲
   private audio = new Audio();
   private playDelay = 0;
   private validCheckTimer: NodeJS.Timer;
@@ -46,7 +46,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   // 双击歌曲条目
   public tryToPlay(item: Song): void {
     // 如果双击的曲目和当前播放的曲目不同, 则立刻播放
-    if (this.src !== item.title) {
+    if (this.playingSong !== item) {
       this.playAudio(item);
       return;
     }
@@ -66,15 +66,13 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     if (currentTime >= startTime && currentTime <= endTime) { // 当前播放进度处在合法范围内
       this.appService.pauseOrPlay$.next(true);
     } else { // 不合法则重新播放
-      this.src = '';
       this.playAudio(item);
     }
   }
 
   // #region 猜题相关
-  // 点击开锁
+  // 点击开锁, 准备答题
   public guessStart(item: Song): void {
-    // if(this.)
     if (!item.right && this.canPlay) {
       item.guessing = true;
       setTimeout(() => this.input.nativeElement.focus());
@@ -87,38 +85,47 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     this.songsList.forEach((item, _index) => item.guessing = false);
   }
 
+  // 使用了钥匙, 直接开锁
+  public openLock(item: Song, index: number): void {
+    if (this.playingSong === item) {
+      clearInterval(this.validCheckTimer);
+      this.unLock(item, index);
+    } else {
+      this.unLock(item, index);
+      this.playAudio(item);
+    }
+    this.appService.keyExpend$.next();
+  }
+
   // 校验答案
   public guessSong(answer: string, item: Song, index: number): void {
     if (item.name.includes(answer)) {
-      item.right = true;
-      clearInterval(this.validCheckTimer);
-      this.rightList.push(index);
-      localStorage.setItem('rightList', JSON.stringify(this.rightList));
+      this.unLock(item, index);
     }
+  }
+
+  /** 解锁歌曲 */
+  private unLock(item: Song, index: number): void {
+    item.right = true;
+    clearInterval(this.validCheckTimer);
+    this.rightList.push(index);
+    localStorage.setItem('rightList', JSON.stringify(this.rightList));
   }
   // #endregion
 
   // 播放歌曲
   public playAudio(item: Song): void {
-    // #region 疯狂切换歌曲有播放异常, 因为使用了大量计时器, 可能哪里有问题, 暂时用这种笨办法解决
-    if (!this.canPlay) {
-      return;
-    }
-    this.canPlay = false;
-    setTimeout(() => this.canPlay = true, 1000);
-    // #endregion
     const startTime = toSeconds(item.startTime);
     const endTime = toSeconds(item.endTime) - 0.5; // - 0.5是为了适应淡出的时间
     this.songsList.forEach(v => v.playing = false);
     this.songsList.find(v => v.title === item.title).playing = true;
-    this.src = item.title;
+    this.playingSong = item;
     // 如果歌曲正在播放则淡出
     if (!this.audio.paused) {
       this.fadeOut();
-      this.playDelay = 500; // 如果淡出则延迟1秒淡入
+      this.playDelay = 500; // 如果淡出则延迟0.5秒淡入
     }
     // 加载新歌曲资源
-    clearInterval(this.validCheckTimer);
     setTimeout(() => {
       this.playDelay = 0; // 恢复默认值
       this.audio.currentTime = 0;
@@ -126,7 +133,8 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画, 所以该值初始化为false
         this.showAlert = false;
       }
-      if (!item.right) {
+      clearInterval(this.validCheckTimer); // 先清除之前的'播放区间合法校验器'
+      if (!item.right) { // 如果本歌曲尚未解锁, 则需要添加'播放区间合法校验器'
         this.audio.currentTime = startTime;
         // 当播放进度超出合法范围时, 停止播放
         this.validCheckTimer = setInterval(() => {
@@ -140,15 +148,6 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         }, 1000);
       }
       this.appService.pauseOrPlay$.next(true);
-      // 通知底部进度条歌曲进度信息
-      setInterval(() => {
-        if (this.audio.duration) { // 播放歌曲时, 一开始传递的duration是NaN, 导致进度条总时间重置为0
-          this.appService.progressChange$.next({
-            currentTime: this.audio.currentTime,
-            duration: this.audio.duration
-          });
-        }
-      });
     }, this.playDelay);
   }
 
@@ -208,6 +207,15 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    // 更新歌曲播放进度条
+    setInterval(() => {
+      if (this.audio.duration) { // 播放歌曲时, 一开始传递的duration是NaN, 导致进度条总时间重置为0
+        this.appService.progressChange$.next({
+          currentTime: this.audio.currentTime,
+          duration: this.audio.duration
+        });
+      }
+    }, 1000);
     // 读取本地已答对歌曲数据
     this.rightList = JSON.parse(localStorage.getItem('rightList')) || [];
     this.rightList.forEach(v => this.songsList[v].right = true);

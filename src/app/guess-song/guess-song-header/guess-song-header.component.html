@@ -42,9 +42,7 @@
   <div class="data-container">
     <div *ngIf="showKeys" class="data keys">
       <div class="title">我的钥匙</div>
-      <app-svg type="key" draggable="true"></app-svg>
-      <app-svg type="key" draggable="true"></app-svg>
-      <app-svg type="key" draggable="true"></app-svg>
+      <app-svg *ngFor="let item of keys" type="key" draggable></app-svg>
     </div>
     <div class="data">
       <div class="title">歌曲数</div>
@@ -55,5 +53,5 @@
       <div class="info">7920</div>
     </div>
   </div>
-  <app-special-song *ngIf="showSpecialSong" (close)="closeHandler()" (guessRight)="guessRight()"></app-special-song>
+  <app-special-song *ngIf="showSpecialSong" (close)="showSpecialSong = false" (guessRight)="guessRightHandler()"></app-special-song>
 </div>

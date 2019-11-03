@@ -1,13 +1,15 @@
-<div class="sidebar-container">
-  <ng-container *ngFor="let list of regularList; let listIndex = index;">
-    <label class="list-title">{{ list.name }}</label>
-    <ul class="regular-list">
-      <ng-container *ngFor="let item of list.children; let itemIndex = index;">
-        <li [ngClass]="{'selected': item.selected}" (click)="listClickHandler(listIndex, itemIndex)">
-          <app-svg [type]="item.icon" width="19px" height="19px" right="9px"></app-svg>
-          {{ item.name }}
-        </li>
-      </ng-container>
-    </ul>
-  </ng-container>
-</div>
+<perfect-scrollbar>
+  <div class="sidebar-container">
+    <ng-container *ngFor="let list of regularList; let listIndex = index;">
+      <label class="list-title">{{ list.name }}</label>
+      <ul class="regular-list">
+        <ng-container *ngFor="let item of list.children; let itemIndex = index;">
+          <li [ngClass]="{'selected': item.selected}" (click)="listClickHandler(listIndex, itemIndex)">
+            <app-svg [type]="item.icon" width="19px" height="19px" right="9px"></app-svg>
+            {{ item.name }}
+          </li>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </div>
+</perfect-scrollbar>

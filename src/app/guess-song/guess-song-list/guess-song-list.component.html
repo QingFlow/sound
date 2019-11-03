@@ -22,7 +22,12 @@
             </ng-container>
           </span>
         </td>
-        <td class="operation" (click)="guessStart(item)">
+        <td
+          class="operation"
+          droppable
+          [dragOverClass]="'drag-target-border'"
+          (click)="guessStart(item)"
+          (onDrop)="openLock(item, index)">
           <ng-container *ngIf="item.right">
             <app-svg type="unlock" class="unlock"></app-svg>
           </ng-container>

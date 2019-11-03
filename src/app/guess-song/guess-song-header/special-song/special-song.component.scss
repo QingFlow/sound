@@ -106,6 +106,7 @@
       display: block;
       margin: 30px 0px 24px 24px;
       width: 430px;
+      transition: all .3s linear;
       animation: specialSongRun 1s linear;
 
       @keyframes specialSongRun {

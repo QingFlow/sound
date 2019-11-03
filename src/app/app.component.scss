@@ -25,7 +25,6 @@
     height: calc(100% - 99px);
 
     .body-left {
-      overflow: auto;
       width: 200px;
       height: 100%;
       background: #f5f5f7;
@@ -34,7 +33,6 @@
     }
 
     .body-right {
-      overflow: auto;
       width: calc(100% - 200px);
       background: #fafafa;
     }

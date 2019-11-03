@@ -7,7 +7,7 @@
 .alert {
   position: absolute;
   right: 50px;
-  bottom: 0px;
+  bottom: -40px;
   padding: 10px;
   background: rgb(50, 50, 50);
   color: #fff;
@@ -25,7 +25,7 @@
     }
   }
   &.slidedown {
-    bottom: 0px;
+    bottom: -40px;
     animation: slidedown .4s linear;
     @keyframes slidedown {
       from {
@@ -33,7 +33,7 @@
       }
 
       to {
-        bottom: 0px;
+        bottom: -40px;
       }
     }
   }
@@ -182,4 +182,7 @@ table {
   to {
     opacity: 1;
   }
+}
+.drag-target-border {
+  background: #000;
 }

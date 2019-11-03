@@ -13,12 +13,16 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppGuessSongDialogComponent } from './guess-song/guess-song-dialog/guess-song-dialog.component';
 import { AppSpecialSongComponent } from './guess-song/guess-song-header/special-song/special-song.component';
+import { NgDragDropModule } from 'ng-drag-drop';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 @NgModule({
   imports: [
     BrowserModule,
     OverlayModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PerfectScrollbarModule,
+    NgDragDropModule.forRoot()
   ],
   declarations: [
     AppComponent,

@@ -1,5 +1,6 @@
 
 export interface Song {
+  id: number; // 序号, 作为标识
   title: string; // 标题
   name: string[]; // 歌名, 使用数组的方式匹配多个歌名, 防止多名歌曲
   singer: string; // 歌手
@@ -15,6 +16,7 @@ export interface Song {
 
 export const songsList: Song[] = [
   {
+    id: 1,
     title: 'Clever勺子 - 如果我变成回忆(吉他女版)（Cover：Tank）.mp3',
     name: ['如果我变成回忆'],
     singer: '阴阳师',
@@ -28,6 +30,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 2,
     title: 'FIELD OF VIEW - Dandan心魅かれてく(渐渐被你吸引).mp3',
     name: ['痴心绝渐渐被你吸引对'],
     singer: '阴阳师',
@@ -41,6 +44,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 3,
     title: '泥鳅Niko - 樱花草（男版）（Cover：Sweety）.mp3',
     name: ['樱花草'],
     singer: '阴阳师',
@@ -54,6 +58,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 4,
     title: 'Westlife - My Love (Radio Edit).mp3',
     name: ['相思'],
     singer: '阴阳师',
@@ -67,6 +72,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 5,
     title: '杨搏 - 遇见.mp3',
     name: ['遇见'],
     singer: '阴阳师',
@@ -80,6 +86,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 6,
     title: '水木年华 - 一生有你.mp3',
     name: ['一生有你'],
     singer: '阴阳师',
@@ -93,6 +100,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 7,
     title: '胡歌 - 忘记时间.mp3',
     name: ['忘记时间'],
     singer: '阴阳师',
@@ -106,6 +114,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 8,
     title: '莫文蔚 - 盛夏的果实.mp3',
     name: ['盛夏的果实'],
     singer: '阴阳师',
@@ -119,6 +128,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 9,
     title: 'Backstreet Boys - As Long as You Love Me.mp3',
     name: ['As Long as You Love Me'],
     singer: '阴阳师',
@@ -132,6 +142,7 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    id: 10,
     title: '蔡依林,周杰伦 - 布拉格广场.mp3',
     name: ['布拉格广场'],
     singer: '阴阳师',

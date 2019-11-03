@@ -9,4 +9,5 @@ export class AppService {
   public nextSong$ = new Subject<void>();
   public pauseOrPlay$ = new Subject<boolean>(); // true: 播放, false: 暂停
   public specialSong$ = new Subject<boolean>(); // 开始/关闭进入特殊歌曲界面
+  public keyExpend$ = new Subject<void>(); // 消耗了一把钥匙
 }
