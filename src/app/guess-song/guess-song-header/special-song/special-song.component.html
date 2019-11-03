@@ -1,7 +1,7 @@
 <div class="app-special-song-container" [ngClass]="{'finish': finish}">
   <div class="header">
     <div *ngIf="showTitle" class="title">念念不忘, 必有回响</div>
-    <div class="close" (click)="close.emit()"></div>
+    <div class="close" (click)="closeClick()"></div>
   </div>
   <div class="body">
     <p>{{ introduction[0] }}</p>

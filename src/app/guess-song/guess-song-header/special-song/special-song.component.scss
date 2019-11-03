@@ -13,7 +13,9 @@
   color: #fff;
   z-index: 999;
   overflow: hidden;
-  transition: all 2s linear;
+  transition: height 2s linear;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #000;
   animation: specialSongContainerRun 1s linear;
 
   @keyframes specialSongContainerRun {
@@ -118,26 +120,26 @@
 
       &.normal {
         padding: 4px 11px;
-        height: 28px;
+        height: 22px;
         color: rgba(0, 0, 0, .65);
         font-size: 14px;
         border: 1px solid #d9d9d9;
-        border-color: #40a9ff;
         border-radius: 4px;
         transition: all .3s;
         outline: 0;
 
         &:focus {
-          box-shadow: 0 0 0 1px rgba(24, 144, 255, .8);
+          border-color: #40a9ff;
+          box-shadow: 0 0 10px 1px rgba(24, 144, 255, 1);
         }
       }
 
 
       &.wrong {
-        border-color: #f5222d;
 
         &:focus {
-          box-shadow: 0 0 0 1px rgba(245, 34, 45, .8);
+          border-color: #f5222d;
+          box-shadow: 0 0 10px 1px rgba(245, 34, 45, .8);
         }
       }
 

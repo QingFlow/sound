@@ -38,19 +38,49 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   public validAnswer(answer: string): void {
     if (answer === '1') {
       this.finish = true;
-      setTimeout(() => {
+      this.playEndingMusic();
+      setTimeout(() => { // 等待窗体上拉动画完成后, 开始出现钥匙动画
         this.showKeys = true;
-        setTimeout(() => {
+        setTimeout(() => {  // 动画完成后显示已有钥匙
           this.guessRight.emit();
         }, 2000);
-        setTimeout(() => {
-          this.close.emit();
+        setTimeout(() => { // 隐藏钥匙
           this.showKeys = false;
         }, 2500);
       }, 1000);
     } else {
       this.wrong = true;
     }
+  }
+
+  // 点击关闭事件
+  public closeClick(): void {
+    this.finish = true;
+    this.playEndingMusic();
+  }
+
+  private playEndingMusic(): void {
+    // 先淡出原先的BGM
+    let volume = 1;
+    this.audio.volume = volume;
+    let fadeOutTimer: NodeJS.Timer;
+    fadeOutTimer = setInterval(() => {
+      volume -= 0.2;
+      this.audio.volume = volume > 0 ? volume : 0;
+      if (volume <= 0) {
+        clearInterval(fadeOutTimer);
+        this.audio.pause();
+        // 播放结束BGM
+        this.audio.src = '../../../../assets/musics/end-music.mp3';
+        this.audio.loop = false;
+        this.audio.volume = 1;
+        this.audio.play();
+        // endingMusic持续7秒, 所以7秒后才能关闭弹窗
+        setTimeout(() => {
+          this.close.emit();
+        }, 8200);
+      }
+    }, 100);
   }
 
   constructor(

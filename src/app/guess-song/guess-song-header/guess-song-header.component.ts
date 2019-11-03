@@ -12,4 +12,11 @@ export class AppGuessSongHeaderComponent {
   public guessRight(): void {
     this.showKeys = true;
   }
+
+  public closeHandler(): void {
+    this.showSpecialSong = false;
+    // const audio = new Audio();
+    // audio.src = '../../../assets/musics/missing-end.mp3';
+    // audio.play();
+  }
 }

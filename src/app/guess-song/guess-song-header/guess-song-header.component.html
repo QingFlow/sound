@@ -55,5 +55,5 @@
       <div class="info">7920</div>
     </div>
   </div>
-  <app-special-song *ngIf="showSpecialSong" (close)="showSpecialSong = false" (guessRight)="guessRight()"></app-special-song>
+  <app-special-song *ngIf="showSpecialSong" (close)="closeHandler()" (guessRight)="guessRight()"></app-special-song>
 </div>
