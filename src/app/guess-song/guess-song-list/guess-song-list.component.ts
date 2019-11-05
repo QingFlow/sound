@@ -129,7 +129,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.playDelay = 0; // 恢复默认值
       this.audio.currentTime = 0;
-      this.audio.src = `../../assets/musics/${item.title}`;
+      this.audio.src = `../../../assets/musics/${item.title}`;
       if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画, 所以该值初始化为false
         this.showAlert = false;
       }
@@ -207,6 +207,11 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.audio.onerror = (err: Event) => {
+      if (err.type === 'error') {
+        console.log('找不到该音乐资源, 请前往仓库阅读README. https://github.com/QingFlow/sound');
+      }
+    };
     // 更新歌曲播放进度条
     setInterval(() => {
       if (this.audio.duration) { // 播放歌曲时, 一开始传递的duration是NaN, 导致进度条总时间重置为0
@@ -220,7 +225,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     this.rightList = JSON.parse(localStorage.getItem('rightList')) || [];
     this.rightList.forEach(v => this.songsList[v].right = true);
     // 监听歌曲结束时, 切下一首歌
-    this.audio.onpause = () => {
+    this.audio.onpause = (e) => {
       const playingSong = this.songsList.find(v => v.playing);
       if (!playingSong.right) {
         // 要判断当前的暂停是否是超出合法范围引起的, 若为人工暂停则无需下一首
