@@ -76,7 +76,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     if (!item.right && this.canPlay) {
       item.guessing = true;
       setTimeout(() => this.input.nativeElement.focus());
-      this.playAudio(item);
+      if (item !== this.playingSong) {
+        this.playAudio(item);
+      }
     }
   }
 
