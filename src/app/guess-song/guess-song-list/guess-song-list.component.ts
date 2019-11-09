@@ -131,7 +131,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.playDelay = 0; // 恢复默认值
       this.audio.currentTime = 0;
-      this.audio.src = `../../../assets/musics/${item.title}`;
+      this.audio.src = `./assets/musics/${item.title}`;
       if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画, 所以该值初始化为false
         this.showAlert = false;
       }

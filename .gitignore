@@ -47,4 +47,6 @@ Thumbs.db
 package-lock.json
 
 # custom
-/src/assets/musics/
+src/assets/musics/
+angular-dist
+electron-dist

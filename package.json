@@ -1,13 +1,19 @@
 {
+  "_comment": "因JSON禁止写注释, 故约定下划线开头的Key均为注释内容",
   "name": "sound",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A work for ngChina 2019!",
+  "author": "QingFlow front-end team",
+  "main": "electron-config.js",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "electron": "ng build --prod --aot --base-href ./ && electron .",
+    "build:web": "ng build --prod --aot",
+    "build:app": "rimraf electron-dist && ng build --prod --aot --base-href ./ && electron-builder -w",
+    "_start": "仅运行在浏览器中",
+    "_electron": "打包后运行electron, 不产生安装文件, 仅预览",
+    "_build:web": "打包项目, 用于部署在浏览器中",
+    "_build:app": "产生安装文件exe和免安装版文件"
   },
   "dependencies": {
     "@angular/animations": "~8.2.0",
@@ -19,7 +25,9 @@
     "@angular/platform-browser": "~8.2.0",
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
+    "electron-updater": "^4.2.0",
     "ng-drag-drop": "^5.0.0",
+    "ngx-electron": "^2.2.0",
     "ngx-perfect-scrollbar": "^8.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
@@ -34,6 +42,8 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "electron": "^6.0.0",
+    "electron-builder": "^22.1.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -45,5 +55,27 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
-  }
+  },
+  "build": {
+    "appId": "com.sound.app",
+    "productName": "sound",
+    "directories": {
+      "output": "electron-dist"
+    },
+    "win": {
+      "icon": "src/assets/images/nest-cloud.ico",
+      "target": ["nsis"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "src/assets/images/nest-cloud.ico",
+      "installerHeaderIcon": "src/assets/images/nest-cloud.ico",
+      "createDesktopShortcut": true
+    }
+  },
+  "keywords": [
+    "dist"
+  ]
 }

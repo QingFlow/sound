@@ -71,7 +71,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
         clearInterval(fadeOutTimer);
         this.audio.pause();
         // 播放结束BGM
-        this.audio.src = '../../../../assets/musics/end-music.mp3';
+        this.audio.src = './assets/musics/end-music.mp3';
         this.audio.loop = false;
         this.audio.volume = 1;
         this.audio.play();
@@ -90,7 +90,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // 播放世界上最好听的BGM
     this.appService.specialSong$.next(true);
-    this.audio.src = `../../../../assets/musics/穿越时空的思念.mp3`;
+    this.audio.src = `./assets/musics/穿越时空的思念.mp3`;
     this.audio.loop = true;
     this.audio.play(); // 先注释, 快听吐了
 
