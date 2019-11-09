@@ -1,0 +1,95 @@
+.footer {
+  display: flex;
+  align-items: center;
+  margin-left: -200px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 48px;
+  border-top: 1px solid #e1e1e2;
+  background: #f6f6f8;
+
+  .play-actions {
+    display: flex;
+    align-items: center;
+    width: 258px;
+
+    .previous-container,
+    .state-container,
+    .next-container {
+      cursor: pointer;
+
+      &:hover {
+        background: #d33030;
+      }
+    }
+
+    .previous-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-left: 30px;
+      width: 30px;
+      height: 30px;
+      background: #e83c3c;
+      border-radius: 50%;
+
+      .column {
+        position: absolute;
+        left: 11px;
+        width: 2px;
+        height: 11px;
+        background: #fff;
+      }
+
+      .triangle {
+        position: absolute;
+        left: 8px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent #fff transparent transparent;
+      }
+    }
+
+    .state-container {
+      @extend .previous-container;
+      width: 35px;
+      height: 35px;
+      margin-left: 24px;
+
+      .column {
+        width: 2.5px;
+        height: 17px;
+        background: #fff;
+
+        &:first-child {
+          left: 12px;
+        }
+
+        &:last-child {
+          left: 20px;
+        }
+      }
+
+      .triangle {
+        position: absolute;
+        left: 37%;
+        border-left: 13px solid #fff;
+        border-top: 9px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+      }
+    }
+
+    .next-container {
+      @extend .previous-container;
+      margin-left: 24px;
+      transform: rotate(180deg);
+
+      .column {
+        width: 2.5px;
+        left: 10px;
+      }
+    }
+  }
+}
