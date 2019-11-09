@@ -5,6 +5,7 @@ import { AppService } from 'src/app/app.service';
 import { toDoubleInteger, toSeconds } from 'src/app/core/common/common';
 import { isNullOrUndefined } from 'util';
 import { songsList, Song } from './song';
+import { EventManager } from '@angular/platform-browser';
 
 
 @Component({
@@ -205,10 +206,17 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private appService: AppService
+    private appService: AppService,
+    private eventManager: EventManager
   ) { }
 
   ngOnInit(): void {
+    // 监听空格键, 切换播放/暂停状态
+    this.eventManager.addGlobalEventListener('window', 'keydown', (v: KeyboardEvent) => {
+      if (v.code === 'Space' && this.playingSong) {
+        this.appService.pauseOrPlay$.next(this.audio.paused);
+      }
+    });
     this.audio.onerror = (err: Event) => {
       if (err.type === 'error') {
         console.log('找不到该音乐资源, 请前往仓库阅读README. https://github.com/QingFlow/sound');

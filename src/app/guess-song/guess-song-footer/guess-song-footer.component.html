@@ -1,10 +1,10 @@
 <div class="footer">
   <div class="play-actions">
-    <div class="previous-container" title="上一首" (click)="previous()">
+    <div class="previous-container" title="上一首" (click)="this.appService.previousSong$.next()">
       <div class="column"></div>
       <div class="triangle"></div>
     </div>
-    <div class="state-container" title="暂停/播放" (click)="pauseOrPlay()">
+    <div class="state-container" title="暂停/播放" (click)="this.appService.pauseOrPlay$.next(!this.playing)">
       <ng-container *ngIf="playing">
         <div class="column"></div>
         <div class="column"></div>
@@ -13,10 +13,21 @@
         <div class="triangle"></div>
       </ng-container>
     </div>
-    <div class="next-container" title="下一首" (click)="next()">
+    <div class="next-container" title="下一首" (click)="this.appService.nextSong$.next()">
       <div class="column"></div>
       <div class="triangle"></div>
     </div>
   </div>
-  <app-guess-song-progress></app-guess-song-progress>
+  <div class="progress-container">
+    <span class="min">{{ currentTime }}</span>
+    <div class="bar-container">
+      <div #totalBar class="total-bar"></div>
+      <div class="current-bar" [ngStyle]="{'width': width}">
+        <div class="point-container">
+          <div class="core"></div>
+        </div>
+      </div>
+    </div>
+    <span class="max">{{ duration }}</span>
+  </div>
 </div>
