@@ -119,29 +119,18 @@
         align-items: center;
         position: absolute;
         top: 0px;
-        min-width: 13px;
         height: 3px;
         background: #e83c3c;
         border: 1px solid #e18b8c;
         border-right: none;
         border-radius: 2px;
 
-        .point-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 14px;
-          height: 14px;
-          border: 1px solid #bfbfbf;
+        .point {
+          min-width: 4px;
+          min-height: 4px;
+          box-shadow: 0px 0px 0px 6px #fff, 0px 0px 0px 7px #bfbfbf;
           border-radius: 50%;
-          background: #fff;
-
-          .core {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #e83c3c;
-          }
+          background: #e83c3c;
         }
       }
     }
@@ -156,7 +145,7 @@
     }
 
     .max {
-      margin-left: 8px;
+      margin-left: 15px;
     }
   }
 }

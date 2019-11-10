@@ -15,16 +15,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       background: #fff;
       border-radius: 50%;
-
-      &>div {
-        width: 15px;
-        height: 15px;
-        margin-bottom: 2px;
-      }
     }
 
     .title {
@@ -78,6 +72,21 @@
       border-top-right-radius: 10%;
       border-bottom-right-radius: 10%;
       border-left: none;
+    }
+
+    .smaller-than-container {
+      &:active {
+        .smaller-than {
+          border-color: rgb(141, 28, 28);
+        }
+      }
+    }
+    .greater-than-container {
+      &:active {
+        .greater-than {
+          border-color: rgb(141, 28, 28);
+        }
+      }
     }
   }
 }
