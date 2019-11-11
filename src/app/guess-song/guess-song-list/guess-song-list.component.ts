@@ -22,6 +22,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   private pauseTimer: NodeJS.Timer; // 暂停定时器, 淡出时0.5秒后执行暂停
   private fadeOutTimer: NodeJS.Timer; // 淡出定时器, 每隔0.1秒减弱0.2的音量, 来模拟淡出
   private fadeInTimer: NodeJS.Timer; // 淡入定时器, 同上
+  private progressTimer: NodeJS.Timer; // 定时发送歌曲播放进度
   private canPlay = true; // 是否允许播放歌曲
   private rightList: number[];
   private playingSpecial = false; // 是否正在播特殊歌曲
@@ -121,7 +122,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     const startTime = toSeconds(item.startTime);
     const endTime = toSeconds(item.endTime) - 0.5; // - 0.5是为了适应淡出的时间
     this.songsList.forEach(v => v.playing = false);
-    this.songsList.find(v => v.title === item.title).playing = true;
+    this.songsList.find(v => v.src === item.src).playing = true;
     this.playingSong = item;
     // 如果歌曲正在播放则淡出
     if (!this.audio.paused) {
@@ -131,8 +132,8 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     // 加载新歌曲资源
     setTimeout(() => {
       this.playDelay = 0; // 恢复默认值
-      this.audio.currentTime = 0;
-      this.audio.src = `./assets/musics/${item.title}`;
+      this.audio.src = item.src;
+      this.audio.load();
       if (!isNullOrUndefined(this.showAlert)) { // 防止一开始就出现动画, 所以该值初始化为false
         this.showAlert = false;
       }
@@ -161,6 +162,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   /** 淡出 0.5s */
   private fadeOut(): void {
+    console.log('fadeOut');
     this.clearTimer();
     let volume = 1;
     this.audio.volume = volume;
@@ -172,6 +174,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       }
     }, 100);
     this.pauseTimer = setTimeout(() => {
+      console.log('pauseTimer');
       this.audio.pause();
     }, 500);
   }
@@ -217,13 +220,11 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         this.appService.pauseOrPlay$.next(this.audio.paused);
       }
     });
-    this.audio.onerror = (err: Event) => {
-      if (err.type === 'error') {
-        console.log('找不到该音乐资源, 请前往仓库阅读README. https://github.com/QingFlow/sound');
-      }
-    };
+    // 读取本地已答对歌曲数据
+    this.rightList = JSON.parse(localStorage.getItem('rightList')) || [];
+    this.rightList.forEach(v => this.songsList[v].right = true);
     // 更新歌曲播放进度条
-    setInterval(() => {
+    this.progressTimer = setInterval(() => {
       if (this.audio.duration) { // 播放歌曲时, 一开始传递的duration是NaN, 导致进度条总时间重置为0
         this.appService.progressChange$.next({
           currentTime: this.audio.currentTime,
@@ -231,11 +232,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         });
       }
     }, 1000);
-    // 读取本地已答对歌曲数据
-    this.rightList = JSON.parse(localStorage.getItem('rightList')) || [];
-    this.rightList.forEach(v => this.songsList[v].right = true);
+    // #region 监听Audio原生对象方法
     // 监听歌曲结束时, 切下一首歌
-    this.audio.onpause = (e) => {
+    this.audio.onpause = () => {
       const playingSong = this.songsList.find(v => v.playing);
       if (!playingSong.right) {
         // 要判断当前的暂停是否是超出合法范围引起的, 若为人工暂停则无需下一首
@@ -249,6 +248,21 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         }
       }
     };
+    // 监听歌曲缓冲进度
+    this.audio.onprogress = () => {
+      const timeRanges = this.audio.buffered;
+      if (timeRanges.length > 0) {
+        const index = timeRanges.length - 1;
+        this.appService.bufferCahnge$.next({
+          bufferTime: timeRanges.end(index > 0 ? index : 0),
+          duration: this.audio.duration
+        });
+      }
+    };
+    this.audio.onloadeddata = () => {
+      console.log('可以播放拉');
+    };
+    // #endregion
     /** 监听上一首、下一首、暂停的动作 */
     this.appService.previousSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       const playingSongIndex = this.songsList.findIndex(v => v.playing);
@@ -277,6 +291,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    clearInterval(this.progressTimer);
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
