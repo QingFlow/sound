@@ -11,6 +11,11 @@ export class AppSidebarComponent implements OnInit {
       name: '推荐',
       children: [
         {
+          name: '来点钢琴曲吧',
+          icon: 'find-music',
+          selected: false
+        },
+        {
           name: '发现音乐',
           icon: 'find-music',
           selected: false
