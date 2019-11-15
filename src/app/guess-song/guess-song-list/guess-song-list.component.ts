@@ -162,7 +162,6 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   /** 淡出 0.5s */
   private fadeOut(): void {
-    console.log('fadeOut');
     this.clearTimer();
     let volume = 1;
     this.audio.volume = volume;
@@ -174,7 +173,6 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       }
     }, 100);
     this.pauseTimer = setTimeout(() => {
-      console.log('pauseTimer');
       this.audio.pause();
     }, 500);
   }
