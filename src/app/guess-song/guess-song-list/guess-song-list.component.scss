@@ -7,7 +7,7 @@
 .alert {
   position: absolute;
   right: 50px;
-  bottom: -40px;
+  bottom: -42px;
   padding: 10px;
   background: rgb(50, 50, 50);
   color: #fff;
@@ -18,7 +18,7 @@
       from {
         bottom: 0px;
       }
-  
+
       to {
         bottom: 160px;
       }
@@ -183,6 +183,18 @@ table {
     opacity: 1;
   }
 }
+
 .drag-target-border {
   background: #000;
+}
+
+input {
+  height: 22px;
+  outline: none;
+  border: 1px solid #d5d6d9;
+  border-radius: 11px;
+  padding: 0 10px;
+  &:focus {
+    border-color: #dddae1;
+  }
 }
