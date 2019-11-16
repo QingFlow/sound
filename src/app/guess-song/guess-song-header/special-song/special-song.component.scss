@@ -17,6 +17,7 @@
   border-radius: 10px;
   box-shadow: 0 0 15px #000;
   animation: specialSongContainerRun 1s linear;
+  opacity: 0.9;
 
   @keyframes specialSongContainerRun {
     from {
@@ -95,6 +96,7 @@
   }
 
   .body {
+    padding-bottom: 40px;
     p {
       margin: 15px;
       text-indent: 25px;
@@ -102,20 +104,21 @@
   }
 
   .footer {
+    position: relative;
     input {
       display: block;
       margin: 30px 0px 24px 24px;
       width: 430px;
       transition: all .3s linear;
-      animation: specialSongRun 1s linear;
+      animation: specialSongRun 0.3s linear;
 
       @keyframes specialSongRun {
         from {
-          width: 0px;
+          height: 0px;
         }
 
         to {
-          width: 430px;
+          height: 22px;
         }
       }
 
@@ -130,8 +133,8 @@
         outline: 0;
 
         &:focus {
-          border-color: #40a9ff;
-          box-shadow: 0 0 10px 1px rgba(24, 144, 255, 1);
+          // border-color: #40a9ff;
+          // box-shadow: 0 0 10px 1px rgba(24, 144, 255, 1);
         }
       }
 
@@ -214,5 +217,27 @@
         transform: translateY(-130px);
       }
     }
+  }
+}
+
+.lines > .particle {
+  position: absolute;
+  background-color: rgba(245, 188, 33, 0.7);
+  -webkit-animation: lines 3s linear infinite;
+          animation: lines 3s linear infinite;
+}
+
+@keyframes lines {
+  0%, 50%, 100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+  25% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  75% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
   }
 }
