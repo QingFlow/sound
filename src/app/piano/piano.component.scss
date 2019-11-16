@@ -40,6 +40,7 @@ body {
   background: #fff;
   border: 1px solid #f9f9f9;
   border-radius: 5px;
+  transition: all ease .2s;
 }
 
 .capslock,
@@ -82,14 +83,8 @@ body {
   width: 681px;
 }
 
-.on {
-  display: none;
-}
-
 #keyboard li:hover,  #keyboard li.active {
   position: relative;
-  top: 1px;
-  left: 1px;
   border-color: #e5e5e5;
   background: #c62f2f;
   color: #fff;
