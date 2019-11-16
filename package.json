@@ -30,7 +30,7 @@
     "ngx-electron": "^2.2.0",
     "ngx-perfect-scrollbar": "^8.0.0",
     "rxjs": "~6.4.0",
-    "tone": "^13.8.25",
+    "tone": "13.8.25",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

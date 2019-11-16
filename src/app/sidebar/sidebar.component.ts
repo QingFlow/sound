@@ -11,73 +11,15 @@ export class AppSidebarComponent implements OnInit {
       name: '推荐',
       children: [
         {
+          name: '听歌识曲',
+          icon: 'guess-music',
+          link: 'guess-song',
+          selected: false
+        },
+        {
           name: '来点钢琴曲吧',
           icon: 'find-music',
-          selected: false
-        },
-        {
-          name: '发现音乐',
-          icon: 'find-music',
-          selected: false
-        },
-        {
-          name: '私人FM',
-          icon: 'radio',
-          selected: false
-        },
-        {
-          name: 'LOOK直播',
-          icon: 'LOOK',
-          selected: false
-        },
-        {
-          name: '视频',
-          icon: 'video',
-          selected: false
-        },
-        {
-          name: '朋友',
-          icon: 'friends',
-          selected: false
-        }
-      ]
-    },
-    {
-      name: '我的音乐',
-      children: [
-        {
-          name: '本地音乐',
-          icon: 'local-music',
-          selected: false
-        },
-        {
-          name: '下载管理',
-          icon: 'download',
-          selected: false
-        },
-        {
-          name: '我的音乐云盘',
-          icon: 'clound',
-          selected: false
-        },
-        {
-          name: '我的电台',
-          icon: 'broadcast',
-          selected: false
-        },
-        {
-          name: '我的收藏',
-          icon: 'person-save',
-          selected: false
-        }
-      ]
-    },
-    {
-      name: '创建的歌单',
-      children: [
-        {
-          name: '我喜欢的音乐',
-          icon: 'heart',
+          link: 'piano',
           selected: false
         }
       ]
@@ -89,7 +31,18 @@ export class AppSidebarComponent implements OnInit {
     this.regularList[listIndex].children[itemIndex].selected = true;
   }
 
+  public openQingForm(): void {
+    // QingForm的链接到时候放这里
+    window.open('https://www.baidu.com', '_blank');
+  }
+
   ngOnInit(): void {
 
+    // {
+    //   name: 'QingForm',
+    //   icon: 'qing-form',
+    //   link: 'panio',
+    //   selected: false
+    // }
   }
 }

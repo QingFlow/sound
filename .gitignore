@@ -45,6 +45,7 @@ testem.log
 .DS_Store
 Thumbs.db
 package-lock.json
+yarn.lock
 
 # custom
 src/assets/musics/
