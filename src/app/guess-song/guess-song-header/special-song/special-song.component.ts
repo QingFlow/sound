@@ -29,6 +29,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     '你一定很想念Ta吧!',
     '如果思念有声音, 那一定是这首歌.'
   ];
+  public lines: { width: string, height: string, top: string, left: string, animationDelay: string}[] = [];
 
   @Output() close: EventEmitter<null> = new EventEmitter<null>();  // 关闭弹窗
   @Output() guessRight: EventEmitter<null> = new EventEmitter<null>();  // 答题成功, 获得钥匙
@@ -83,6 +84,29 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
+  /**
+   * 初始化特殊歌曲中，跳动线条动画
+   */
+  initLines(): void {
+    let i = 0;
+    while (i < 99) {
+      this.lines.push({ width: `${this.randomNum(1, 3)}px`,
+        height: `${this.randomNum(20, 80)}%`,
+        top: `${this.randomNum(-170, -140)}%`,
+        left: `${this.randomNum(5, 95)}%`,
+        animationDelay: `${this.randomNum(0, 30) / 10}s`
+      });
+      i++;
+    }
+  }
+
+  /**
+   * 获取从 m 到 n 之间的随机数
+   */
+  randomNum(m: number, n: number): number {
+    return Math.floor( Math.random() * (n - m + 1) ) + m;
+  }
+
   constructor(
     private appService: AppService
   ) { }
@@ -108,6 +132,9 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
         }
       });
     }, 2000);
+
+    // 初始化 BGM输入时的线条动画
+    this.initLines();
   }
 
   ngOnDestroy(): void {
