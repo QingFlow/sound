@@ -1,0 +1,37 @@
+<div style="width:960px;margin:10px auto; clear:both; text-align:center;">
+</div>
+<div id="container">
+  <textarea id="write" rows="6" cols="60"></textarea>
+  <ul id="keyboard">
+    <li class="symbol">`</li>
+
+    <li *ngFor="let item of numbers" class="symbol" [ngClass]="{ 'active': item.active }">{{ item.key }}</li>
+
+    <li class="symbol">-</li>
+    <li class="symbol">=</li>
+    <li class="delete lastitem">delete</li>
+    <li class="tab">tab</li>
+
+    <li *ngFor="let item of lettersRow1" class="letter" [ngClass]="{ 'active': item.active }">{{ item.key }}</li>
+
+    <li class="symbol">[</li>
+    <li class="symbol">]</li>
+    <li class="symbol lastitem">\</li>
+    <li class="capslock">caps lock</li>
+
+    <li *ngFor="let item of lettersRow2" class="letter" [ngClass]="{ 'active': item.active }">{{ item.key }}</li>
+
+    <li class="symbol">;</li>
+    <li class="symbol">'</li>
+    <li class="return lastitem">return</li>
+    <li class="left-shift">shift</li>
+
+    <li *ngFor="let item of lettersRow3" class="letter" [ngClass]="{ 'active': item.active }">{{ item.key }}</li>
+
+    <li class="symbol">,</li>
+    <li class="symbol">.</li>
+    <li class="symbol">/</li>
+    <li class="right-shift lastitem">shift</li>
+    <li class="space lastitem">&nbsp;</li>
+  </ul>
+</div>
