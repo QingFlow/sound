@@ -185,7 +185,9 @@ table {
 }
 
 .drag-target-border {
-  background: #000;
+  transition: all ease .6s;
+  background: rgba(198, 47, 47, 0.3);
+  border-radius: 3px;
 }
 
 input {
