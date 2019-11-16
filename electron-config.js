@@ -8,18 +8,18 @@ const path = require("path");
 let mainWindow
 
 function createWindow() {
-  console.log('createWindow');
   mainWindow = new BrowserWindow({
-    autoHideMenuBar: true, // 隐藏头部菜单
-    show: false,
-    minWidth: 1500,
-    minHeight: 800,
-    icon: 'src/assets/images/nest-cloud.ico'
+    frame: false,
+    minWidth: 1020,
+    minHeight: 450,
+    icon: 'src/assets/images/nest-cloud.ico',
+    webPreferences: {
+      nodeIntegration: true
+    },
+    show: false
   });
   mainWindow.maximize();
   mainWindow.show();
-
-  mainWindow.setFullScreen = true;
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, `/angular-dist/index.html`),
@@ -27,13 +27,9 @@ function createWindow() {
       slashes: true
     })
   );
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools({mode: 'bottom'})
-
-  mainWindow.on('closed', function () {
-    mainWindow = null
-  })
+  // mainWindow.webContents.openDevTools({
+  //   mode: 'bottom'
+  // })
 }
 
 app.on('ready', createWindow)

@@ -8,9 +8,9 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.mudule';
 import { AppHeaderComponent } from './header/header.component';
-import { AppSvgComponent } from './core/svg/svg.component';
 import { AppSidebarComponent } from './sidebar/sidebar.component';
 import { SvgModule } from './core/svg/svg.module';
+import { NgxElectronModule } from 'ngx-electron';
 
 @NgModule({
   imports: [
@@ -20,6 +20,7 @@ import { SvgModule } from './core/svg/svg.module';
     SvgModule,
     BrowserAnimationsModule,
     PerfectScrollbarModule,
+    NgxElectronModule,
     NgDragDropModule.forRoot()
   ],
   declarations: [
