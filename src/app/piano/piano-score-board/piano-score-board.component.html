@@ -1,0 +1,13 @@
+<div class="score-board-container">
+  <div class="score-board-left">
+    <div class="content-left" [style.left]="(403 - beatsCount * 24) + 'px'">
+      <div *ngFor="let beat of score" class="beat">{{ beat }}</div>
+    </div>
+  </div>
+  <div class="score-divider"></div>
+  <div class="score-board-right">
+    <div class="content-right" [style.left]="(60 - beatsCount * 24) + 'px'">
+      <div *ngFor="let beat of score" class="beat">{{ beat }}</div>
+    </div>
+  </div>
+</div>
