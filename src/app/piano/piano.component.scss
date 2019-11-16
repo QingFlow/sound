@@ -27,6 +27,7 @@ body {
 #keyboard {
   margin: 0;
   padding: 0;
+  height: 230px;
   list-style: none;
 
   li {
@@ -42,12 +43,15 @@ body {
     transition: all ease .2s;
     user-select: none;
 
+    &:not(.disabled) {
+      cursor: pointer;
+    }
+
     &.active:not(.disabled) {
       position: relative;
       border-color: #e5e5e5;
       background: #c62f2f;
       color: #fff;
-      cursor: pointer;
     }
 
     &.disabled {

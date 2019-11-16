@@ -1,7 +1,7 @@
 <div style="width:960px;margin:10px auto; clear:both; text-align:center;">
 </div>
 <div id="container">
-  <textarea id="write" rows="6" cols="60"></textarea>
+  <app-piano-score-board></app-piano-score-board>
   <ul id="keyboard">
     <li class="symbol disabled">`</li>
     <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': numbers, 'class': 'symbol' } }"></ng-template>

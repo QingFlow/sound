@@ -1,0 +1,42 @@
+.score-board-container {
+  display: flex;
+  align-items: center;
+  width: 683px;
+  height: 50px;
+}
+
+.score-board-left, .score-board-right {
+  position: relative;
+  display: inline-block;
+  width: 340px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.score-divider {
+  display: inline-block;
+  height: calc(100% - 20px);
+  width: 3px;
+  background: #c62f2f;
+}
+
+.content-left, .content-right {
+  white-space: nowrap;
+  height: 50px;
+  line-height: 50px;
+  transition: left linear .5s;
+
+  &.content-left {
+    position: absolute;
+    color: #c62f2f;
+  }
+
+  &.content-right {
+    position: absolute;
+  }
+
+  .beat {
+    display: inline-block;
+    width: 24px;
+  }
+}

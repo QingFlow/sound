@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AppPianoComponent } from './piano.component';
 import { PianoRoutingModule } from './piano-routing.module';
+import { AppPianoScoreBoardComponent } from './piano-score-board/piano-score-board.component';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import { PianoRoutingModule } from './piano-routing.module';
     PianoRoutingModule
   ],
   declarations: [
-    AppPianoComponent
+    AppPianoComponent,
+    AppPianoScoreBoardComponent
   ],
 })
 export class PianoModule { }
