@@ -1,4 +1,10 @@
-export const numbers = [
+export interface PianoKey {
+  key: string;
+  soundCode: string;
+  active: boolean;
+}
+
+export const numbers: PianoKey[] = [
   { key: '1', soundCode: 'C2', active: false },
   { key: '2', soundCode: 'D2', active: false },
   { key: '3', soundCode: 'E2', active: false },
@@ -10,7 +16,7 @@ export const numbers = [
   { key: '9', soundCode: 'D3', active: false },
   { key: '0', soundCode: 'E3', active: false }
 ];
-export const lettersRow1 = [
+export const lettersRow1: PianoKey[] = [
   { key: 'Q', soundCode: 'F3', active: false },
   { key: 'W', soundCode: 'G3', active: false },
   { key: 'E', soundCode: 'A3', active: false },
@@ -22,7 +28,7 @@ export const lettersRow1 = [
   { key: 'O', soundCode: 'G4', active: false },
   { key: 'P', soundCode: 'A4', active: false }
 ];
-export const lettersRow2 = [
+export const lettersRow2: PianoKey[] = [
   { key: 'A', soundCode: 'B4', active: false },
   { key: 'S', soundCode: 'C5', active: false },
   { key: 'D', soundCode: 'D5', active: false },
@@ -33,7 +39,7 @@ export const lettersRow2 = [
   { key: 'K', soundCode: 'B5', active: false },
   { key: 'L', soundCode: 'C6', active: false }
 ];
-export const lettersRow3 = [
+export const lettersRow3: PianoKey[] = [
   { key: 'Z', soundCode: 'D6', active: false },
   { key: 'X', soundCode: 'E6', active: false },
   { key: 'C', soundCode: 'F6', active: false },

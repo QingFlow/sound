@@ -28,46 +28,58 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-}
 
-#keyboard li {
-  float: left;
-  margin: 0 5px 5px 0;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  background: #fff;
-  border: 1px solid #f9f9f9;
-  border-radius: 5px;
-  transition: all ease .2s;
+  li {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+    transition: all ease .2s;
+    user-select: none;
+
+    &.active:not(.disabled) {
+      position: relative;
+      border-color: #e5e5e5;
+      background: #c62f2f;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    &.disabled {
+      background: #efefef;
+    }
+  }
+
+  .tab, .delete {
+    width: 70px;
+  }
+  .capslock {
+    width: 80px;
+  }
+  .return {
+    width: 77px;
+  }
+  .left-shift {
+    width: 95px;
+  }
+  .right-shift {
+    width: 109px;
+  }
+  .space {
+    clear: left;
+    width: 681px;
+  }
 }
 
 .capslock,
 .tab,
 .left-shift {
   clear: left;
-}
-
-#keyboard .tab,
-#keyboard .delete {
-  width: 70px;
-}
-
-#keyboard .capslock {
-  width: 80px;
-}
-
-#keyboard .return {
-  width: 77px;
-}
-
-#keyboard .left-shift {
-  width: 95px;
-}
-
-#keyboard .right-shift {
-  width: 109px;
 }
 
 .lastitem {
@@ -78,15 +90,3 @@ body {
   text-transform: uppercase;
 }
 
-#keyboard .space {
-  clear: left;
-  width: 681px;
-}
-
-#keyboard li:hover,  #keyboard li.active {
-  position: relative;
-  border-color: #e5e5e5;
-  background: #c62f2f;
-  color: #fff;
-  cursor: pointer;
-}

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventManager } from '@angular/platform-browser';
-import Tone from 'tone';
 import { SoundLibrary } from './instruments';
-import { numbers, lettersRow1, lettersRow2, lettersRow3 } from './piano.constants';
+import { numbers, lettersRow1, lettersRow2, lettersRow3, PianoKey } from './piano.constants';
 
 @Component({
   selector: 'app-piano',
@@ -16,6 +15,12 @@ export class AppPianoComponent implements OnInit {
   lettersRow3 = lettersRow3;
 
   synth: any;
+
+  userClickPiano(pianoKey: PianoKey) {
+    if (pianoKey.active) { return; }
+    pianoKey.active = true;
+    this.synth.triggerAttackRelease(pianoKey.soundCode, '1n');
+  }
 
   constructor(private eventManager: EventManager) {}
 
