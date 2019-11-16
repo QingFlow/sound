@@ -89,11 +89,11 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
    */
   initLines(): void {
     let i = 0;
-    while (i < 100) {
+    while (i < 99) {
       this.lines.push({ width: `${this.randomNum(1, 3)}px`,
         height: `${this.randomNum(20, 80)}%`,
-        top: `${this.randomNum(-140, -100)}%`,
-        left: `${this.randomNum(10, 90)}%`,
+        top: `${this.randomNum(-170, -140)}%`,
+        left: `${this.randomNum(5, 95)}%`,
         animationDelay: `${this.randomNum(0, 30) / 10}s`
       });
       i++;
