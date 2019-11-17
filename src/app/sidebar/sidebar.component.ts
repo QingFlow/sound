@@ -28,12 +28,11 @@ export class AppSidebarComponent {
   ];
 
   public openQingForm(): void {
-    // QingForm的链接到时候放这里
-    const qingFormLink = 'https://www.baidu.com';
+    const url = 'https://tirelyl.github.io/qing-form/basic';
     if (this.electronService.isElectronApp) {
-      this.electronService.shell.openExternal(qingFormLink);
+      this.electronService.shell.openExternal(url);
     } else {
-      window.open(qingFormLink, '_blank');
+      window.open(url, '_blank');
     }
   }
 

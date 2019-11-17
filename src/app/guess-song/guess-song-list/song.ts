@@ -283,7 +283,7 @@ export const songsList: Song[] = [
   },
   {
     title: `真的爱你`,
-    src: 'https://file.qingflow.com/uploads/file/CCCCCCCCCCCCCCCCCCCCCCCCCCCCC.mp3',
+    src: 'https://file.qingflow.com/uploads/file/c69b3507-fa09-43e6-a3f4-d9eb614a0f55.mp3',
     name: ['真的爱你'],
     singer: 'Beyond',
     album: '25周年精选',
@@ -520,6 +520,20 @@ export const songsList: Song[] = [
     right: false
   },
   {
+    title: `君が好きだと叫びたい`,
+    src: 'https://file.qingflow.com/uploads/file/dca9602f-82eb-4758-bee9-067a7bd9e355.mp3',
+    name: ['君が好きだと叫びたい', '好想大声说爱你'],
+    singer: 'BAAD',
+    album: '灌篮高手',
+    totalTime: '03:50',
+    startTime: '01:04',
+    endTime: '01:32',
+    selected: false,
+    playing: false,
+    guessing: false,
+    right: false
+  },
+  {
     title: `Revolution`,
     src: 'https://file.qingflow.com/uploads/file/89900448-c04b-4194-9765-4c5aafc3e9bd.mp3',
     name: ['Revolution'],
@@ -708,7 +722,7 @@ export const songsList: Song[] = [
     singer: '张紫豪',
     album: '可不可以',
     totalTime: '04:00',
-    startTime: '00:12',
+    startTime: '01:13',
     endTime: '01:39',
     selected: false,
     playing: false,

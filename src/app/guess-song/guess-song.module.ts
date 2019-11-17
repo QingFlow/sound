@@ -12,6 +12,7 @@ import { SvgModule } from '../core/svg/svg.module';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { AppProgressPointComponent } from './guess-song-footer/progress-point/progress-point.component';
 import { AppGuessSongService } from './guess-song.service';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AppGuessSongService } from './guess-song.service';
     PerfectScrollbarModule,
     SvgModule,
     GuessSongRoutingModule,
-    NgDragDropModule
+    NgDragDropModule,
+    NzMessageModule
   ],
   declarations: [
     AppGuessSongComponent,
@@ -35,7 +37,8 @@ import { AppGuessSongService } from './guess-song.service';
     AppGuessSongDialogComponent
   ],
   providers: [
-    AppGuessSongService
+    AppGuessSongService,
+    NzMessageService
   ]
 })
 export class GuessSongModule { }

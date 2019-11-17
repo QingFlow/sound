@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-progress-point',
-  template: '<div class="point-container"><div class="point"></div></div>',
+  templateUrl: './progress-point.component.html',
   styleUrls: ['./progress-point.component.scss']
 })
 export class AppProgressPointComponent implements OnDestroy {

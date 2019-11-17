@@ -20,20 +20,21 @@
             <span class="button-title">获取钥匙</span>
           </div>
         </button>
-        <button type="button">
+        <!-- 没时间做, 先丢着 -->
+        <!-- <button type="button">
           <div>
             <div class="svg-container">
               <app-svg type="direction"></app-svg>
             </div>
             <span class="button-title">游戏规则</span>
           </div>
-        </button>
-        <button type="button">
+        </button> -->
+        <button type="button" (click)="github()">
           <div>
             <div class="svg-container">
               <app-svg type="share"></app-svg>
             </div>
-            <span class="button-title">分享</span>
+            <span class="button-title">Github</span>
           </div>
         </button>
       </div>
@@ -46,11 +47,11 @@
     </div>
     <div class="data">
       <div class="title">歌曲数</div>
-      <div class="info">570</div>
+      <div class="info">{{ songNumber }}</div>
     </div>
     <div class="data">
       <div class="title">播放数</div>
-      <div class="info">7920</div>
+      <div class="info">{{ playingTimes }}</div>
     </div>
   </div>
   <app-special-song *ngIf="showSpecialSong" (close)="showSpecialSong = false" (guessRight)="guessRightHandler()"></app-special-song>

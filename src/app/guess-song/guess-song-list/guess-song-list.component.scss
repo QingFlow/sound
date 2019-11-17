@@ -4,45 +4,6 @@
   user-select: none;
 }
 
-.alert {
-  position: absolute;
-  right: 50px;
-  bottom: -42px;
-  padding: 10px;
-  background: rgb(50, 50, 50);
-  color: #fff;
-
-  &.slideup {
-    bottom: 160px;
-    animation: slideup .4s linear;
-
-    @keyframes slideup {
-      from {
-        bottom: 0px;
-      }
-
-      to {
-        bottom: 160px;
-      }
-    }
-  }
-
-  &.slidedown {
-    bottom: -42px;
-    animation: slidedown .4s linear;
-
-    @keyframes slidedown {
-      from {
-        bottom: 160px;
-      }
-
-      to {
-        bottom: -42px;
-      }
-    }
-  }
-}
-
 table {
   width: 100%;
   border-collapse: collapse;

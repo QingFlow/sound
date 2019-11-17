@@ -11,6 +11,7 @@ import { AppGuessSongService } from '../../guess-song.service';
 export class AppSpecialSongComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private audio = new Audio();
+  private closable = false; // 在动画没有结束之前, 坚决不让关闭
 
   public wrong = false; // 是否答题错误
   public showKeys = false;
@@ -29,12 +30,10 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     '你一定很想念Ta吧!',
     '如果思念有声音, 那一定是这首歌.'
   ];
-  public lines: { width: string, height: string, top: string, left: string, animationDelay: string}[] = [];
+  public lines: { width: string, height: string, top: string, left: string, animationDelay: string }[] = [];
 
   @Output() close: EventEmitter<null> = new EventEmitter<null>();  // 关闭弹窗
   @Output() guessRight: EventEmitter<null> = new EventEmitter<null>();  // 答题成功, 获得钥匙
-
-  @ViewChild('guessInput', { static: false }) input: ElementRef;
 
   public validAnswer(answer: string): void {
     if (answer === '1') {
@@ -56,8 +55,12 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
 
   // 点击关闭事件
   public closeClick(): void {
-    this.finish = true;
-    this.playEndingMusic();
+    if (this.closable) {
+      this.finish = true;
+      this.playEndingMusic();
+    } else {
+      this.appGuessSongService.message('点都点开了, 不听完还想关!?');
+    }
   }
 
   private playEndingMusic(): void {
@@ -90,7 +93,8 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   initLines(): void {
     let i = 0;
     while (i < 99) {
-      this.lines.push({ width: `${this.randomNum(1, 3)}px`,
+      this.lines.push({
+        width: `${this.randomNum(1, 3)}px`,
         height: `${this.randomNum(20, 80)}%`,
         top: `${this.randomNum(-170, -140)}%`,
         left: `${this.randomNum(5, 95)}%`,
@@ -104,7 +108,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
    * 获取从 m 到 n 之间的随机数
    */
   randomNum(m: number, n: number): number {
-    return Math.floor( Math.random() * (n - m + 1) ) + m;
+    return Math.floor(Math.random() * (n - m + 1)) + m;
   }
 
   constructor(
@@ -128,7 +132,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
       concat(...introduction$).pipe(takeUntil(this.unsubscribe$)).subscribe({
         complete: () => {
           this.showInput = true;
-          setTimeout(() => this.input.nativeElement.focus());
+          this.closable = true;
         }
       });
     }, 2000);
