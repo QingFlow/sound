@@ -11,9 +11,11 @@
   padding: 10px;
   background: rgb(50, 50, 50);
   color: #fff;
+
   &.slideup {
     bottom: 160px;
     animation: slideup .4s linear;
+
     @keyframes slideup {
       from {
         bottom: 0px;
@@ -24,9 +26,11 @@
       }
     }
   }
+
   &.slidedown {
     bottom: -42px;
     animation: slidedown .4s linear;
+
     @keyframes slidedown {
       from {
         bottom: 160px;
@@ -52,6 +56,9 @@ table {
 
       td {
         border-right: 1px solid #e1e1e2;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
 
         &:last-child {
           border: none;
@@ -67,19 +74,19 @@ table {
       }
 
       .title {
-        width: 450px;
+        min-width: 238px;
       }
 
       .singer {
-        width: auto;
+        min-width: 213px;
       }
 
       .album {
-        width: auto;
+        min-width: 171px;
       }
 
       .time {
-        width: auto;
+        min-width: 87px;
       }
     }
   }
@@ -196,6 +203,7 @@ input {
   border: 1px solid #d5d6d9;
   border-radius: 11px;
   padding: 0 10px;
+
   &:focus {
     border-color: #dddae1;
   }

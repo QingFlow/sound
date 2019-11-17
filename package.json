@@ -69,6 +69,10 @@
         "nsis"
       ]
     },
+    "mac": {
+      "icon": "src/assets/images/nest-cloud.ico",
+      "artifactName": "${productName}_setup_${version}.${ext}"
+    },
     "nsis": {
       "oneClick": false,
       "perMachine": true,
