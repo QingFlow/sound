@@ -1,10 +1,10 @@
 <div class="footer">
   <div class="play-actions">
-    <div class="previous-container" title="上一首" (click)="this.appService.previousSong$.next()">
+    <div class="previous-container" title="上一首" (click)="action('previous')">
       <div class="column"></div>
       <div class="triangle"></div>
     </div>
-    <div class="state-container" title="暂停/播放" (click)="this.appService.pauseOrPlay$.next(!this.playing)">
+    <div class="state-container" title="暂停/播放" (click)="action('pauseOrPlay')">
       <ng-container *ngIf="playing">
         <div class="column"></div>
         <div class="column"></div>
@@ -13,7 +13,7 @@
         <div class="triangle"></div>
       </ng-container>
     </div>
-    <div class="next-container" title="下一首" (click)="this.appService.nextSong$.next()">
+    <div class="next-container" title="下一首" (click)="action('next')">
       <div class="column"></div>
       <div class="triangle"></div>
     </div>
@@ -23,7 +23,7 @@
     <div class="bar-container">
       <div #totalBar class="total-bar">
         <div class="current-bar" [ngStyle]="{'width': currentWidth}">
-          <div class="point"></div>
+          <app-progress-point (resize)="resize($event)" (resizeEnd)="resizeEnd()"></app-progress-point>
         </div>
         <div class="buffer-bar" [ngStyle]="{'width': bufferWidth}"></div>
       </div>

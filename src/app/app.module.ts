@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AppService } from './app.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgDragDropModule } from 'ng-drag-drop';
@@ -27,9 +26,6 @@ import { NgxElectronModule } from 'ngx-electron';
     AppSidebarComponent,
     AppHeaderComponent,
     AppComponent
-  ],
-  providers: [
-    AppService
   ],
   bootstrap: [
     AppComponent

@@ -120,16 +120,6 @@
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
         z-index: 1;
-
-        .point {
-          position: absolute;
-          right: 0px;
-          min-width: 4px;
-          min-height: 4px;
-          box-shadow: 0px 0px 0px 4px #fff, 0px 0px 0px 5px #bfbfbf;
-          border-radius: 50%;
-          background: #e83c3c;
-        }
       }
 
       .buffer-bar {

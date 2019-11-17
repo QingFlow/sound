@@ -10,6 +10,8 @@ import { AppGuessSongDialogComponent } from './guess-song-dialog/guess-song-dial
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SvgModule } from '../core/svg/svg.module';
 import { NgDragDropModule } from 'ng-drag-drop';
+import { AppProgressPointComponent } from './guess-song-footer/progress-point/progress-point.component';
+import { AppGuessSongService } from './guess-song.service';
 
 @NgModule({
   imports: [
@@ -26,10 +28,14 @@ import { NgDragDropModule } from 'ng-drag-drop';
     AppGuessSongListComponent,
     AppSpecialSongComponent,
     AppGuessSongFooterComponent,
-    AppGuessSongDialogComponent
+    AppGuessSongDialogComponent,
+    AppProgressPointComponent
   ],
   entryComponents: [
     AppGuessSongDialogComponent
   ],
+  providers: [
+    AppGuessSongService
+  ]
 })
 export class GuessSongModule { }

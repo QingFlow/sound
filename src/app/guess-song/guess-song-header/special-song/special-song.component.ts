@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { from, of, concat, Observable, Subject } from 'rxjs';
 import { delay, concatMap, tap, takeUntil } from 'rxjs/operators';
-import { AppService } from 'src/app/app.service';
+import { AppGuessSongService } from '../../guess-song.service';
 
 @Component({
   selector: 'app-special-song',
@@ -108,12 +108,12 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private appService: AppService
+    private appGuessSongService: AppGuessSongService
   ) { }
 
   ngOnInit(): void {
     // 播放世界上最好听的BGM
-    this.appService.specialSong$.next(true);
+    this.appGuessSongService.specialSong$.next(true);
     this.audio.src = `https://file.qingflow.com/uploads/file/ed1da145-a7c9-4bb9-9c8f-36f73b0b15ac.mp3`;
     this.audio.loop = true;
     this.audio.play(); // 先注释, 快听吐了
@@ -139,7 +139,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.audio.pause();
-    this.appService.specialSong$.next(false);
+    this.appGuessSongService.specialSong$.next(false);
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AppService } from 'src/app/app.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AppGuessSongService } from '../guess-song.service';
 
 @Component({
   selector: 'app-guess-song-header',
@@ -23,7 +23,7 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private appService: AppService
+    private appGuessSongService: AppGuessSongService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
       this.keys = keys;
       this.showKeys = true;
     }
-    this.appService.keyExpend$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+    this.appGuessSongService.keyExpend$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.keys.length = this.keys.length - 1;
       localStorage.setItem('keys', JSON.stringify(this.keys));
     });

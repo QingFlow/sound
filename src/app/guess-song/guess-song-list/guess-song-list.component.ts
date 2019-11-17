@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AppService } from 'src/app/app.service';
 import { toDoubleInteger, toSeconds } from 'src/app/core/common/common';
 import { isNullOrUndefined } from 'util';
 import { songsList, Song } from './song';
 import { EventManager } from '@angular/platform-browser';
+import { AppGuessSongService, SongStatus } from '../guess-song.service';
 
 
 @Component({
@@ -58,7 +58,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     }
     // 如果该歌曲已解锁, 则继续播放
     if (item.right) {
-      this.appService.pauseOrPlay$.next(true);
+      this.appGuessSongService.playingStatus$.next(SongStatus.play);
       return;
     }
     // 若未解锁, 则校验当前暂停是否处于合法区间的
@@ -66,7 +66,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     const endTime = toSeconds(item.endTime);
     const currentTime = this.audio.currentTime;
     if (currentTime >= startTime && currentTime <= endTime) { // 当前播放进度处在合法范围内
-      this.appService.pauseOrPlay$.next(true);
+      this.appGuessSongService.playingStatus$.next(SongStatus.play);
     } else { // 不合法则重新播放
       this.playAudio(item);
     }
@@ -98,7 +98,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       this.unLock(item, index);
       this.playAudio(item);
     }
-    this.appService.keyExpend$.next();
+    this.appGuessSongService.keyExpend$.next();
   }
 
   // 校验答案
@@ -151,7 +151,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
           }
         }, 1000);
       }
-      this.appService.pauseOrPlay$.next(true);
+      this.appGuessSongService.playingStatus$.next(SongStatus.play);
     }, this.playDelay);
   }
 
@@ -207,7 +207,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private appService: AppService,
+    private appGuessSongService: AppGuessSongService,
     private eventManager: EventManager
   ) { }
 
@@ -215,7 +215,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     // 监听空格键, 切换播放/暂停状态
     this.eventManager.addGlobalEventListener('window', 'keydown', (v: KeyboardEvent) => {
       if (v.code === 'Space' && this.playingSong) {
-        this.appService.pauseOrPlay$.next(this.audio.paused);
+        this.appGuessSongService.playingStatus$.next(this.audio.paused ? SongStatus.pause : SongStatus.play);
       }
     });
     // 读取本地已答对歌曲数据
@@ -224,7 +224,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     // 更新歌曲播放进度条
     this.progressTimer = setInterval(() => {
       if (this.audio.duration) { // 播放歌曲时, 一开始传递的duration是NaN, 导致进度条总时间重置为0
-        this.appService.progressChange$.next({
+        this.appGuessSongService.progressChange$.next({
           currentTime: this.audio.currentTime,
           duration: this.audio.duration
         });
@@ -251,7 +251,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       const timeRanges = this.audio.buffered;
       if (timeRanges.length > 0) {
         const index = timeRanges.length - 1;
-        this.appService.bufferCahnge$.next({
+        this.appGuessSongService.bufferChange$.next({
           bufferTime: timeRanges.end(index > 0 ? index : 0),
           duration: this.audio.duration
         });
@@ -261,23 +261,34 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       console.log('可以播放拉');
     };
     // #endregion
-    /** 监听上一首、下一首、暂停的动作 */
-    this.appService.previousSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      const playingSongIndex = this.songsList.findIndex(v => v.playing);
-      this.songsList.forEach(v => v.playing = false);
-      this.playAudio(this.songsList[playingSongIndex === 0 ? this.songsList.length - 1 : playingSongIndex - 1]);
-    });
-    this.appService.nextSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => this.nextSong());
-    this.appService.pauseOrPlay$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
-      this.clearTimer();
-      this.pause = v;
-      v ? this.fadeIn() : this.fadeOut();
+    /** 监听歌曲状态变更 */
+    this.appGuessSongService.playingStatus$.pipe(takeUntil(this.unsubscribe$)).subscribe(status => {
+      switch (status) {
+        case SongStatus.privious:
+          const playingSongIndex = this.songsList.findIndex(v => v.playing);
+          this.songsList.forEach(v => v.playing = false);
+          this.playAudio(this.songsList[playingSongIndex === 0 ? this.songsList.length - 1 : playingSongIndex - 1]);
+          break;
+        case SongStatus.pause:
+          this.clearTimer();
+          this.pause = true;
+          this.fadeOut();
+          break;
+        case SongStatus.play:
+          this.clearTimer();
+          this.pause = false;
+          this.fadeIn();
+          break;
+        case SongStatus.next:
+          this.nextSong();
+          break;
+      }
     });
     // 监听特殊歌曲
-    this.appService.specialSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
+    this.appGuessSongService.specialSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
       if (v) {
         this.playingSpecial = true;
-        this.appService.pauseOrPlay$.next(false);
+        this.appGuessSongService.playingStatus$.next(SongStatus.pause);
         // 表明当前正在播放特殊歌曲
         this.playingSpecial = true;
         this.tipText = '用心感受, 别出小差!';
@@ -286,6 +297,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         this.tipText = '尚未解锁该歌曲, 仅能听副歌部分, 即将播放下一首~';
       }
     });
+    this.appGuessSongService.updatePlayingCurrentTime$.subscribe(v => this.audio.currentTime = v);
   }
 
   ngOnDestroy(): void {
