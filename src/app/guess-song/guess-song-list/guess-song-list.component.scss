@@ -4,53 +4,38 @@
   user-select: none;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.table-header {
+  ul {
+    display: flex;
+    height: 30px;
+    font-size: 12px;
+    border-top: 1px solid #e1e1e2;
+    border-bottom: 1px solid #e1e1e2;
 
-  thead {
-    tr {
-      height: 30px;
-      font-size: 12px;
-      border-top: 1px solid #e1e1e2;
-      border-bottom: 1px solid #e1e1e2;
+    li {
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      border-right: 1px solid #e1e1e2;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
-      td {
-        border-right: 1px solid #e1e1e2;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-        &:last-child {
-          border: none;
-        }
-      }
-
-      .no {
-        width: 40px;
-      }
-
-      .operation {
-        width: 170px;
-      }
-
-      .title {
-        min-width: 238px;
-      }
-
-      .singer {
-        min-width: 213px;
-      }
-
-      .album {
-        min-width: 171px;
-      }
-
-      .time {
-        min-width: 87px;
+      &:last-child {
+        border: none;
       }
     }
   }
+}
+
+.scrollbar {
+  height: calc(100% - 192px);
+}
+
+table {
+  padding-bottom: 48px;
+  width: 100%;
+  border-collapse: collapse;
 
   .table-body {
     tr {
@@ -140,6 +125,31 @@ table {
   td {
     padding-left: 9px;
   }
+}
+
+
+.no {
+  width: 40px;
+}
+
+.operation {
+  width: 170px;
+}
+
+.title {
+  width: 490px;
+}
+
+.singer {
+  width: 438px;
+}
+
+.album {
+  width: 386px;
+}
+
+.time {
+  width: 180px;
 }
 
 @keyframes fade {

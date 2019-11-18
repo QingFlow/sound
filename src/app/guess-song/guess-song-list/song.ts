@@ -550,7 +550,7 @@ export const songsList: Song[] = [
   {
     title: `Every Heart（Cover：BoA）`,
     src: 'https://file.qingflow.com/uploads/file/60e8ec9b-10d8-44dd-a8fc-13a13f9b51db.mp3',
-    name: ['Every Heart（Cover：BoA）'],
+    name: ['Every Heart'],
     singer: 'VeraJae',
     album: '一个翻唱集',
     totalTime: '04:31',
@@ -606,7 +606,7 @@ export const songsList: Song[] = [
   {
     title: `成都（Cover 赵雷）`,
     src: 'https://file.qingflow.com/uploads/file/caf3f4d6-8c8c-4328-98e7-85321db02ef7.mp3',
-    name: ['成都（Cover 赵雷）'],
+    name: ['成都'],
     singer: '成都',
     album: '成都',
     totalTime: '04:46',
@@ -648,7 +648,7 @@ export const songsList: Song[] = [
   {
     title: `霜雪千年（Cover 洛天依 ／ 乐正绫）`,
     src: 'https://file.qingflow.com/uploads/file/0ef71729-288e-4146-ade2-6fb922c181e9.mp3',
-    name: ['霜雪千年（Cover 洛天依 ／ 乐正绫）'],
+    name: ['霜雪千年'],
     singer: '双笙,封茗囧菌',
     album: '霜雪千年(翻唱)',
     totalTime: '04:06',
@@ -788,7 +788,7 @@ export const songsList: Song[] = [
   {
     title: `我们都一样（Cover：张杰）`,
     src: 'https://file.qingflow.com/uploads/file/972c8bc7-13c0-42b8-aac4-e75fee04f34f.mp3',
-    name: ['我们都一样（Cover：张杰）'],
+    name: ['我们都一样'],
     singer: '澪恩Seiwen',
     album: '我们都一样（女生版）',
     totalTime: '04:55',
@@ -830,7 +830,7 @@ export const songsList: Song[] = [
   {
     title: `盗将行（Cover：花粥）`,
     src: 'https://file.qingflow.com/uploads/file/08e7f89a-f225-4dfc-8d3f-5d53fbf84878.mp3',
-    name: ['盗将行（Cover：花粥）'],
+    name: ['盗将行'],
     singer: '莅宣',
     album: '盗将行',
     totalTime: '03:21',
@@ -844,7 +844,7 @@ export const songsList: Song[] = [
   {
     title: `去年夏天（Cover：王大毛）`,
     src: 'https://file.qingflow.com/uploads/file/7b082108-98dd-4851-aa99-9460e63ab938.mp3',
-    name: ['去年夏天（Cover：王大毛）'],
+    name: ['去年夏天'],
     singer: '程嘉敏',
     album: '去年夏天',
     totalTime: '04:05',
@@ -941,7 +941,7 @@ export const songsList: Song[] = [
   },
   {
     title: `失恋阵线联盟`,
-    src: 'https://file.qingflow.com/uploads/file/bddc6ce4-c786-4ba6-90e7-a7207664d65b.mp3.mp3',
+    src: 'https://file.qingflow.com/uploads/file/bddc6ce4-c786-4ba6-90e7-a7207664d65b.mp3',
     name: ['失恋阵线联盟'],
     singer: '草蜢',
     album: '失恋阵线联盟',
@@ -998,7 +998,7 @@ export const songsList: Song[] = [
   {
     title: `陷阱（Cover 王北车）`,
     src: 'https://file.qingflow.com/uploads/file/b72ad33b-058b-4c7c-8925-42c48ec74ce4.mp3',
-    name: ['陷阱（Cover 王北车）'],
+    name: ['陷阱'],
     singer: '锦零',
     album: '陷阱',
     totalTime: '04:40',
@@ -1124,7 +1124,7 @@ export const songsList: Song[] = [
   {
     title: `PLANET（Cover：ラムジ）`,
     src: 'https://file.qingflow.com/uploads/file/18120f95-97ce-44f0-969b-36e81082cd3b.mp3',
-    name: ['PLANET（Cover：ラムジ）'],
+    name: ['PLANET'],
     singer: '黑猫',
     album: 'planet（御姐版你懂叭）',
     totalTime: '04:03',

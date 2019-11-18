@@ -1,55 +1,57 @@
-<table>
-  <thead>
-    <tr>
-      <td class="no"></td>
-      <td class="operation">锁定状态</td>
-      <td class="title">音乐标题</td>
-      <td class="singer">歌手</td>
-      <td class="album">专辑</td>
-      <td class="time">时长</td>
-    </tr>
-  </thead>
-  <tbody class="table-body">
-    <ng-container *ngFor="let item of songsList; let index = index;">
-      <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
-        <td class="td-no">
-          <span>
-            <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
-            <!-- 只有播放的那条记录显示播放状态icon -->
-            <ng-container *ngIf="item.playing">
-              <app-svg type="playing"></app-svg>
-              <div *ngIf="!pause" class="mute"></div>
-            </ng-container>
-          </span>
-        </td>
-        <td
-          class="operation"
-          droppable
-          [dragOverClass]="'drag-target-border'"
-          (click)="guessStart(item)"
-          (onDrop)="openLock(item, index)">
-          <ng-container *ngIf="item.right">
-            <app-svg type="unlock" class="unlock"></app-svg>
-          </ng-container>
-          <ng-container *ngIf="!item.right">
-            <span *ngIf="!item.guessing" style="vertical-align: middle;">
-              <app-svg type="lock" color="#c62f2f"></app-svg>
+<div class="table-header">
+  <ul>
+    <li class="no"></li>
+    <li class="operation">锁定状态</li>
+    <li class="title">音乐标题</li>
+    <li class="singer">歌手</li>
+    <li class="album">专辑</li>
+    <li class="time">时长</li>
+  </ul>
+</div>
+<perfect-scrollbar class="scrollbar">
+  <table>
+    <tbody class="table-body">
+      <ng-container *ngFor="let item of songsList; let index = index;">
+        <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
+          <td class="td-no">
+            <span>
+              <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
+              <!-- 只有播放的那条记录显示播放状态icon -->
+              <ng-container *ngIf="item.playing">
+                <app-svg type="playing"></app-svg>
+                <div *ngIf="!pause" class="mute"></div>
+              </ng-container>
             </span>
-            <input
-              *ngIf="item.guessing"
-              #guessInput
-              class="guessInput"
-              type="text"
-              placeholder="请输入歌名"
-              (blur)="guessingBluerHandler()"
-              (keyup.enter)="guessSong(guessInput.value, item, index)">
-          </ng-container>
-        </td>
-        <td [ngClass]="{'right': item.right}">{{ item.title }}</td>
-        <td [ngClass]="{'right': item.right}">{{ item.singer }}</td>
-        <td [ngClass]="{'right': item.right}">{{ item.album }}</td>
-        <td [ngClass]="{'right': item.right}">{{ item.totalTime }}</td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+          </td>
+          <td
+            class="operation"
+            droppable
+            [dragOverClass]="'drag-target-border'"
+            (click)="guessStart(item)"
+            (onDrop)="openLock(item, index)">
+            <ng-container *ngIf="item.right">
+              <app-svg type="unlock" class="unlock"></app-svg>
+            </ng-container>
+            <ng-container *ngIf="!item.right">
+              <span *ngIf="!item.guessing" style="vertical-align: middle;">
+                <app-svg type="lock" color="#c62f2f"></app-svg>
+              </span>
+              <input
+                *ngIf="item.guessing"
+                #guessInput
+                class="guessInput"
+                type="text"
+                placeholder="请输入歌名"
+                (blur)="guessingBluerHandler()"
+                (keyup.enter)="guessSong(guessInput.value, item, index)">
+            </ng-container>
+          </td>
+          <td class="title" [ngClass]="{'right': item.right}">{{ item.title }}</td>
+          <td class="singer" [ngClass]="{'right': item.right}">{{ item.singer }}</td>
+          <td class="album" [ngClass]="{'right': item.right}">{{ item.album }}</td>
+          <td class="time" [ngClass]="{'right': item.right}">{{ item.totalTime }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</perfect-scrollbar>

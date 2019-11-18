@@ -113,9 +113,11 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   // 校验答案
   public guessSong(answer: string, item: Song, index: number): void {
-    if (item.name.includes(answer)) {
-      this.unLock(item, index);
-    }
+    item.name.forEach(v => {
+      if (v.toLowerCase() === answer.toLowerCase()) {
+        this.unLock(item, index);
+      }
+    });
   }
 
   /** 解锁歌曲 */
