@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppGuessSongComponent implements OnInit {
   ngOnInit(): void {
-    document.body.onkeydown = e => {
-      e.preventDefault();
-    };
+    // 尝试阻止空格键引起页面下拉
+    // document.body.onkeydown = e => {
+    //   e.preventDefault();
+    // };
   }
 }

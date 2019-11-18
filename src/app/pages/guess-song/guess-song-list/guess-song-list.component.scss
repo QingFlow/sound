@@ -39,6 +39,12 @@ table {
   tr {
     font-size: 12px;
 
+    // 强化用户答题成就感
+    // &.right {
+    //   transition: all 1s ease;
+    //   border: 1px solid rgba(198, 47, 47, .3);
+    // }
+
     .mute {
       background: #fafafa;
     }

@@ -97,7 +97,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       if (item !== this.playingSong) {
         this.playAudio(item);
       } else {
-        this.appGuessSongService.playingStatus$.next(SongStatus.play);
+        if (this.audio.paused) {
+          this.appGuessSongService.playingStatus$.next(SongStatus.play);
+        }
       }
     }
   }

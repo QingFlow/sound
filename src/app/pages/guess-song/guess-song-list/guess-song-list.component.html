@@ -11,6 +11,7 @@
 <perfect-scrollbar class="scrollbar">
   <table>
     <ng-container *ngFor="let item of songsList; let index = index;">
+      <!-- <tr [ngClass]="{'selected': item.selected, 'right': item.right}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)"> -->
       <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
         <td class="td-no no">
           <span>

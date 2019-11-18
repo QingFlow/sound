@@ -46,7 +46,7 @@ export const songsList: Song[] = [
   {
     title: '樱花草',
     src: 'https://file.qingflow.com/uploads/file/cde14cf2-80cb-4684-b28a-42cdb2cee3e8.mp3',
-    name: ['泥鳅Niko'],
+    name: ['樱花草'],
     singer: '泥鳅Niko',
     album: '热门华语',
     totalTime: '02:13',
