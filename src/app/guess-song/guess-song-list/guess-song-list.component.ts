@@ -17,6 +17,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private playingSong: Song; // 正在播放的歌曲
   private audio = new Audio();
+  private guessing = false; // true: 正在猜歌
   private playDelay = 0;
   private validCheckTimer: NodeJS.Timer;
   private pauseTimer: NodeJS.Timer; // 暂停定时器, 淡出时0.5秒后执行暂停
@@ -85,6 +86,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       this.appGuessSongService.message('用心感受, 别出小差!');
       return;
     }
+    this.guessing = true;
     if (!item.right && this.canPlay) {
       item.guessing = true;
       setTimeout(() => this.input.nativeElement.focus());
@@ -96,6 +98,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   // 失焦的时候
   public guessingBluerHandler(): void {
+    this.guessing = false;
     this.songsList.forEach((item, _index) => item.guessing = false);
   }
 
@@ -220,7 +223,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
     // 监听空格键, 切换播放/暂停状态
     this.eventManager.addGlobalEventListener('window', 'keydown', (v: KeyboardEvent) => {
-      if (v.code === 'Space' && this.playingSong) {
+      if (v.code === 'Space' && this.playingSong && !this.guessing) {
         this.appGuessSongService.playingStatus$.next(this.audio.paused ? SongStatus.play : SongStatus.pause);
       }
     });
