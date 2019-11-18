@@ -28,6 +28,8 @@
 
   .body-right {
     width: calc(100% - 200px);
+    height: 100%;
+    overflow: auto;
     background: #fafafa;
   }
 }
