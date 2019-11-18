@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'guess-song',
-    loadChildren: './guess-song/guess-song.module#GuessSongModule'
+    loadChildren: './pages/guess-song/guess-song.module#GuessSongModule'
   },
   {
     path: 'piano',
-    loadChildren: './piano/piano.module#PianoModule'
+    loadChildren: './pages/piano/piano.module#PianoModule'
   },
   {
     path: '**',

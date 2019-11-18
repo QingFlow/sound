@@ -6,8 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.mudule';
-import { AppHeaderComponent } from './header/header.component';
-import { AppSidebarComponent } from './sidebar/sidebar.component';
+import { AppHeaderComponent } from './layout/header/header.component';
+import { AppSidebarComponent } from './layout/sidebar/sidebar.component';
 import { SvgModule } from './core/svg/svg.module';
 import { NgxElectronModule } from 'ngx-electron';
 

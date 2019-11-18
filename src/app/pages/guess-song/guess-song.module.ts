@@ -8,7 +8,7 @@ import { AppSpecialSongComponent } from './guess-song-header/special-song/specia
 import { AppGuessSongFooterComponent } from './guess-song-footer/guess-song-footer.component';
 import { AppGuessSongDialogComponent } from './guess-song-dialog/guess-song-dialog.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { SvgModule } from '../core/svg/svg.module';
+import { SvgModule } from '../../core/svg/svg.module';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { AppProgressPointComponent } from './guess-song-footer/progress-point/progress-point.component';
 import { AppGuessSongService } from './guess-song.service';
