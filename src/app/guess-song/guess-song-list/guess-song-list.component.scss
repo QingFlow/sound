@@ -39,6 +39,7 @@ table {
 
   .table-body {
     tr {
+      margin-left: -16px;
       font-size: 12px;
 
       .mute {
@@ -71,6 +72,8 @@ table {
     }
 
     td {
+      position: relative;
+      left: -5px;
       height: 28px;
 
       &.operation {
@@ -120,10 +123,6 @@ table {
         }
       }
     }
-  }
-
-  td {
-    padding-left: 9px;
   }
 }
 
