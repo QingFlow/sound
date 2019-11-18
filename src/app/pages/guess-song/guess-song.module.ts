@@ -6,7 +6,6 @@ import { AppGuessSongHeaderComponent } from './guess-song-header/guess-song-head
 import { AppGuessSongListComponent } from './guess-song-list/guess-song-list.component';
 import { AppSpecialSongComponent } from './guess-song-header/special-song/special-song.component';
 import { AppGuessSongFooterComponent } from './guess-song-footer/guess-song-footer.component';
-import { AppGuessSongDialogComponent } from './guess-song-dialog/guess-song-dialog.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SvgModule } from '../../core/svg/svg.module';
 import { NgDragDropModule } from 'ng-drag-drop';
@@ -30,11 +29,7 @@ import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
     AppGuessSongListComponent,
     AppSpecialSongComponent,
     AppGuessSongFooterComponent,
-    AppGuessSongDialogComponent,
     AppProgressPointComponent
-  ],
-  entryComponents: [
-    AppGuessSongDialogComponent
   ],
   providers: [
     AppGuessSongService,

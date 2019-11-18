@@ -27,9 +27,9 @@ function createWindow() {
       slashes: true
     })
   );
-  mainWindow.webContents.openDevTools({
-    mode: 'bottom'
-  })
+  // mainWindow.webContents.openDevTools({
+  //   mode: 'bottom'
+  // })
 }
 
 app.on('ready', createWindow)

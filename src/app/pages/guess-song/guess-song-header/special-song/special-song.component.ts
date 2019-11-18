@@ -36,7 +36,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   @Output() guessRight: EventEmitter<null> = new EventEmitter<null>();  // 答题成功, 获得钥匙
 
   public validAnswer(answer: string): void {
-    if (answer === '1') {
+    if (['穿越时空的思念', '时代を超える想い'].includes(answer)) {
       this.finish = true;
       this.playEndingMusic();
       setTimeout(() => { // 等待窗体上拉动画完成后, 开始出现钥匙动画

@@ -10,48 +10,47 @@
 </div>
 <perfect-scrollbar class="scrollbar">
   <table>
-    <tbody class="table-body">
-      <ng-container *ngFor="let item of songsList; let index = index;">
-        <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
-          <td class="td-no">
-            <span>
-              <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
-              <!-- 只有播放的那条记录显示播放状态icon -->
-              <ng-container *ngIf="item.playing">
-                <app-svg type="playing"></app-svg>
-                <div *ngIf="!pause" class="mute"></div>
-              </ng-container>
+    <ng-container *ngFor="let item of songsList; let index = index;">
+      <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
+        <td class="td-no no">
+          <span>
+            <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
+            <!-- 只有播放的那条记录显示播放状态icon -->
+            <ng-container *ngIf="item.playing">
+              <app-svg type="playing"></app-svg>
+              <div *ngIf="pause" class="mute"></div>
+            </ng-container>
+          </span>
+        </td>
+        <td
+          class="operation"
+          droppable
+          [style.cursor]="item.right ? 'default' : 'pointer'"
+          [dragOverClass]="'drag-target-border'"
+          (click)="guessStart(item)"
+          (onDrop)="openLock(item, index)">
+          <ng-container *ngIf="item.right">
+            <app-svg type="unlock" class="unlock"></app-svg>
+          </ng-container>
+          <ng-container *ngIf="!item.right">
+            <span *ngIf="!item.guessing" style="vertical-align: middle;">
+              <app-svg type="lock" color="#c62f2f"></app-svg>
             </span>
-          </td>
-          <td
-            class="operation"
-            droppable
-            [dragOverClass]="'drag-target-border'"
-            (click)="guessStart(item)"
-            (onDrop)="openLock(item, index)">
-            <ng-container *ngIf="item.right">
-              <app-svg type="unlock" class="unlock"></app-svg>
-            </ng-container>
-            <ng-container *ngIf="!item.right">
-              <span *ngIf="!item.guessing" style="vertical-align: middle;">
-                <app-svg type="lock" color="#c62f2f"></app-svg>
-              </span>
-              <input
-                *ngIf="item.guessing"
-                #guessInput
-                class="guessInput"
-                type="text"
-                placeholder="请输入歌名"
-                (blur)="guessingBluerHandler()"
-                (keyup.enter)="guessSong(guessInput.value, item, index)">
-            </ng-container>
-          </td>
-          <td class="title" [ngClass]="{'right': item.right}">{{ item.title }}</td>
-          <td class="singer" [ngClass]="{'right': item.right}">{{ item.singer }}</td>
-          <td class="album" [ngClass]="{'right': item.right}">{{ item.album }}</td>
-          <td class="time" [ngClass]="{'right': item.right}">{{ item.totalTime }}</td>
-        </tr>
-      </ng-container>
-    </tbody>
+            <input
+              *ngIf="item.guessing"
+              #guessInput
+              class="guessInput"
+              type="text"
+              placeholder="请输入歌名"
+              (blur)="guessingBluerHandler()"
+              (keyup.enter)="guessSong(guessInput.value, item, index)">
+          </ng-container>
+        </td>
+        <td class="title" [ngClass]="{'right': item.right}">{{ item.title }}</td>
+        <td class="singer" [ngClass]="{'right': item.right}">{{ item.singer }}</td>
+        <td class="album" [ngClass]="{'right': item.right}">{{ item.album }}</td>
+        <td class="time" [ngClass]="{'right': item.right}">{{ item.totalTime }}</td>
+      </tr>
+    </ng-container>
   </table>
 </perfect-scrollbar>

@@ -21,6 +21,10 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
   public durationNumber = 0; // 歌曲总时间(用来计算)
   public playing = false; // 歌曲的播放状态
 
+  get totalBarWidth(): number {
+    return this.totalBar.nativeElement.offsetWidth;
+  }
+
   @ViewChild('totalBar', { static: false }) totalBar: ElementRef;
 
 
@@ -31,6 +35,9 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
     this.moving = true;
     this.newWidth = newWidth;
     this.currentWidth = `${newWidth}px`;
+
+    this.currentTime = toMinute((this.durationNumber * this.newWidth) / this.totalBarWidth);
+
   }
 
   public resizeEnd(): void {
@@ -38,8 +45,7 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
     if (this.durationNumber === 0) {
       return;
     }
-    const totalWidth: number = this.totalBar.nativeElement.offsetWidth;
-    const currentTime = (this.newWidth * this.durationNumber) / totalWidth;
+    const currentTime = (this.newWidth * this.durationNumber) / this.totalBarWidth;
     this.appGuessSongService.updatePlayingCurrentTime$.next(currentTime);
   }
 
@@ -70,13 +76,11 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
       this.currentTime = toMinute(v.currentTime);
       this.duration = toMinute(v.duration);
       // 计算当前进度
-      const totalWidth = this.totalBar.nativeElement.offsetWidth;
-      this.currentWidth = `${(v.currentTime * totalWidth) / v.duration}px`;
+      this.currentWidth = `${(v.currentTime * this.totalBarWidth) / v.duration}px`;
     });
     // 计算缓冲进度
     this.appGuessSongService.bufferChange$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
-      const totalWidth = this.totalBar.nativeElement.offsetWidth;
-      this.bufferWidth = `${(v.bufferTime * totalWidth) / v.duration}px`;
+      this.bufferWidth = `${(v.bufferTime * this.totalBarWidth) / v.duration}px`;
     });
     this.appGuessSongService.playingStatus$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
       switch (v) {

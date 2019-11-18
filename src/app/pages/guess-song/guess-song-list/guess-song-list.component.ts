@@ -86,12 +86,18 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       this.appGuessSongService.message('用心感受, 别出小差!');
       return;
     }
+    if (item.right) {
+      return;
+    }
     this.guessing = true;
-    if (!item.right && this.canPlay) {
+    if (this.canPlay) {
       item.guessing = true;
       setTimeout(() => this.input.nativeElement.focus());
+      // 如果解锁的歌曲
       if (item !== this.playingSong) {
         this.playAudio(item);
+      } else {
+        this.appGuessSongService.playingStatus$.next(SongStatus.play);
       }
     }
   }
@@ -223,7 +229,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
     // 监听空格键, 切换播放/暂停状态
     this.eventManager.addGlobalEventListener('window', 'keydown', (v: KeyboardEvent) => {
-      if (v.code === 'Space' && this.playingSong && !this.guessing) {
+      if (v.code === 'Space' && this.playingSong && !this.guessing && !this.playingSpecial) {
         this.appGuessSongService.playingStatus$.next(this.audio.paused ? SongStatus.play : SongStatus.pause);
       }
     });
@@ -326,6 +332,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       if (v >= startTime && v <= endTime) {
         this.audio.currentTime = v;
       } else {
+        if (v <= startTime) {
+          this.audio.currentTime = toSeconds(this.playingSong.startTime);
+        }
         this.appGuessSongService.message('进度超出合法范围了哦~');
       }
     });
