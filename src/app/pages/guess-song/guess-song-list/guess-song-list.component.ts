@@ -331,7 +331,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     this.appGuessSongService.updatePlayingCurrentTime$.subscribe(v => {
       const startTime = toSeconds(this.playingSong.startTime);
       const endTime = toSeconds(this.playingSong.endTime);
-      if (v >= startTime && v <= endTime) {
+      if ((v >= startTime && v <= endTime) || this.playingSong.right) {
         this.audio.currentTime = v;
       } else {
         if (v <= startTime) {

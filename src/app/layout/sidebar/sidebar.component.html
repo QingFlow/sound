@@ -1,19 +1,17 @@
-<perfect-scrollbar>
-  <div class="sidebar-container">
-    <ng-container *ngFor="let list of regularList; let listIndex = index;">
-      <label class="list-title">{{ list.name }}</label>
-      <ul class="regular-list">
-        <ng-container *ngFor="let item of list.children; let itemIndex = index;">
-          <li [routerLink]="item.link" routerLinkActive="selected">
-            <app-svg [type]="item.icon" width="19px" height="19px" right="9px"></app-svg>
-            {{ item.name }}
-          </li>
-        </ng-container>
-        <li (click)="openQingForm()">
-          <app-svg type="qing-form" width="19px" height="19px" right="9px"></app-svg>
-          QingForm
+<div class="sidebar-container">
+  <ng-container *ngFor="let list of regularList; let listIndex = index;">
+    <label class="list-title">{{ list.name }}</label>
+    <ul class="regular-list">
+      <ng-container *ngFor="let item of list.children; let itemIndex = index;">
+        <li [routerLink]="item.link" routerLinkActive="selected">
+          <app-svg [type]="item.icon" width="19px" height="19px" right="9px"></app-svg>
+          {{ item.name }}
         </li>
-      </ul>
-    </ng-container>
-  </div>
-</perfect-scrollbar>
+      </ng-container>
+      <li (click)="openQingForm()">
+        <app-svg type="qing-form" width="19px" height="19px" right="9px"></app-svg>
+        QingForm
+      </li>
+    </ul>
+  </ng-container>
+</div>
