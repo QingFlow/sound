@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "A work for ngChina 2019!",
   "author": "QingFlow front-end team",
+  "main": "electron-config.js",
   "scripts": {
     "start": "ng serve",
     "electron": "ng build --prod --aot --base-href ./ && electron .",

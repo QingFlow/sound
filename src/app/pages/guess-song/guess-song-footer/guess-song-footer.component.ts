@@ -42,7 +42,7 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
 
   public resizeEnd(): void {
     this.moving = false;
-    if (this.durationNumber === 0) {
+    if (this.durationNumber === 0 || !this.newWidth) {
       return;
     }
     const currentTime = (this.newWidth * this.durationNumber) / this.totalBarWidth;

@@ -34,7 +34,8 @@
 
 table {
   padding-bottom: 48px;
-  border-collapse: collapse;
+  overflow: scroll;
+  overflow-x: hidden;
 
   tr {
     font-size: 12px;
