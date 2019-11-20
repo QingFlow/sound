@@ -5,7 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 export const enum SongStatus {
   privious,
   pause,
-  play,
+  play, // 专指继续播放的情况, 不包含歌曲切换之类的
   next
 }
 
@@ -15,6 +15,7 @@ export class AppGuessSongService {
 
   public progressChange$ = new Subject<{ currentTime: number, duration: number }>(); // 播放进度变更
   public playingStatus$ = new Subject<SongStatus>(); // 歌曲的各个状态变更
+  public resetProgress$ = new Subject<void>(); // 重置进度条
   public specialSong$ = new Subject<boolean>(); // 开始/关闭进入特殊歌曲界面
   public keyExpend$ = new Subject<void>(); // 消耗了一把钥匙
   public bufferChange$ = new Subject<{ bufferTime: number, duration: number }>(); // 歌曲的缓存秒数

@@ -172,6 +172,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
           }
         }, 1000);
       }
+      this.appGuessSongService.resetProgress$.next();
       this.appGuessSongService.playingStatus$.next(SongStatus.play);
     }, this.playDelay);
   }

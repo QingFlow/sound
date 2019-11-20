@@ -90,13 +90,12 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
         case SongStatus.play:
           this.playing = true;
           break;
-        default:
-          // 播放新歌曲的时候, 进度条恢复初始状态
-          this.currentTime = '00:00';
-          this.currentWidth = '0px';
-          this.bufferWidth = '0px';
-          break;
       }
+    });
+    this.appGuessSongService.resetProgress$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
+      this.currentTime = '00:00';
+      this.currentWidth = '0px';
+      this.bufferWidth = '0px';
     });
   }
 
