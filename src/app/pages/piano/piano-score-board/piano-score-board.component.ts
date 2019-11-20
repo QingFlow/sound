@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { songbie } from '../piano.constants';
+import { songbie, meijianxue } from '../piano.constants';
 
 @Component({
   selector: 'app-piano-score-board',
@@ -8,7 +8,7 @@ import { songbie } from '../piano.constants';
 })
 export class AppPianoScoreBoardComponent implements OnInit {
 
-  score = songbie;
+  score = meijianxue;u
 
   beatsCount = 0;
 
