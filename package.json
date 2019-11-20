@@ -8,7 +8,7 @@
   "scripts": {
     "start": "ng serve",
     "electron": "ng build --prod --aot --base-href ./ && electron .",
-    "deploy": "ng deploy",
+    "deploy": "ng deploy --base-href=\"./\"",
     "build:web": "ng build --prod --aot",
     "build:app": "rimraf electron-dist && ng build --prod --aot --base-href ./ && electron-builder -w",
     "_start": "仅运行在浏览器中",

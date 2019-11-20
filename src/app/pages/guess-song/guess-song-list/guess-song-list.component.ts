@@ -2,10 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { toDoubleInteger, toSeconds } from 'src/app/core/common/common';
-import { isNullOrUndefined } from 'util';
 import { songsList, Song } from './song';
-import { EventManager } from '@angular/platform-browser';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
+import { EventService } from 'src/app/core/service/event.service';
 
 
 @Component({
@@ -225,14 +224,14 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   constructor(
     private appGuessSongService: AppGuessSongService,
-    private eventManager: EventManager
+    private eventService: EventService
   ) { }
 
   ngOnInit(): void {
     this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
-    // 监听空格键, 切换播放/暂停状态
-    this.eventManager.addGlobalEventListener('window', 'keydown', (v: KeyboardEvent) => {
-      if (v.code === 'Space' && this.playingSong && !this.guessing && !this.playingSpecial) {
+    // 监听空格键, 切换播放/暂停状态, 初次打开、正在猜歌、正在播放特殊歌曲等情况不响应
+    this.eventService.keyEvent.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
+      if (v.key === ' ' && v.event === 'keydown' && this.playingSong && !this.guessing && !this.playingSpecial) {
         this.appGuessSongService.playingStatus$.next(this.audio.paused ? SongStatus.play : SongStatus.pause);
       }
     });
