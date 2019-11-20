@@ -12,6 +12,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import { AppProgressPointComponent } from './guess-song-footer/progress-point/progress-point.component';
 import { AppGuessSongService } from './guess-song.service';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
+import { AppProgressComponent } from './guess-song-footer/progress/progress.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
     AppGuessSongListComponent,
     AppSpecialSongComponent,
     AppGuessSongFooterComponent,
-    AppProgressPointComponent
+    AppProgressPointComponent,
+    AppProgressComponent
   ],
   providers: [
     AppGuessSongService,

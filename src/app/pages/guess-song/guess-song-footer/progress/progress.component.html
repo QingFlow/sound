@@ -1,0 +1,8 @@
+<div class="bar-container">
+  <div #totalBar class="total-bar">
+    <div class="current-bar" [ngStyle]="{'width': currentWidth}">
+      <app-progress-point (resize)="resize($event)" (resizeEnd)="resizeEnd()"></app-progress-point>
+    </div>
+    <div class="buffer-bar" [ngStyle]="{'width': bufferWidth}"></div>
+  </div>
+</div>

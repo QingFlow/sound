@@ -12,6 +12,8 @@ export const enum SongStatus {
 @Injectable()
 export class AppGuessSongService {
   private messageShowing = false; // 是否正在显示message
+  /** // 进度条是否正在被拖拽 true: 正在被拖拽 */
+  private _progressMoving = false;
 
   public progressChange$ = new Subject<{ currentTime: number, duration: number }>(); // 播放进度变更
   public playingStatus$ = new Subject<SongStatus>(); // 歌曲的各个状态变更
@@ -22,6 +24,14 @@ export class AppGuessSongService {
   public updatePlayingCurrentTime$ = new Subject<number>(); // 拖拽进度条导致的播放时间变更
   /** true: 处于缓冲 false: 能够播放 */
   public playNewSong$ = new Subject<boolean>();
+
+  get progressMoving(): boolean {
+    return this._progressMoving;
+  }
+
+  public setProgressMoving(value: boolean) {
+    this._progressMoving = value;
+  }
 
   public message(text: string) {
     if (!this.messageShowing) {
