@@ -20,7 +20,7 @@
   </div>
   <div class="progress-container">
     <span class="min">{{ currentTime }}</span>
-    <app-progress></app-progress>
+    <app-progress (currentTimeChange)="currentTimeChangeHandler($event)"></app-progress>
     <span class="max">{{ duration }}</span>
   </div>
 </div>

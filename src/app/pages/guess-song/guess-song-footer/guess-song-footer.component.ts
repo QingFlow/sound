@@ -16,6 +16,9 @@ export class AppGuessSongFooterComponent implements OnInit, OnDestroy {
   public duration: string = '00:00'; // 歌曲总时间(用来显示)
   public playing = false; // 歌曲的播放状态
 
+  public currentTimeChangeHandler(currentTime: string): void {
+    this.currentTime = currentTime;
+  }
 
   public action(action: 'previous' | 'pauseOrPlay' | 'next'): void {
     switch (action) {

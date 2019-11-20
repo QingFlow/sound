@@ -17,7 +17,7 @@ export class AppProgressPointComponent implements OnDestroy {
   @HostListener('mousedown', ['$event'])
   onMousedown(event: MouseEvent): void {
     event.preventDefault();
-    const initWidth = this.el.nativeElement.parentElement.offsetWidth;
+    const initWidth = this.elementRef.nativeElement.parentElement.offsetWidth;
     const initClientX = event.clientX;
     const mouseup = fromEvent(document, 'mouseup');
     this.subscription = mouseup
@@ -38,7 +38,7 @@ export class AppProgressPointComponent implements OnDestroy {
   private onMove(event: MouseEvent, initWidth: number, initClientX: number): void {
     const movementX = event.clientX - initClientX;
     const newWidth = initWidth + movementX;
-    const totalBarWidth = this.el.nativeElement.parentElement.parentElement.offsetWidth;
+    const totalBarWidth = this.elementRef.nativeElement.parentElement.parentElement.offsetWidth;
     // 防止超出总的进度范围
     if (newWidth >= 0 && newWidth < totalBarWidth) {
       this.resize.emit(newWidth);
@@ -53,7 +53,7 @@ export class AppProgressPointComponent implements OnDestroy {
   }
 
   constructor(
-    private el: ElementRef
+    private elementRef: ElementRef
   ) { }
 
   ngOnDestroy(): void {
