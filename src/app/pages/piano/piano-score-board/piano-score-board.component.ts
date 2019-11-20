@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { songbie } from '../piano.constants';
 
 @Component({
   selector: 'app-piano-score-board',
@@ -7,79 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppPianoScoreBoardComponent implements OnInit {
 
-  score = [
-    'o', ' ',
-    'u', 'o',
-    's', ' ',
-    ' ', ' ',
-    'p', ' ',
-    's', ' ',
-    'o', ' ',
-    ' ', ' ',
-
-    'o', ' ',
-    't', 'y',
-    'u', ' ',
-    'y', 't',
-    'y', ' ',
-    ' ', ' ',
-    ' ', ' ',
-    ' ', ' ',
-
-    'o', ' ',
-    'u', 'o',
-    's', ' ',
-    ' ', 'a',
-    'p', ' ',
-    's', ' ',
-    'o', ' ',
-    ' ', ' ',
-
-    'o', ' ',
-    'y', 'u',
-    'i', ' ',
-    ' ', 'r',
-    't', ' ',
-    ' ', ' ',
-    ' ', ' ',
-    ' ', ' ',
-
-    'p', ' ',
-    's', ' ',
-    's', ' ',
-    ' ', ' ',
-    'a', ' ',
-    'p', 'a',
-    's', ' ',
-    ' ', ' ',
-
-    'p', 'a',
-    's', 'p',
-    'p', 'o',
-    'u', 't',
-    'y', ' ',
-    ' ', ' ',
-    ' ', ' ',
-    ' ', ' ',
-
-    'o', ' ',
-    'u', 'o',
-    's', ' ',
-    ' ', 'a',
-    'p', ' ',
-    's', ' ',
-    'o', ' ',
-    ' ', ' ',
-
-    'o', ' ',
-    'y', 'u',
-    'i', ' ',
-    ' ', 'r',
-    't', ' ',
-    ' ', ' ',
-    ' ', ' ',
-    ' ', ' ',
-  ];
+  score = songbie;
 
   beatsCount = 0;
 

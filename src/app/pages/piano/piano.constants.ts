@@ -4,6 +4,7 @@ export interface PianoKey {
   active: boolean;
 }
 
+// #region 钢琴按键
 export const numbers: PianoKey[] = [
   { key: '1', soundCode: 'C2', active: false },
   { key: '2', soundCode: 'D2', active: false },
@@ -48,6 +49,9 @@ export const lettersRow3: PianoKey[] = [
   { key: 'N', soundCode: 'B6', active: false },
   { key: 'M', soundCode: 'C7', active: false }
 ];
+// #endregion
+
+// #region 每个音对应的采样音频
 export const soundMap = new Map<string, string>([
   ['C2', 'a49.mp3'],
   ['D2', 'a50.mp3'],
@@ -91,3 +95,85 @@ export const soundMap = new Map<string, string>([
 
   ['C7', 'a77.mp3'],
 ]);
+// #endregion
+
+/** 歌单 */
+// #region 送别
+export const songbie = [
+  'o', ' ',
+  'u', 'o',
+  's', ' ',
+  ' ', ' ',
+  'p', ' ',
+  's', ' ',
+  'o', ' ',
+  ' ', ' ',
+
+  'o', ' ',
+  't', 'y',
+  'u', ' ',
+  'y', 't',
+  'y', ' ',
+  ' ', ' ',
+  ' ', ' ',
+  ' ', ' ',
+
+  'o', ' ',
+  'u', 'o',
+  's', ' ',
+  ' ', 'a',
+  'p', ' ',
+  's', ' ',
+  'o', ' ',
+  ' ', ' ',
+
+  'o', ' ',
+  'y', 'u',
+  'i', ' ',
+  ' ', 'r',
+  't', ' ',
+  ' ', ' ',
+  ' ', ' ',
+  ' ', ' ',
+
+  'p', ' ',
+  's', ' ',
+  's', ' ',
+  ' ', ' ',
+  'a', ' ',
+  'p', 'a',
+  's', ' ',
+  ' ', ' ',
+
+  'p', 'a',
+  's', 'p',
+  'p', 'o',
+  'u', 't',
+  'y', ' ',
+  ' ', ' ',
+  ' ', ' ',
+  ' ', ' ',
+
+  'o', ' ',
+  'u', 'o',
+  's', ' ',
+  ' ', 'a',
+  'p', ' ',
+  's', ' ',
+  'o', ' ',
+  ' ', ' ',
+
+  'o', ' ',
+  'y', 'u',
+  'i', ' ',
+  ' ', 'r',
+  't', ' ',
+  ' ', ' ',
+  ' ', ' ',
+  ' ', ' ',
+];
+// #endregion
+
+// #region 眉间雪
+// #endregion
+

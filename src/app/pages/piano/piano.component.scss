@@ -33,7 +33,7 @@ body {
   li {
     float: left;
     margin: 0 5px 5px 0;
-    width: 40px;
+    width: 42px;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -57,6 +57,11 @@ body {
     &.disabled {
       background: #efefef;
     }
+
+
+    &.lastitem {
+      margin-right: 0;
+    }
   }
 
   .tab, .delete {
@@ -66,13 +71,13 @@ body {
     width: 80px;
   }
   .return {
-    width: 77px;
+    width: 79px;
   }
   .left-shift {
     width: 95px;
   }
   .right-shift {
-    width: 109px;
+    width: 111px;
   }
   .space {
     clear: left;
@@ -86,11 +91,5 @@ body {
   clear: left;
 }
 
-.lastitem {
-  margin-right: 0;
-}
 
-.uppercase {
-  text-transform: uppercase;
-}
 
