@@ -1,35 +1,35 @@
-<div style="width:960px;margin:10px auto; clear:both; text-align:center;">
-</div>
-<div id="container">
-  <app-piano-score-board></app-piano-score-board>
-  <ul id="keyboard">
-    <li class="symbol disabled">`</li>
-    <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': numbers, 'class': 'symbol' } }"></ng-template>
-    <li class="symbol disabled">-</li>
-    <li class="symbol disabled">=</li>
-    <li class="delete lastitem disabled">delete</li>
-
-    <li class="tab disabled">tab</li>
-    <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': lettersRow1, 'class': 'letter' } }"></ng-template>
-    <li class="symbol disabled">[</li>
-    <li class="symbol disabled">]</li>
-    <li class="symbol lastitem disabled">\</li>
-
-    <li class="capslock disabled">caps lock</li>
-    <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': lettersRow2, 'class': 'letter' } }"></ng-template>
-    <li class="symbol disabled">;</li>
-    <li class="symbol disabled">'</li>
-    <li class="return lastitem disabled">return</li>
-
-    <li class="left-shift disabled">shift</li>
-    <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': lettersRow3, 'class': 'letter' } }"></ng-template>
-    <li class="symbol disabled">,</li>
-    <li class="symbol disabled">.</li>
-    <li class="symbol disabled">/</li>
-    <li class="right-shift lastitem disabled">shift</li>
-    <li class="space lastitem disabled">&nbsp;</li>
-  </ul>
-</div>
+<nz-spin [nzSpinning]="keyBoerdLoading" [nzDelay]="500">
+  <div id="container">
+    <app-piano-score-board></app-piano-score-board>
+    <ul id="keyboard">
+      <li class="symbol disabled">`</li>
+      <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': numbers, 'class': 'symbol' } }"></ng-template>
+      <li class="symbol disabled">-</li>
+      <li class="symbol disabled">=</li>
+      <li class="delete lastitem disabled">delete</li>
+  
+      <li class="tab disabled">tab</li>
+      <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': lettersRow1, 'class': 'letter' } }"></ng-template>
+      <li class="symbol disabled">[</li>
+      <li class="symbol disabled">]</li>
+      <li class="symbol lastitem disabled">\</li>
+  
+      <li class="capslock disabled">caps lock</li>
+      <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': lettersRow2, 'class': 'letter' } }"></ng-template>
+      <li class="symbol disabled">;</li>
+      <li class="symbol disabled">'</li>
+      <li class="return lastitem disabled">return</li>
+  
+      <li class="left-shift disabled">shift</li>
+      <ng-template [ngTemplateOutlet]="pianoKeyTpl" [ngTemplateOutletContext]="{ $implicit: { 'keys': lettersRow3, 'class': 'letter' } }"></ng-template>
+      <li class="symbol disabled">,</li>
+      <li class="symbol disabled">.</li>
+      <li class="symbol disabled">/</li>
+      <li class="right-shift lastitem disabled">shift</li>
+      <li class="space lastitem disabled">&nbsp;</li>
+    </ul>
+  </div>
+</nz-spin>
 <ng-template #pianoKeyTpl let-data>
   <li
     *ngFor="let item of data.keys"
