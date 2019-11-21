@@ -276,6 +276,7 @@ const meijainxueCycle = [
   'J', 'J',
   'J', 'H',
 
+  ' ', ' ',
   'U', 'O',
 
   'P', ' ',
@@ -293,6 +294,7 @@ const meijainxueCycle = [
   'D', ' ',
   'H', 'F',
 
+  ' ', ' ',
   'U', 'O',
 
   'P', ' ',

@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { EventService } from '../../core/service/event.service';
 import { SoundLibrary } from './instruments';
 import { numbers, lettersRow1, lettersRow2, lettersRow3, PianoKey } from './piano.constants';
-import { Subject } from 'rxjs';
-import { EventService } from 'src/app/core/service/event.service';
-import { takeUntil } from 'rxjs/operators';
-
 @Component({
   selector: 'app-piano',
   templateUrl: './piano.component.html',
@@ -19,12 +18,21 @@ export class AppPianoComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private pianoKeys: PianoKey[];
   synth: any;
+  keyBoerdLoading = false;
 
   /** 用户点击页面上的按键 */
   userClickPiano(pianoKey: PianoKey) {
     if (pianoKey.active) { return; }
     pianoKey.active = true;
     this.synth.triggerAttackRelease(pianoKey.soundCode, '1n');
+  }
+
+  triggerPianoKey(key: string): void {
+    const keyItem = this.pianoKeys.find(item => item.key === key);
+    if (!keyItem) { return; }
+    keyItem.active = true;
+    this.synth.triggerAttackRelease(keyItem.soundCode, '1n');
+    setTimeout(() => keyItem.active = false, 300);
   }
 
   /**
@@ -42,11 +50,18 @@ export class AppPianoComponent implements OnInit, OnDestroy {
     }
   }
 
+  private addKeyBoardEventListener(): void {
+    this.eventSrv.keyEvent
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(event => this.handlePianoKeyEvent(event));
+  }
+
   constructor(
     private eventSrv: EventService
   ) {}
 
   ngOnInit(): void {
+    this.keyBoerdLoading = true;
     // 初始化合成器
     this.synth = new SoundLibrary().load();
 
@@ -57,11 +72,15 @@ export class AppPianoComponent implements OnInit, OnDestroy {
       ...this.lettersRow3
     ];
 
-    this.eventSrv.keyEvent
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(event => {
-        this.handlePianoKeyEvent(event);
-      });
+    // 监听采样加载完成
+    const timer = setInterval(() => {
+      console.log(this.synth.loaded);
+      if (this.synth.loaded) {
+        this.keyBoerdLoading = false;
+        this.addKeyBoardEventListener();
+        clearInterval(timer);
+      }
+    }, 100);
   }
 
   ngOnDestroy(): void {
