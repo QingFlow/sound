@@ -12,9 +12,11 @@ export class AppComponent implements OnInit {
   constructor(
     private eventManager: EventManager,
     private eventSrv: EventService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    // 禁用浏览器默认下滑的行为
+    document.body.onkeydown = event => event.preventDefault();
     this.eventManager.addGlobalEventListener('window', 'keydown', (event: KeyboardEvent) => {
       this.eventSrv.keyEvent.next({ key: event.key, event: 'keydown' });
     });

@@ -347,5 +347,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
     this.fadeOut();
+    // 释放内存
+    setTimeout(() => {
+      this.audio = null;
+    }, 500);
   }
 }
