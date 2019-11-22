@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: './pages/piano/piano.module#PianoModule'
   },
   {
-    path: '**',
+    path: '**', // 建议用 '' 来处理默认页，用 '**' 处理不存在的路由
     redirectTo: 'guess-song'
   }
 ];

@@ -9,7 +9,7 @@ export const enum SongStatus {
   next
 }
 
-@Injectable()
+@Injectable() // 建议改用 providedIn: GuestSongModule 的写法
 export class AppGuessSongService {
   private messageShowing = false; // 是否正在显示message
   /** // 进度条是否正在被拖拽 true: 正在被拖拽 */

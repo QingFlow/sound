@@ -34,7 +34,7 @@ import { AppProgressComponent } from './guess-song-footer/progress/progress.comp
     AppProgressComponent
   ],
   providers: [
-    AppGuessSongService,
+    AppGuessSongService, // 建议改用 providedIn: GuestSongModule 的写法
     NzMessageService
   ]
 })

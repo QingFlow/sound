@@ -52,6 +52,7 @@ export class AppProgressPointComponent implements OnDestroy {
     }
   }
 
+  // 建议进行成员排序，把构造函数排到最前面，以便一眼看出依赖关系
   constructor(
     private elementRef: ElementRef
   ) { }

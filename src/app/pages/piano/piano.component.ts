@@ -15,7 +15,7 @@ export class AppPianoComponent implements OnInit, OnDestroy {
   lettersRow2 = lettersRow2;
   lettersRow3 = lettersRow3;
 
-  private unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>(); // void 用得不错，可以明确表明不用/不能给它传值
   private pianoKeys: PianoKey[];
   synth: any;
   keyBoerdLoading = false;

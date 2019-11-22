@@ -6,7 +6,7 @@ import { songsList, Song } from './song';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 import { EventService } from 'src/app/core/service/event.service';
 
-
+// 类过大，建议做 SoC 分析，拆出一些服务和组件
 @Component({
   selector: 'app-guess-song-list',
   templateUrl: './guess-song-list.component.html',
@@ -36,6 +36,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   @ViewChild('guessInput', { static: false }) input: ElementRef;
 
+  // 格式化类的工作考虑做成 pipe
   // 保留两位整数, 1 => 01
   public getIndex(index: number): string {
     return toDoubleInteger(index);
@@ -282,6 +283,8 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       this.appGuessSongService.playNewSong$.next(false);
     };
     // #endregion
+    // takeUntil 用得比较巧妙，但是建议把这些控制逻辑也封装到服务里
+    // 当状态关联复杂、事件较多时，考虑用 NgRx 方式，或者在模型上设置 Observable 属性，再到模板中绑定
     /** 监听歌曲状态变更 */
     this.appGuessSongService.playingStatus$.pipe(takeUntil(this.unsubscribe$)).subscribe(status => {
       switch (status) {
