@@ -5,6 +5,12 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AppPianoComponent } from '../piano.component';
 
+interface SongListItem {
+  id: number;
+  name: string;
+  source: string[];
+}
+
 @Component({
   selector: 'app-piano-score-board',
   templateUrl: './piano-score-board.component.html',
@@ -12,30 +18,40 @@ import { AppPianoComponent } from '../piano.component';
 })
 export class AppPianoScoreBoardComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject();
-  songList = [
-    { name: '《送别》', source: songbie },
-    { name: '《眉间雪》', source: meijianxue }
+  songList: SongListItem[] = [
+    { id: 1, name: '《送别》', source: songbie },
+    { id: 2, name: '《眉间雪》', source: meijianxue }
   ];
+  selecedSong = this.songList[0];
   score: string[] = songbie;
   boardScrollTimer: NodeJS.Timer;
   beatsCount = 0;
   autoPlaying = false;
 
-  changeSong(song: { name: string, source: string[] }): void {
+  compareSong(song1: SongListItem, song2: SongListItem): boolean {
+    return song1.id === song2.id;
+  }
+
+  changeSong(song: SongListItem): void {
     this.score = song.source;
     this.beatsCount = 0;
     this.clearTimer();
   }
 
-  autoPlay(): void {
-    this.beatsCount = 0;
-    this.clearTimer();
-
-    this.autoPlaying = true;
-    this.boardScrollTimer = setInterval(() => {
-      this.pianoComp.triggerPianoKey(this.score[this.beatsCount - 3]);
-      this.beatsCount++;
-    }, 500);
+  toggleAutoPlay(): void {
+    if (this.autoPlaying) {
+      this.beatsCount = 0;
+      this.clearTimer();
+      this.autoPlaying = false;
+    } else {
+      this.beatsCount = 0;
+      this.clearTimer();
+      this.autoPlaying = true;
+      this.boardScrollTimer = setInterval(() => {
+        this.pianoComp.triggerPianoKey(this.score[this.beatsCount - 3]);
+        this.beatsCount++;
+      }, 500);
+    }
   }
 
   private clearTimer(): void {

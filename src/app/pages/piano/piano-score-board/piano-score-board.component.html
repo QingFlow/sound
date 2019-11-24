@@ -1,10 +1,15 @@
-<ul class="song-list">
-  <li *ngFor="let song of songList" class="song-item" (click)="changeSong(song)">
-    {{ song.name }}
-  </li>
-</ul>
-
-<p (click)="autoPlay()">autoPlay</p>
+<nz-radio-group [(ngModel)]="selecedSong" (ngModelChange)="changeSong($event)">
+  <label *ngFor="let song of songList" nz-radio [nzValue]="song">{{ song.name }}</label>
+</nz-radio-group>
+<p>
+  <button
+    nz-button
+    class="autoplay-btn"
+    nzType="default"
+    (click)="toggleAutoPlay()">
+    toggleAutoPlay
+  </button>
+</p>
 
 <div class="score-board-container">
   <div class="score-board-left">

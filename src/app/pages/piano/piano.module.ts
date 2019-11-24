@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzButtonModule, NzRadioModule, NzSpinModule } from 'ng-zorro-antd';
 import { AppPianoComponent } from './piano.component';
 import { PianoRoutingModule } from './piano-routing.module';
 import { AppPianoScoreBoardComponent } from './piano-score-board/piano-score-board.component';
@@ -8,8 +9,12 @@ import { AppPianoScoreBoardComponent } from './piano-score-board/piano-score-boa
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     PianoRoutingModule,
-    NzSpinModule
+    NzRadioModule,
+    NzSpinModule,
+    NzButtonModule
   ],
   declarations: [
     AppPianoComponent,

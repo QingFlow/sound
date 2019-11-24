@@ -1,3 +1,15 @@
+[nz-radio] {
+  display: block;
+  &:not(:last-of-type) {
+    margin-bottom: 4px;
+  }
+}
+
+.autoplay-btn {
+  width: 180px;
+  margin: 8px 0;
+}
+
 .score-board-container {
   display: flex;
   align-items: center;
