@@ -1,5 +1,6 @@
 
 export interface Song {
+  fakeTitle: string; // 假标题, 防作弊用的
   title: string; // 标题
   src: string; // OSS地址
   name: string[]; // 歌名, 使用数组的方式匹配多个歌名, 防止多名歌曲
@@ -14,9 +15,17 @@ export interface Song {
   right: boolean; // 是否已答题
 }
 
+const commonConfig = {
+  fakeTitle: '',
+  selected: false,
+  playing: false,
+  guessing: false,
+  right: false
+};
+
 export const songsList: Song[] = [
   {
-    title: '如果我变成回忆',
+    title: `如果我变成回忆`,
     src: 'https://file.qingflow.com/uploads/file/c5e69092-176e-45f0-b839-6e86d8aaceaf.mp3',
     name: ['如果我变成回忆'],
     singer: 'Clever勺子',
@@ -24,13 +33,10 @@ export const songsList: Song[] = [
     totalTime: '04:46',
     startTime: '01:14',
     endTime: '02:13',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '摩诃不思议アドベンチャー!',
+    title: `摩诃不思议アドベンチャー!`,
     src: 'https://file.qingflow.com/uploads/file/2e9c338b-934d-4539-b56a-ff3ecbebc8b0.mp3',
     name: ['摩诃不思议アドベンチャー'],
     singer: '高橋洋樹',
@@ -38,13 +44,10 @@ export const songsList: Song[] = [
     totalTime: '03:34',
     startTime: '00:10',
     endTime: '00:34',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '樱花草',
+    title: `樱花草`,
     src: 'https://file.qingflow.com/uploads/file/cde14cf2-80cb-4684-b28a-42cdb2cee3e8.mp3',
     name: ['樱花草'],
     singer: '泥鳅Niko',
@@ -52,13 +55,10 @@ export const songsList: Song[] = [
     totalTime: '02:13',
     startTime: '1:11',
     endTime: '1:39',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: 'My Love',
+    title: `My Love`,
     src: 'https://file.qingflow.com/uploads/file/0d949973-8b12-49ff-b2d8-d2edcffd30fc.mp3',
     name: ['My Love'],
     singer: 'Westlife',
@@ -66,13 +66,10 @@ export const songsList: Song[] = [
     totalTime: '03:53',
     startTime: '01:58',
     endTime: '02:38',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '遇见',
+    title: `遇见`,
     src: 'https://file.qingflow.com/uploads/file/b4544447-c107-454c-880b-fdedab38ba17.mp3',
     name: ['遇见'],
     singer: '杨搏',
@@ -80,13 +77,10 @@ export const songsList: Song[] = [
     totalTime: '03:39',
     startTime: '01:15',
     endTime: '01:38',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '一生有你',
+    title: `一生有你`,
     src: 'https://file.qingflow.com/uploads/file/dd9be461-a8f4-428a-b5a8-1b0b5faf1387.mp3',
     name: ['一生有你'],
     singer: '水木年华',
@@ -94,13 +88,10 @@ export const songsList: Song[] = [
     totalTime: '04:18',
     startTime: '03:08',
     endTime: '03:54',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '忘记时间',
+    title: `忘记时间`,
     src: 'https://file.qingflow.com/uploads/file/07585e87-1a29-4dcb-873f-523d702f5415.mp3',
     name: ['忘记时间'],
     singer: '胡歌',
@@ -108,13 +99,10 @@ export const songsList: Song[] = [
     totalTime: '04:32',
     startTime: '01:32',
     endTime: '02:00',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '盛夏的果实',
+    title: `盛夏的果实`,
     src: 'https://file.qingflow.com/uploads/file/a24e10a0-58bf-4d91-8273-1d0e9c182738.mp3',
     name: ['盛夏的果实'],
     singer: '莫文蔚',
@@ -122,13 +110,10 @@ export const songsList: Song[] = [
     totalTime: '04:10',
     startTime: '02:42',
     endTime: '03:50',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: 'As Long as You Love Me',
+    title: `As Long as You Love Me`,
     src: 'https://file.qingflow.com/uploads/file/1b8aa1f2-13da-48c3-bb97-787706f535cd.mp3',
     name: ['As Long as You Love Me'],
     singer: 'Backstreet Boys',
@@ -136,13 +121,10 @@ export const songsList: Song[] = [
     totalTime: '03:32',
     startTime: '00:57',
     endTime: '01:18',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: '布拉格广场',
+    title: `布拉格广场`,
     src: 'https://file.qingflow.com/uploads/file/301e7277-f354-4d65-9038-8b20b6de2e3e.mp3',
     name: ['布拉格广场'],
     singer: '蔡依林 周杰伦',
@@ -150,13 +132,10 @@ export const songsList: Song[] = [
     totalTime: '04:54',
     startTime: '01:00',
     endTime: '01:41',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: 'aLIEz',
+    title: `aLIEz`,
     src: 'https://file.qingflow.com/uploads/file/4f8d9991-5359-4474-9be4-1ca2d0fb4663.mp3',
     name: ['aLIEz'],
     singer: 'mizuki,SawanoHiroyuki[nZk]',
@@ -164,13 +143,10 @@ export const songsList: Song[] = [
     totalTime: '04:28',
     startTime: '00:58',
     endTime: '01:18',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
-    title: 'Skin',
+    title: `Skin`,
     src: 'https://file.qingflow.com/uploads/file/b69b0fc4-c4f5-4649-be7e-9ccc297191e6.mp3',
     name: ['Skin'],
     singer: `Rag'N'Bone Man`,
@@ -178,10 +154,7 @@ export const songsList: Song[] = [
     totalTime: '03:59',
     startTime: '00:57',
     endTime: '01:29',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `DON'T PUSH ME`,
@@ -192,10 +165,7 @@ export const songsList: Song[] = [
     totalTime: '03:14',
     startTime: '00:09',
     endTime: '00:44',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Disco Inferno`,
@@ -206,10 +176,7 @@ export const songsList: Song[] = [
     totalTime: '03:34',
     startTime: '00:52',
     endTime: '01:11',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `No Roots`,
@@ -220,10 +187,7 @@ export const songsList: Song[] = [
     totalTime: '03:55',
     startTime: '00:53',
     endTime: '01:24',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `给我一个理由忘记`,
@@ -234,10 +198,7 @@ export const songsList: Song[] = [
     totalTime: '04:45',
     startTime: '01:27',
     endTime: '01:58',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Here With You`,
@@ -248,10 +209,7 @@ export const songsList: Song[] = [
     totalTime: '03:45',
     startTime: '01:10',
     endTime: '01:26',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Waiting For Love`,
@@ -262,10 +220,7 @@ export const songsList: Song[] = [
     totalTime: '04:34',
     startTime: '00:17',
     endTime: '00:47',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `不再犹豫`,
@@ -276,10 +231,7 @@ export const songsList: Song[] = [
     totalTime: '04:12',
     startTime: '00:32',
     endTime: '01:13',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `真的爱你`,
@@ -290,10 +242,7 @@ export const songsList: Song[] = [
     totalTime: '04:37',
     startTime: '00:50',
     endTime: '01:22',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `I Really Like You`,
@@ -304,10 +253,7 @@ export const songsList: Song[] = [
     totalTime: '03:24',
     startTime: '00:39',
     endTime: '01:11',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Shape of You`,
@@ -318,10 +264,7 @@ export const songsList: Song[] = [
     totalTime: '03:51',
     startTime: '00:30',
     endTime: '01:29',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Big Big World`,
@@ -332,10 +275,7 @@ export const songsList: Song[] = [
     totalTime: '03:26',
     startTime: '01:41',
     endTime: '02:22',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `我的秘密`,
@@ -346,10 +286,7 @@ export const songsList: Song[] = [
     totalTime: '04:10',
     startTime: '01:05',
     endTime: '01:43',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Anyone Of Us (Stupid Mistake)`,
@@ -360,10 +297,7 @@ export const songsList: Song[] = [
     totalTime: '03:47',
     startTime: '00:35',
     endTime: '01:14',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Fire`,
@@ -374,10 +308,7 @@ export const songsList: Song[] = [
     totalTime: '03:48',
     startTime: '00:52',
     endTime: '01:04',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Believer`,
@@ -388,10 +319,7 @@ export const songsList: Song[] = [
     totalTime: '03:10',
     startTime: '00:02',
     endTime: '00:48',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Look What You Made Me Do`,
@@ -402,10 +330,7 @@ export const songsList: Song[] = [
     totalTime: '02:47',
     startTime: '00:45',
     endTime: '01:15',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Die Young`,
@@ -416,10 +341,7 @@ export const songsList: Song[] = [
     totalTime: '03:33',
     startTime: '00:07',
     endTime: '00:38',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Counting Stars`,
@@ -430,10 +352,7 @@ export const songsList: Song[] = [
     totalTime: '04:17',
     startTime: '00:38',
     endTime: '01:18',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `You Belong With Me`,
@@ -444,10 +363,7 @@ export const songsList: Song[] = [
     totalTime: '03:49',
     startTime: '00:37',
     endTime: '01:07',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Oops`,
@@ -458,10 +374,7 @@ export const songsList: Song[] = [
     totalTime: '03:24',
     startTime: '01:04',
     endTime: '01:21',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Bye Bye Bye`,
@@ -472,10 +385,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:42',
     endTime: '01:03',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Maps`,
@@ -486,10 +396,7 @@ export const songsList: Song[] = [
     totalTime: '03:09',
     startTime: '00:39',
     endTime: '01:12',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `We Are Never Ever Getting Back Together`,
@@ -500,10 +407,7 @@ export const songsList: Song[] = [
     totalTime: '03:13',
     startTime: '00:39',
     endTime: '01:02',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Lock Me Up`,
@@ -514,10 +418,7 @@ export const songsList: Song[] = [
     totalTime: '03:31',
     startTime: '00:44',
     endTime: '01:06',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `君が好きだと叫びたい`,
@@ -528,10 +429,7 @@ export const songsList: Song[] = [
     totalTime: '03:50',
     startTime: '01:04',
     endTime: '01:32',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Revolution`,
@@ -542,10 +440,7 @@ export const songsList: Song[] = [
     totalTime: '03:51',
     startTime: '00:03',
     endTime: '00:14',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Every Heart（Cover：BoA）`,
@@ -556,10 +451,7 @@ export const songsList: Song[] = [
     totalTime: '04:31',
     startTime: '00:45',
     endTime: '01:11',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `New Soul`,
@@ -570,10 +462,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:10',
     endTime: '00:28',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `侧脸`,
@@ -584,10 +473,7 @@ export const songsList: Song[] = [
     totalTime: '03:37',
     startTime: '01:15',
     endTime: '01:44',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `知足`,
@@ -598,10 +484,7 @@ export const songsList: Song[] = [
     totalTime: '04:16',
     startTime: '02:52',
     endTime: '03:43',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `成都（Cover 赵雷）`,
@@ -612,10 +495,7 @@ export const songsList: Song[] = [
     totalTime: '04:46',
     startTime: '01:22',
     endTime: '01:53',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `说爱你`,
@@ -626,10 +506,7 @@ export const songsList: Song[] = [
     totalTime: '03:22',
     startTime: '00:22',
     endTime: '00:42',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `后来`,
@@ -640,10 +517,7 @@ export const songsList: Song[] = [
     totalTime: '05:41',
     startTime: '02:36',
     endTime: '03:02',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `霜雪千年（Cover 洛天依 ／ 乐正绫）`,
@@ -654,10 +528,7 @@ export const songsList: Song[] = [
     totalTime: '04:06',
     startTime: '00:16',
     endTime: '01:29',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `娃娃脸`,
@@ -668,10 +539,7 @@ export const songsList: Song[] = [
     totalTime: '03:24',
     startTime: '00:16',
     endTime: '01:54',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `起风了`,
@@ -682,10 +550,7 @@ export const songsList: Song[] = [
     totalTime: '05:13',
     startTime: '01:36',
     endTime: '02:07',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `感谢你曾来过`,
@@ -696,10 +561,7 @@ export const songsList: Song[] = [
     totalTime: '03:56',
     startTime: '01:01',
     endTime: '01:50',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `小乌龟`,
@@ -710,10 +572,7 @@ export const songsList: Song[] = [
     totalTime: '03:46',
     startTime: '00:38',
     endTime: '01:13',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `可不可以`,
@@ -724,10 +583,7 @@ export const songsList: Song[] = [
     totalTime: '04:00',
     startTime: '01:11',
     endTime: '01:39',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `偏爱`,
@@ -738,10 +594,7 @@ export const songsList: Song[] = [
     totalTime: '03:32',
     startTime: '00:56',
     endTime: '01:25',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `云烟成雨`,
@@ -752,10 +605,7 @@ export const songsList: Song[] = [
     totalTime: '04:00',
     startTime: '01:13',
     endTime: '01:39',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `白羊`,
@@ -766,10 +616,7 @@ export const songsList: Song[] = [
     totalTime: '02:48',
     startTime: '00:36',
     endTime: '01:09',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `美人鱼`,
@@ -780,10 +627,7 @@ export const songsList: Song[] = [
     totalTime: '04:14',
     startTime: '00:58',
     endTime: '01:37',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `我们都一样（Cover：张杰）`,
@@ -794,10 +638,7 @@ export const songsList: Song[] = [
     totalTime: '04:55',
     startTime: '01:20',
     endTime: '01:53',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `彩虹的微笑`,
@@ -808,10 +649,7 @@ export const songsList: Song[] = [
     totalTime: '02:50',
     startTime: '01:16',
     endTime: '01:53',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `風の住む街`,
@@ -822,10 +660,7 @@ export const songsList: Song[] = [
     totalTime: '04:45',
     startTime: '01:20',
     endTime: '01:44',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `盗将行（Cover：花粥）`,
@@ -836,10 +671,7 @@ export const songsList: Song[] = [
     totalTime: '03:21',
     startTime: '00:44',
     endTime: '01:10',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `去年夏天（Cover：王大毛）`,
@@ -850,10 +682,7 @@ export const songsList: Song[] = [
     totalTime: '04:05',
     startTime: '00:49',
     endTime: '01:20',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `暖暖`,
@@ -864,10 +693,7 @@ export const songsList: Song[] = [
     totalTime: '04:00',
     startTime: '01:09',
     endTime: '01:28',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `Lemon`,
@@ -878,10 +704,7 @@ export const songsList: Song[] = [
     totalTime: '04:15',
     startTime: '00:58',
     endTime: '01:26',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `ハレハレヤ`,
@@ -892,10 +715,7 @@ export const songsList: Song[] = [
     totalTime: '03:29',
     startTime: '00:11',
     endTime: '00:54',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `逍遥叹`,
@@ -906,10 +726,7 @@ export const songsList: Song[] = [
     totalTime: '05:13',
     startTime: '01:21',
     endTime: '01:46',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `出山`,
@@ -920,10 +737,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:58',
     endTime: '01:16',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `小情歌`,
@@ -934,10 +748,7 @@ export const songsList: Song[] = [
     totalTime: '04:33',
     startTime: '01:42',
     endTime: '02:14',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `失恋阵线联盟`,
@@ -948,10 +759,7 @@ export const songsList: Song[] = [
     totalTime: '02:53',
     startTime: '00:16',
     endTime: '00:59',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `红色高跟鞋`,
@@ -962,10 +770,7 @@ export const songsList: Song[] = [
     totalTime: '03:26',
     startTime: '00:42',
     endTime: '01:06',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `如果有来生`,
@@ -976,10 +781,7 @@ export const songsList: Song[] = [
     totalTime: '04:07',
     startTime: '01:04',
     endTime: '01:33',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `虹之间`,
@@ -990,10 +792,7 @@ export const songsList: Song[] = [
     totalTime: '04:06',
     startTime: '01:10',
     endTime: '01:37',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `陷阱（Cover 王北车）`,
@@ -1004,10 +803,7 @@ export const songsList: Song[] = [
     totalTime: '04:40',
     startTime: '01:23',
     endTime: '01:52',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `一直很安静`,
@@ -1018,10 +814,7 @@ export const songsList: Song[] = [
     totalTime: '04:10',
     startTime: '01:57',
     endTime: '02:31',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `我爱他`,
@@ -1032,10 +825,7 @@ export const songsList: Song[] = [
     totalTime: '04:40',
     startTime: '01:08',
     endTime: '01:55',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `你瞒我瞒`,
@@ -1046,10 +836,7 @@ export const songsList: Song[] = [
     totalTime: '03:59',
     startTime: '01:09',
     endTime: '01:38',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `易燃易爆炸`,
@@ -1060,10 +847,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:49',
     endTime: '01:23',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `爱你`,
@@ -1074,10 +858,7 @@ export const songsList: Song[] = [
     totalTime: '03:28',
     startTime: '00:36',
     endTime: '01:06',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `你的酒馆对我打了烊`,
@@ -1088,10 +869,7 @@ export const songsList: Song[] = [
     totalTime: '04:11',
     startTime: '00:24',
     endTime: '01:07',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `假装`,
@@ -1102,10 +880,7 @@ export const songsList: Song[] = [
     totalTime: '04:24',
     startTime: '01:25',
     endTime: '02:04',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `绿色`,
@@ -1116,10 +891,7 @@ export const songsList: Song[] = [
     totalTime: '04:29',
     startTime: '00:57',
     endTime: '01:27',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   },
   {
     title: `PLANET（Cover：ラムジ）`,
@@ -1130,9 +902,6 @@ export const songsList: Song[] = [
     totalTime: '04:03',
     startTime: '00:47',
     endTime: '01:23',
-    selected: false,
-    playing: false,
-    guessing: false,
-    right: false
+    ...commonConfig
   }
 ];

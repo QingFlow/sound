@@ -24,3 +24,20 @@ export function toSeconds(time: string): number {
   const seconds = Number.parseInt(times[1], 10);
   return minutes * 60 + seconds;
 }
+
+/**
+ * 将字符串中对应下标的字符换成新的字符
+ * @param source 原字符串
+ * @param position 需要被替换的下标
+ * @param newChar 新的字符值
+ */
+export function replaceChat(source: string, position: number, newChar: string) {
+  if (position < 0 || position >= source.length || source.length === 0) {
+    return 'invalid parameters...';
+  }
+  const iBeginPos = 0;
+  const sFrontPart = source.substr(iBeginPos, position);
+  const sTailPart = source.substr(position + 1, source.length);
+  const sRet = sFrontPart + newChar + sTailPart;
+  return sRet;
+}

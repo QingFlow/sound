@@ -46,7 +46,14 @@
               (keyup.enter)="guessSong(guessInput.value, item, index)">
           </ng-container>
         </td>
-        <td class="title" [ngClass]="{'right': item.right}">{{ item.title }}</td>
+        <td class="title" [ngClass]="{'right': item.right}">
+          <ng-container *ngIf="item.right">
+            {{ item.title }}
+          </ng-container>
+          <ng-container *ngIf="!item.right">
+            {{ item.fakeTitle }}
+          </ng-container>
+        </td>
         <td class="singer" [ngClass]="{'right': item.right}">{{ item.singer }}</td>
         <td class="album" [ngClass]="{'right': item.right}">{{ item.album }}</td>
         <td class="time" [ngClass]="{'right': item.right}">{{ item.totalTime }}</td>

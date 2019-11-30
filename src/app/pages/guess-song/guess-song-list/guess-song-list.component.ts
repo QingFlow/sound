@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { toDoubleInteger, toSeconds } from 'src/app/core/common/utils';
+import { toDoubleInteger, toSeconds, replaceChat } from 'src/app/core/common/utils';
 import { songsList, Song } from './song';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 import { EventService } from 'src/app/core/service/event.service';
@@ -223,6 +223,19 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    // 防作弊
+    this.songsList.map(v => v.fakeTitle = v.title);
+    this.songsList.map((item, i) => {
+      const titleLength = item.title.length;
+      const fakeTitle = '还想作弊?';
+      let point = 0; // 代表fakeTitle当前需要使用的字符下标
+      for (let index = 0; index < titleLength; index++) {
+        item.fakeTitle = replaceChat(item.fakeTitle, index, fakeTitle[point]);
+        if (point++ > fakeTitle.length - 2) {
+          point = 0;
+        }
+      }
+    });
     this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
     // 监听空格键, 切换播放/暂停状态, [初次打开, 正在猜歌, 正在播放特殊歌曲]等情况不响应
     this.eventService.blankKeydown$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
