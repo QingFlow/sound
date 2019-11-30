@@ -51,7 +51,7 @@ export class AppPianoComponent implements OnInit, OnDestroy {
   }
 
   private addKeyBoardEventListener(): void {
-    this.eventSrv.keyEvent
+    this.eventSrv.keyEvent$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(event => this.handlePianoKeyEvent(event));
   }

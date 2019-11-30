@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { toDoubleInteger, toSeconds } from 'src/app/core/common/common';
+import { toDoubleInteger, toSeconds } from 'src/app/core/common/utils';
 import { songsList, Song } from './song';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 import { EventService } from 'src/app/core/service/event.service';
@@ -16,7 +16,6 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private playingSong: Song; // 正在播放的歌曲
   private audio = new Audio();
-  private guessing = false; // true: 正在猜歌
   private playDelay = 0;
   private validCheckTimer: NodeJS.Timer;
   private pauseTimer: NodeJS.Timer; // 暂停定时器, 淡出时0.5秒后执行暂停
@@ -30,16 +29,12 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   /** 说起来有点复杂...大概就是点下一首时, 理论上进度条清空后等下一首歌曲的进度传输. 因为程序执行需要时间, 在下一首播放之前已经清空了进度条, 但是之前播放的歌曲还是发送了进度信息过来, 导致刚刚点完下一首, 一大截进度跳过去了... */
   private stopTransfer = true; // 当为true时, 停止向进度条传送歌曲进度.
 
+  public guessing = false; // true: 正在猜歌
   public pause: boolean; // true: 播放, false: 暂停
   public songsList = songsList;
   public tipText = '尚未解锁该歌曲, 仅能听副歌部分, 即将播放下一首~'; // 提示文案
 
   @ViewChild('guessInput', { static: false }) input: ElementRef;
-
-  // 保留两位整数, 1 => 01
-  public getIndex(index: number): string {
-    return toDoubleInteger(index);
-  }
 
   // 确认是否选中
   public listClickHandler(index: number): void {
@@ -229,9 +224,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
-    // 监听空格键, 切换播放/暂停状态, 初次打开、正在猜歌、正在播放特殊歌曲等情况不响应
-    this.eventService.keyEvent.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
-      if (v.key === ' ' && v.event === 'keydown' && this.playingSong && !this.guessing && !this.playingSpecial) {
+    // 监听空格键, 切换播放/暂停状态, [初次打开, 正在猜歌, 正在播放特殊歌曲]等情况不响应
+    this.eventService.blankKeydown$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
+      if (this.playingSong && !this.guessing && !this.playingSpecial) {
         this.appGuessSongService.playingStatus$.next(this.audio.paused ? SongStatus.play : SongStatus.pause);
       }
     });

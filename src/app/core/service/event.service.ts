@@ -5,5 +5,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class EventService {
-  keyEvent = new Subject<{ key: string, event: 'keydown' | 'keyup' }>();
+  public keyEvent$ = new Subject<{ key: string, event: 'keydown' | 'keyup' }>();
+  public blankKeydown$ = new Subject<void>(); // 监听空格键keydown事件
 }

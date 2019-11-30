@@ -2,7 +2,7 @@ import { Component, OnDestroy, ElementRef, HostListener, Output, EventEmitter, V
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppGuessSongService } from '../../guess-song.service';
-import { toMinute } from 'src/app/core/common/common';
+import { toMinute } from 'src/app/core/common/utils';
 
 @Component({
   selector: 'app-progress',

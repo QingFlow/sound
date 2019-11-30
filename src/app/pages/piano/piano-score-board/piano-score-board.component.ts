@@ -65,7 +65,7 @@ export class AppPianoScoreBoardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.eventSrv.keyEvent
+    this.eventSrv.keyEvent$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(event => {
         if (event.key !== ' ' || event.event !== 'keydown') { return; }

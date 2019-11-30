@@ -13,6 +13,11 @@ import { AppProgressPointComponent } from './guess-song-footer/progress-point/pr
 import { AppGuessSongService } from './guess-song.service';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
 import { AppProgressComponent } from './guess-song-footer/progress/progress.component';
+import { IndexFormatPipe } from 'src/app/core/common/pipe';
+
+const pipes = [
+  IndexFormatPipe
+];
 
 @NgModule({
   imports: [
@@ -31,7 +36,8 @@ import { AppProgressComponent } from './guess-song-footer/progress/progress.comp
     AppSpecialSongComponent,
     AppGuessSongFooterComponent,
     AppProgressPointComponent,
-    AppProgressComponent
+    AppProgressComponent,
+    ...pipes
   ],
   providers: [
     AppGuessSongService,

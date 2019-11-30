@@ -11,11 +11,10 @@
 <perfect-scrollbar class="scrollbar">
   <table>
     <ng-container *ngFor="let item of songsList; let index = index;">
-      <!-- <tr [ngClass]="{'selected': item.selected, 'right': item.right}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)"> -->
       <tr [ngClass]="{'selected': item.selected}" (click)="listClickHandler(index)" (dblclick)="tryToPlay(item)">
         <td class="td-no no">
           <span>
-            <span *ngIf="!item.playing">{{ getIndex(index+1) }}</span>
+            <span *ngIf="!item.playing">{{ index | indexFormat }}</span>
             <!-- 只有播放的那条记录显示播放状态icon -->
             <ng-container *ngIf="item.playing">
               <app-svg type="playing"></app-svg>

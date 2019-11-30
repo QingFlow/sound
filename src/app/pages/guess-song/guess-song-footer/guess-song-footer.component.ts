@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { toMinute } from 'src/app/core/common/common';
+import { toMinute } from 'src/app/core/common/utils';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 
 @Component({
