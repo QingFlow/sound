@@ -19,6 +19,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   public showInput = false;
   public finish = false; // 结束时收起输入框的动画
   public introduction: string[] = ['', '', '', '', '', '', '', '', ''];
+  public hearts: { size: string, left: string, top: string, animationDuration: string }[] = [];
   public _introduction = [
     '在成长的过程中, 我们会遇到成千上万的人.',
     '他们当中有的是路人, 与你擦肩而过; ',
@@ -30,7 +31,6 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     '你一定很想念Ta吧!',
     '如果思念有声音, 那一定是这首歌.'
   ];
-  public lines: { width: string, height: string, top: string, left: string, animationDelay: string }[] = [];
 
   @Output() close: EventEmitter<null> = new EventEmitter<null>();  // 关闭弹窗
   @Output() guessRight: EventEmitter<null> = new EventEmitter<null>();  // 答题成功, 获得钥匙
@@ -92,22 +92,21 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
    */
   initLines(): void {
     let i = 0;
-    while (i < 99) {
-      this.lines.push({
-        width: `${this.randomNum(1, 3)}px`,
-        height: `${this.randomNum(20, 80)}%`,
-        top: `${this.randomNum(-170, -140)}%`,
-        left: `${this.randomNum(5, 95)}%`,
-        animationDelay: `${this.randomNum(0, 30) / 10}s`
+    while (i < 29) {
+      this.hearts.push({
+        size: `${this.randomNum(6, 10)}px`,
+        left: `${this.randomNum(10, 460)}px`,
+        top: `${this.randomNum(-15, 10)}px`,
+        animationDuration: `${this.randomNum(1, 3)}s`
       });
       i++;
     }
   }
 
   /**
-   * 获取从 m 到 n 之间的随机数
+   * 产生从 m 到 n 之间的随机数
    */
-  randomNum(m: number, n: number): number {
+  private randomNum(m: number, n: number): number {
     return Math.floor(Math.random() * (n - m + 1)) + m;
   }
 

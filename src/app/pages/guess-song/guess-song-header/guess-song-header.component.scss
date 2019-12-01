@@ -143,18 +143,18 @@
 
       &.keys {
         animation: keysFadeInRun 1s linear;
-      
+
         @keyframes keysFadeInRun {
           from {
             opacity: 0;
           }
-      
+
           to {
             opacity: 1;
           }
         }
       }
-      
+
       &:last-of-type {
         border: none;
       }

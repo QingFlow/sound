@@ -10,7 +10,22 @@
     <p>{{ introduction[6] }}{{ introduction[7] }}</p>
     <p>{{ introduction[8] }}</p>
   </div>
-  <div class="footer lines">
+  <div class="footer">
+    <div *ngIf="showInput" class="hearts">
+      <div
+        class="heart-container"
+        *ngFor="let item of hearts">
+        <div
+          class="heart"
+          [ngStyle]="{ 
+            'width': item.size, 
+            'height': item.size, 
+            'top': item.top, 
+            'left': item.left,
+            'animation-duration': item.animationDuration
+          }"></div>
+      </div>
+    </div>
     <input
       *ngIf="showInput"
       #guessInput
@@ -19,10 +34,11 @@
       class="normal"
       [ngClass]="{'wrong': wrong}"
       (keyup.enter)="validAnswer(guessInput.value)">
-    <span
+    <!-- <span
       *ngFor="let line of lines"
       [ngStyle]="{ 'width': line.width, 'height': line.height, 'top': line.top, 'left': line.left, 'animation-delay': line.animationDelay }"
-      class="particle"></span>
+      class="particle"></span> -->
+
   </div>
 </div>
 

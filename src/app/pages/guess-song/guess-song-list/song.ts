@@ -537,7 +537,7 @@ export const songsList: Song[] = [
     singer: '后弦',
     album: '娃娃脸',
     totalTime: '03:24',
-    startTime: '00:16',
+    startTime: '01:16',
     endTime: '01:54',
     ...commonConfig
   },
