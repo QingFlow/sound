@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Provider, APP_INITIALIZER } from '@angular/core';
 import { AppComponent } from './app.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,6 +10,21 @@ import { AppHeaderComponent } from './layout/header/header.component';
 import { AppSidebarComponent } from './layout/sidebar/sidebar.component';
 import { SvgModule } from './core/svg/svg.module';
 import { NgxElectronModule } from 'ngx-electron';
+import { StartupService } from './core/service/startup.service';
+
+export function StartupServiceFactory(startupService: StartupService): () => Promise<any> {
+  return () => startupService.load();
+}
+
+const APPINIT_PROVIDERS: Provider[] = [
+  StartupService,
+  {
+    provide: APP_INITIALIZER,
+    useFactory: StartupServiceFactory,
+    deps: [StartupService],
+    multi: true
+  }
+];
 
 @NgModule({
   imports: [
@@ -29,6 +44,9 @@ import { NgxElectronModule } from 'ngx-electron';
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  providers: [
+    ...APPINIT_PROVIDERS
+  ],
 })
 export class AppModule { }

@@ -29,7 +29,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     '人生最美好的状态莫过于最爱的人在身边, 最好的朋友在对面. ',
     '此时, 是否有一张脸出现在你的记忆里? 心中是否浮现出了一个名字? ',
     '你一定很想念Ta吧!',
-    '如果思念有声音, 那一定是这首歌.'
+    '如果思念有声音, 那一定是这首歌.(答案在控制台)'
   ];
 
   @Output() close: EventEmitter<null> = new EventEmitter<null>();  // 关闭弹窗
@@ -88,9 +88,9 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 初始化特殊歌曲中，跳动线条动画
+   * 初始化特殊歌曲中，漫天爱心动画
    */
-  initLines(): void {
+  initHeartAnimation(): void {
     let i = 0;
     while (i < 29) {
       this.hearts.push({
@@ -120,6 +120,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     this.audio.src = `https://file.qingflow.com/uploads/file/ed1da145-a7c9-4bb9-9c8f-36f73b0b15ac.mp3`;
     this.audio.loop = true;
     this.audio.play(); // 先注释, 快听吐了
+    console.log('穿越时空的思念');
 
     setTimeout(() => this.showTitle = true, 1000);
     const introduction$: Observable<string>[] = [];
@@ -137,7 +138,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
     }, 2000);
 
     // 初始化 BGM输入时的线条动画
-    this.initLines();
+    this.initHeartAnimation();
   }
 
   ngOnDestroy(): void {

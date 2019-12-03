@@ -5,6 +5,7 @@ import { toDoubleInteger, toSeconds, replaceChat } from 'src/app/core/common/uti
 import { songsList, Song } from './song';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 import { EventService } from 'src/app/core/service/event.service';
+import { AppSettingService } from 'src/app/core/service/setting.service';
 
 
 @Component({
@@ -131,6 +132,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     clearInterval(this.validCheckTimer);
     this.rightList.push(index);
     localStorage.setItem('rightList', JSON.stringify(this.rightList));
+    this.appSettingService.addUserExp();
   }
   // #endregion
 
@@ -219,7 +221,8 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   constructor(
     private appGuessSongService: AppGuessSongService,
-    private eventService: EventService
+    private eventService: EventService,
+    private appSettingService: AppSettingService
   ) { }
 
   ngOnInit(): void {
