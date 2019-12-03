@@ -20,16 +20,22 @@
             <span class="button-title">获取钥匙</span>
           </div>
         </button>
-        <!-- 没时间做, 先丢着 -->
-        <!-- <button type="button">
-          <div>
-            <div class="svg-container">
-              <app-svg type="direction"></app-svg>
-            </div>
-            <span class="button-title">游戏规则</span>
-          </div>
-        </button> -->
-        <button type="button" (click)="github()">
+        <a
+          class="element-container"
+          nz-popconfirm
+          nzPopconfirmTitle="这样解锁的歌曲是没有灵魂的! 你确定要继续?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="unlockAll()">
+            <button type="button">
+              <div>
+                <div class="svg-container">
+                  <app-svg type="direction"></app-svg>
+                </div>
+                <span class="button-title">解锁全部</span>
+              </div>
+            </button>
+        </a>
+        <button class="element-container" type="button" (click)="github()">
           <div>
             <div class="svg-container">
               <app-svg type="share"></app-svg>

@@ -22,6 +22,8 @@ export class AppGuessSongService {
   public keyExpend$ = new Subject<void>(); // 消耗了一把钥匙
   public bufferChange$ = new Subject<{ bufferTime: number, duration: number }>(); // 歌曲的缓存秒数
   public updatePlayingCurrentTime$ = new Subject<number>(); // 拖拽进度条导致的播放时间变更
+  public unlockAll$ = new Subject<void>(); // 解锁全部歌曲
+
   /** true: 处于缓冲 false: 能够播放 */
   public playNewSong$ = new Subject<boolean>();
 

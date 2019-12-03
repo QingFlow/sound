@@ -4,6 +4,8 @@ import { takeUntil } from 'rxjs/operators';
 import { AppGuessSongService } from '../guess-song.service';
 import { songsList } from '../guess-song-list/song';
 import { ElectronService } from 'ngx-electron';
+import { AppSettingService } from 'src/app/core/service/setting.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-guess-song-header',
@@ -27,6 +29,14 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
     localStorage.setItem('keys', JSON.stringify(this.keys));
   }
 
+  public unlockAll(): void {
+    if (this.appSettingService.user.level === 6) {
+      this.appGuessSongService.unlockAll$.next();
+    } else {
+      this.nzMessageService.error('只有等级达到6级才可以使用此功能!');
+    }
+  }
+
   public github(): void {
     const url = 'https://github.com/QingFlow/sound';
     if (this.electronService.isElectronApp) {
@@ -38,7 +48,9 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private electronService: ElectronService,
-    private appGuessSongService: AppGuessSongService
+    private appGuessSongService: AppGuessSongService,
+    private appSettingService: AppSettingService,
+    private nzMessageService: NzMessageService
   ) { }
 
   ngOnInit(): void {

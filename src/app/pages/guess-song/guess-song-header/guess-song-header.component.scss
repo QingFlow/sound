@@ -71,6 +71,10 @@
         display: flex;
         margin-top: 17px;
 
+        .element-container {
+          margin-left: 10px;
+        }
+
         button {
           padding: 0px 9px;
           background: #fff;
@@ -88,11 +92,7 @@
           &:active {
             background: #fafafa;
           }
-
-          &:not(:first-child) {
-            margin-left: 10px;
-          }
-
+          
           &.emphasize {
             background: #c62f2f;
             color: #fff;

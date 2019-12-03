@@ -339,7 +339,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         this.playingSpecial = false;
       }
     });
-    this.appGuessSongService.updatePlayingCurrentTime$.subscribe(v => {
+    this.appGuessSongService.updatePlayingCurrentTime$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
       const startTime = toSeconds(this.playingSong.startTime);
       const endTime = toSeconds(this.playingSong.endTime);
       if ((v >= startTime && v <= endTime) || this.playingSong.right) {
@@ -350,6 +350,16 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         }
         this.appGuessSongService.message('进度超出合法范围了哦~');
       }
+    });
+    this.appGuessSongService.unlockAll$.subscribe(() => {
+      clearInterval(this.validCheckTimer);
+      this.songsList.forEach((item, index) => {
+        if (!item.right) {
+          item.right = true;
+          this.rightList.push(index);
+        }
+      });
+      localStorage.setItem('rightList', JSON.stringify(this.rightList));
     });
   }
 

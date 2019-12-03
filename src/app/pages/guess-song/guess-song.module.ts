@@ -11,7 +11,7 @@ import { SvgModule } from '../../core/svg/svg.module';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { AppProgressPointComponent } from './guess-song-footer/progress-point/progress-point.component';
 import { AppGuessSongService } from './guess-song.service';
-import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
+import { NzMessageModule, NzMessageService, NzPopconfirmModule } from 'ng-zorro-antd';
 import { AppProgressComponent } from './guess-song-footer/progress/progress.component';
 import { IndexFormatPipe } from 'src/app/core/common/pipe';
 
@@ -26,7 +26,8 @@ const pipes = [
     SvgModule,
     GuessSongRoutingModule,
     NgDragDropModule,
-    NzMessageModule
+    NzMessageModule,
+    NzPopconfirmModule
   ],
   declarations: [
     AppGuessSongComponent,
