@@ -74,7 +74,6 @@ export class AppPianoComponent implements OnInit, OnDestroy {
 
     // 监听采样加载完成
     const timer = setInterval(() => {
-      console.log(this.synth.loaded);
       if (this.synth.loaded) {
         this.keyBoerdLoading = false;
         this.addKeyBoardEventListener();

@@ -26,12 +26,20 @@ export class AppSettingService {
   public addUserExp(): void {
     this.user.exp += 100;
     // 判断是否应该升级
-    const maxExp = 100 * Math.pow(2, this.user.level - 1);
-    if (this.user.exp === maxExp) {
+    if (this.user.exp === this.maxExp) {
       this.levelUp();
     }
     this.guessRight$.next();
     localStorage.setItem('soundUser', JSON.stringify(this.user));
+  }
+
+  // 计算升级所需经验
+  get maxExp(): number {
+    if (this.user.level < 8) {
+      return 100 * Math.pow(2, this.user.level - 1);
+    } else {
+      return 8000;
+    }
   }
 
   // 升级
