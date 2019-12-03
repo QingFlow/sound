@@ -6,6 +6,7 @@ import { songsList, Song } from './song';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 import { EventService } from 'src/app/core/service/event.service';
 import { AppSettingService } from 'src/app/core/service/setting.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 
 @Component({
@@ -119,11 +120,14 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   // 校验答案
   public guessSong(answer: string, item: Song, index: number): void {
+    let right = false;
     item.name.forEach(v => {
       if (v.toLowerCase() === answer.toLowerCase()) {
         this.unLock(item, index);
+        right = true;
       }
     });
+    this.nzMessageService.error('不对哦~ Try again!');
   }
 
   /** 解锁歌曲 */
@@ -222,7 +226,8 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   constructor(
     private appGuessSongService: AppGuessSongService,
     private eventService: EventService,
-    private appSettingService: AppSettingService
+    private appSettingService: AppSettingService,
+    private nzMessageService: NzMessageService
   ) { }
 
   ngOnInit(): void {

@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { from, of, concat, Observable, Subject } from 'rxjs';
 import { delay, concatMap, tap, takeUntil } from 'rxjs/operators';
 import { AppGuessSongService } from '../../guess-song.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-special-song',
@@ -46,6 +47,7 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
         }, 2000);
         setTimeout(() => { // 隐藏钥匙
           this.showKeys = false;
+          this.nzMessageService.success('恭喜你获得3把钥匙, 你可以将钥匙拖拽至未解锁的歌曲锁头部分, 即可免答解锁', { nzDuration: 7000 });
         }, 2500);
       }, 1000);
     } else {
@@ -111,7 +113,8 @@ export class AppSpecialSongComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private appGuessSongService: AppGuessSongService
+    private appGuessSongService: AppGuessSongService,
+    private nzMessageService: NzMessageService
   ) { }
 
   ngOnInit(): void {
