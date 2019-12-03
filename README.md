@@ -3,13 +3,17 @@
 
 轻流前端团队利用业余时间研发的一款应用, 基于Angular+Electron实现的, 主页仿照网易云, 做了三个功能页.
 
+## 作者列表(按模块顺序)
+
+
+
+| [<img src="https://avatars1.githubusercontent.com/u/30228406?v=4" width="150px;"/><br /><sub>Eve</sub>](https://github.com/Mr-Eve) | [<img src="https://avatars1.githubusercontent.com/u/25194505?s=60&v=4" width="150px;"/><br /><sub>artemisXiao</sub>](https://github.com/artemisXiao) | [<img src="https://avatars1.githubusercontent.com/u/20921324?s=60&v=4" width="150px;"/><br /><sub>tirelyl</sub>](https://github.com/tirelyl)
+| :---: | :---: | :---: |
+
+
 ## 模块介绍
 
 ### 听歌识曲
-
-| 模块负责人 |
-|--|
-| [<img src="https://avatars1.githubusercontent.com/u/30228406?v=4" width="100px;"/><br /><sub>Eve</sub>](https://github.com/Mr-Eve) |
 
 #### 基本介绍
 
