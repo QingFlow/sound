@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { toDoubleInteger, toSeconds, replaceChat } from 'src/app/core/common/utils';
+import { toSeconds, replaceChat, shuffle, setLocalStorage, getLocalStorage } from 'src/app/core/common/utils';
 import { songsList, Song } from './song';
 import { AppGuessSongService, SongStatus } from '../guess-song.service';
 import { EventService } from 'src/app/core/service/event.service';
@@ -33,7 +33,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
 
   public guessing = false; // true: 正在猜歌
   public pause: boolean; // true: 播放, false: 暂停
-  public songsList = songsList;
+  public songsList = [];
   public tipText = '尚未解锁该歌曲, 仅能听副歌部分, 即将播放下一首~'; // 提示文案
 
   @ViewChild('guessInput', { static: false }) input: ElementRef;
@@ -135,7 +135,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
     item.right = true;
     clearInterval(this.validCheckTimer);
     this.rightList.push(index);
-    localStorage.setItem('rightList', JSON.stringify(this.rightList));
+    setLocalStorage('rightList', this.rightList);
     this.appSettingService.addUserExp();
   }
   // #endregion
@@ -231,6 +231,19 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    // 读取本地歌曲乱序信息
+    const localSongList = getLocalStorage('sortIds') as number[] || [];
+    if (localSongList.length === 0) {
+      const sortSongList = shuffle(songsList) as Song[];
+      const sortIds = sortSongList.map(v => v.id);
+      setLocalStorage('sortIds', sortIds);
+      this.songsList = songsList;
+    } else {
+      localSongList.forEach(v => {
+        const findSong = songsList.find(song => song.id === v);
+        this.songsList.push(findSong);
+      });
+    }
     // 防作弊
     this.songsList.map(v => v.fakeTitle = v.title);
     this.songsList.map((item, i) => {
@@ -244,7 +257,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
+    this.playingTimes = Number.parseInt(getLocalStorage('playingTimes'), 10) || 0;
     // 监听空格键, 切换播放/暂停状态, [初次打开, 正在猜歌, 正在播放特殊歌曲]等情况不响应
     this.eventService.blankKeydown$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
       if (this.playingSong && !this.guessing && !this.playingSpecial) {
@@ -252,7 +265,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       }
     });
     // 读取本地已答对歌曲数据
-    this.rightList = JSON.parse(localStorage.getItem('rightList')) || [];
+    this.rightList = getLocalStorage('rightList') || [];
     this.rightList.forEach(v => this.songsList[v].right = true);
     // 更新歌曲播放进度条
     this.progressTimer = setInterval(() => {
@@ -291,10 +304,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
       }
     };
     this.audio.onloadeddata = () => {
-      console.log('可以播放拉');
       this.stopTransfer = false;
       this.playingTimes++;
-      localStorage.setItem('playingTimes', JSON.stringify(this.playingTimes));
+      setLocalStorage('playingTimes', this.playingTimes);
       this.appGuessSongService.playNewSong$.next(false);
     };
     // #endregion
@@ -364,7 +376,7 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
           this.rightList.push(index);
         }
       });
-      localStorage.setItem('rightList', JSON.stringify(this.rightList));
+      setLocalStorage('rightList', this.rightList);
     });
   }
 

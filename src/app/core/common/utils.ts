@@ -41,3 +41,33 @@ export function replaceChat(source: string, position: number, newChar: string) {
   const sRet = sFrontPart + newChar + sTailPart;
   return sRet;
 }
+
+/**
+ * 数组乱序
+ * @param array 数组
+ */
+export function shuffle(array: Array<any>) {
+  let i = array.length;
+  while (i) {
+    const j = Math.floor(Math.random() * i--);
+    [array[j], array[i]] = [array[i], array[j]];
+  }
+  return array;
+}
+
+/**
+ * 将数据存入localStorage
+ * @param name 需要存储的名称
+ * @param value 需要存储的值
+ */
+export function setLocalStorage(name: string, value: any): void {
+  localStorage.setItem(name, JSON.stringify(value));
+}
+
+/**
+ * 从localStorage中取出数据
+ * @param name 需要取出的名称
+ */
+export function getLocalStorage(name: string): any {
+  return JSON.parse(localStorage.getItem(name));
+}

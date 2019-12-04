@@ -1,5 +1,6 @@
 
 export interface Song {
+  id: number; // 序号
   fakeTitle: string; // 假标题, 防作弊用的
   title: string; // 标题
   src: string; // OSS地址
@@ -15,13 +16,18 @@ export interface Song {
   right: boolean; // 是否已答题
 }
 
-const commonConfig = {
-  fakeTitle: '',
-  selected: false,
-  playing: false,
-  guessing: false,
-  right: false
-};
+let id = 0; // 自增的id, 懒得一个个写了, 让他自己算去吧...
+
+function commonConfig(): any {
+  return {
+    id: ++id,
+    fakeTitle: '',
+    selected: false,
+    playing: false,
+    guessing: false,
+    right: false
+  };
+}
 
 export const songsList: Song[] = [
   {
@@ -33,7 +39,7 @@ export const songsList: Song[] = [
     totalTime: '04:46',
     startTime: '01:14',
     endTime: '02:13',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `摩诃不思议アドベンチャー!`,
@@ -44,7 +50,7 @@ export const songsList: Song[] = [
     totalTime: '03:34',
     startTime: '00:10',
     endTime: '00:34',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `樱花草`,
@@ -55,7 +61,7 @@ export const songsList: Song[] = [
     totalTime: '02:13',
     startTime: '1:11',
     endTime: '1:39',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `My Love`,
@@ -66,7 +72,7 @@ export const songsList: Song[] = [
     totalTime: '03:53',
     startTime: '01:58',
     endTime: '02:38',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `遇见`,
@@ -77,7 +83,7 @@ export const songsList: Song[] = [
     totalTime: '03:39',
     startTime: '01:15',
     endTime: '01:38',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `一生有你`,
@@ -88,7 +94,7 @@ export const songsList: Song[] = [
     totalTime: '04:18',
     startTime: '03:08',
     endTime: '03:54',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `忘记时间`,
@@ -99,7 +105,7 @@ export const songsList: Song[] = [
     totalTime: '04:32',
     startTime: '01:32',
     endTime: '02:00',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `盛夏的果实`,
@@ -110,7 +116,7 @@ export const songsList: Song[] = [
     totalTime: '04:10',
     startTime: '02:42',
     endTime: '03:50',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `As Long as You Love Me`,
@@ -121,7 +127,7 @@ export const songsList: Song[] = [
     totalTime: '03:32',
     startTime: '00:57',
     endTime: '01:18',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `布拉格广场`,
@@ -132,7 +138,7 @@ export const songsList: Song[] = [
     totalTime: '04:54',
     startTime: '01:00',
     endTime: '01:41',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `aLIEz`,
@@ -143,7 +149,7 @@ export const songsList: Song[] = [
     totalTime: '04:28',
     startTime: '00:58',
     endTime: '01:18',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Skin`,
@@ -154,7 +160,7 @@ export const songsList: Song[] = [
     totalTime: '03:59',
     startTime: '00:57',
     endTime: '01:29',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `DON'T PUSH ME`,
@@ -165,7 +171,7 @@ export const songsList: Song[] = [
     totalTime: '03:14',
     startTime: '00:09',
     endTime: '00:44',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Disco Inferno`,
@@ -176,7 +182,7 @@ export const songsList: Song[] = [
     totalTime: '03:34',
     startTime: '00:52',
     endTime: '01:11',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `No Roots`,
@@ -187,7 +193,7 @@ export const songsList: Song[] = [
     totalTime: '03:55',
     startTime: '00:53',
     endTime: '01:24',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `给我一个理由忘记`,
@@ -198,7 +204,7 @@ export const songsList: Song[] = [
     totalTime: '04:45',
     startTime: '01:27',
     endTime: '01:58',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Here With You`,
@@ -209,7 +215,7 @@ export const songsList: Song[] = [
     totalTime: '03:45',
     startTime: '01:10',
     endTime: '01:26',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Waiting For Love`,
@@ -220,7 +226,7 @@ export const songsList: Song[] = [
     totalTime: '04:34',
     startTime: '00:17',
     endTime: '00:47',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `不再犹豫`,
@@ -231,7 +237,7 @@ export const songsList: Song[] = [
     totalTime: '04:12',
     startTime: '00:32',
     endTime: '01:13',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `真的爱你`,
@@ -242,7 +248,7 @@ export const songsList: Song[] = [
     totalTime: '04:37',
     startTime: '00:50',
     endTime: '01:22',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `I Really Like You`,
@@ -253,7 +259,7 @@ export const songsList: Song[] = [
     totalTime: '03:24',
     startTime: '00:39',
     endTime: '01:11',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Shape of You`,
@@ -264,7 +270,7 @@ export const songsList: Song[] = [
     totalTime: '03:51',
     startTime: '00:30',
     endTime: '01:29',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Big Big World`,
@@ -275,7 +281,7 @@ export const songsList: Song[] = [
     totalTime: '03:26',
     startTime: '01:41',
     endTime: '02:22',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `我的秘密`,
@@ -286,7 +292,7 @@ export const songsList: Song[] = [
     totalTime: '04:10',
     startTime: '01:05',
     endTime: '01:43',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Anyone Of Us (Stupid Mistake)`,
@@ -297,7 +303,7 @@ export const songsList: Song[] = [
     totalTime: '03:47',
     startTime: '00:35',
     endTime: '01:14',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Fire`,
@@ -308,7 +314,7 @@ export const songsList: Song[] = [
     totalTime: '03:48',
     startTime: '00:52',
     endTime: '01:04',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Believer`,
@@ -319,7 +325,7 @@ export const songsList: Song[] = [
     totalTime: '03:10',
     startTime: '00:02',
     endTime: '00:48',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Look What You Made Me Do`,
@@ -330,7 +336,7 @@ export const songsList: Song[] = [
     totalTime: '02:47',
     startTime: '00:45',
     endTime: '01:15',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Die Young`,
@@ -341,7 +347,7 @@ export const songsList: Song[] = [
     totalTime: '03:33',
     startTime: '00:07',
     endTime: '00:38',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Counting Stars`,
@@ -352,7 +358,7 @@ export const songsList: Song[] = [
     totalTime: '04:17',
     startTime: '00:38',
     endTime: '01:18',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `You Belong With Me`,
@@ -363,7 +369,7 @@ export const songsList: Song[] = [
     totalTime: '03:49',
     startTime: '00:37',
     endTime: '01:07',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Oops`,
@@ -374,7 +380,7 @@ export const songsList: Song[] = [
     totalTime: '03:24',
     startTime: '01:04',
     endTime: '01:21',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Bye Bye Bye`,
@@ -385,7 +391,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:42',
     endTime: '01:03',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Maps`,
@@ -396,7 +402,7 @@ export const songsList: Song[] = [
     totalTime: '03:09',
     startTime: '00:39',
     endTime: '01:12',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `We Are Never Ever Getting Back Together`,
@@ -407,7 +413,7 @@ export const songsList: Song[] = [
     totalTime: '03:13',
     startTime: '00:39',
     endTime: '01:02',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Lock Me Up`,
@@ -418,7 +424,7 @@ export const songsList: Song[] = [
     totalTime: '03:31',
     startTime: '00:44',
     endTime: '01:06',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `君が好きだと叫びたい`,
@@ -429,7 +435,7 @@ export const songsList: Song[] = [
     totalTime: '03:50',
     startTime: '01:04',
     endTime: '01:32',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Revolution`,
@@ -440,7 +446,7 @@ export const songsList: Song[] = [
     totalTime: '03:51',
     startTime: '00:03',
     endTime: '00:14',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Every Heart（Cover：BoA）`,
@@ -451,7 +457,7 @@ export const songsList: Song[] = [
     totalTime: '04:31',
     startTime: '00:45',
     endTime: '01:11',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `New Soul`,
@@ -462,7 +468,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:10',
     endTime: '00:28',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `侧脸`,
@@ -473,7 +479,7 @@ export const songsList: Song[] = [
     totalTime: '03:37',
     startTime: '01:15',
     endTime: '01:44',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `知足`,
@@ -484,7 +490,7 @@ export const songsList: Song[] = [
     totalTime: '04:16',
     startTime: '02:52',
     endTime: '03:43',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `成都（Cover 赵雷）`,
@@ -495,7 +501,7 @@ export const songsList: Song[] = [
     totalTime: '04:46',
     startTime: '01:22',
     endTime: '01:53',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `说爱你`,
@@ -506,7 +512,7 @@ export const songsList: Song[] = [
     totalTime: '03:22',
     startTime: '00:22',
     endTime: '00:42',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `后来`,
@@ -517,7 +523,7 @@ export const songsList: Song[] = [
     totalTime: '05:41',
     startTime: '02:36',
     endTime: '03:02',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `霜雪千年（Cover 洛天依 ／ 乐正绫）`,
@@ -528,7 +534,7 @@ export const songsList: Song[] = [
     totalTime: '04:06',
     startTime: '00:16',
     endTime: '01:29',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `娃娃脸`,
@@ -539,7 +545,7 @@ export const songsList: Song[] = [
     totalTime: '03:24',
     startTime: '01:16',
     endTime: '01:54',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `起风了`,
@@ -550,7 +556,7 @@ export const songsList: Song[] = [
     totalTime: '05:13',
     startTime: '01:36',
     endTime: '02:07',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `感谢你曾来过`,
@@ -561,7 +567,7 @@ export const songsList: Song[] = [
     totalTime: '03:56',
     startTime: '01:01',
     endTime: '01:50',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `小乌龟`,
@@ -572,7 +578,7 @@ export const songsList: Song[] = [
     totalTime: '03:46',
     startTime: '00:38',
     endTime: '01:13',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `可不可以`,
@@ -583,7 +589,7 @@ export const songsList: Song[] = [
     totalTime: '04:00',
     startTime: '01:11',
     endTime: '01:39',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `偏爱`,
@@ -594,7 +600,7 @@ export const songsList: Song[] = [
     totalTime: '03:32',
     startTime: '00:56',
     endTime: '01:25',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `云烟成雨`,
@@ -605,7 +611,7 @@ export const songsList: Song[] = [
     totalTime: '04:00',
     startTime: '01:13',
     endTime: '01:39',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `白羊`,
@@ -616,7 +622,7 @@ export const songsList: Song[] = [
     totalTime: '02:48',
     startTime: '00:36',
     endTime: '01:09',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `美人鱼`,
@@ -627,7 +633,7 @@ export const songsList: Song[] = [
     totalTime: '04:14',
     startTime: '00:58',
     endTime: '01:37',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `我们都一样（Cover：张杰）`,
@@ -638,7 +644,7 @@ export const songsList: Song[] = [
     totalTime: '04:55',
     startTime: '01:20',
     endTime: '01:53',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `彩虹的微笑`,
@@ -649,7 +655,7 @@ export const songsList: Song[] = [
     totalTime: '02:50',
     startTime: '01:16',
     endTime: '01:53',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `風の住む街`,
@@ -660,7 +666,7 @@ export const songsList: Song[] = [
     totalTime: '04:45',
     startTime: '01:20',
     endTime: '01:44',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `盗将行（Cover：花粥）`,
@@ -671,7 +677,7 @@ export const songsList: Song[] = [
     totalTime: '03:21',
     startTime: '00:44',
     endTime: '01:10',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `去年夏天（Cover：王大毛）`,
@@ -682,7 +688,7 @@ export const songsList: Song[] = [
     totalTime: '04:05',
     startTime: '00:49',
     endTime: '01:20',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `暖暖`,
@@ -693,7 +699,7 @@ export const songsList: Song[] = [
     totalTime: '04:00',
     startTime: '01:09',
     endTime: '01:28',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `Lemon`,
@@ -704,7 +710,7 @@ export const songsList: Song[] = [
     totalTime: '04:15',
     startTime: '00:58',
     endTime: '01:26',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `ハレハレヤ`,
@@ -715,7 +721,7 @@ export const songsList: Song[] = [
     totalTime: '03:29',
     startTime: '00:11',
     endTime: '00:54',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `逍遥叹`,
@@ -726,7 +732,7 @@ export const songsList: Song[] = [
     totalTime: '05:13',
     startTime: '01:21',
     endTime: '01:46',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `出山`,
@@ -737,7 +743,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:58',
     endTime: '01:16',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `小情歌`,
@@ -748,7 +754,7 @@ export const songsList: Song[] = [
     totalTime: '04:33',
     startTime: '01:42',
     endTime: '02:14',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `失恋阵线联盟`,
@@ -759,7 +765,7 @@ export const songsList: Song[] = [
     totalTime: '02:53',
     startTime: '00:16',
     endTime: '00:59',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `红色高跟鞋`,
@@ -770,7 +776,7 @@ export const songsList: Song[] = [
     totalTime: '03:26',
     startTime: '00:42',
     endTime: '01:06',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `如果有来生`,
@@ -781,7 +787,7 @@ export const songsList: Song[] = [
     totalTime: '04:07',
     startTime: '01:04',
     endTime: '01:33',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `虹之间`,
@@ -792,7 +798,7 @@ export const songsList: Song[] = [
     totalTime: '04:06',
     startTime: '01:10',
     endTime: '01:37',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `陷阱（Cover 王北车）`,
@@ -803,7 +809,7 @@ export const songsList: Song[] = [
     totalTime: '04:40',
     startTime: '01:23',
     endTime: '01:52',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `一直很安静`,
@@ -814,7 +820,7 @@ export const songsList: Song[] = [
     totalTime: '04:10',
     startTime: '01:57',
     endTime: '02:31',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `我爱他`,
@@ -825,7 +831,7 @@ export const songsList: Song[] = [
     totalTime: '04:40',
     startTime: '01:08',
     endTime: '01:55',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `你瞒我瞒`,
@@ -836,7 +842,7 @@ export const songsList: Song[] = [
     totalTime: '03:59',
     startTime: '01:09',
     endTime: '01:38',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `易燃易爆炸`,
@@ -847,7 +853,7 @@ export const songsList: Song[] = [
     totalTime: '03:20',
     startTime: '00:49',
     endTime: '01:23',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `爱你`,
@@ -858,7 +864,7 @@ export const songsList: Song[] = [
     totalTime: '03:28',
     startTime: '00:36',
     endTime: '01:06',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `你的酒馆对我打了烊`,
@@ -869,7 +875,7 @@ export const songsList: Song[] = [
     totalTime: '04:11',
     startTime: '00:24',
     endTime: '01:07',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `假装`,
@@ -880,7 +886,7 @@ export const songsList: Song[] = [
     totalTime: '04:24',
     startTime: '01:25',
     endTime: '02:04',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `绿色`,
@@ -891,7 +897,7 @@ export const songsList: Song[] = [
     totalTime: '04:29',
     startTime: '00:57',
     endTime: '01:27',
-    ...commonConfig
+    ...commonConfig()
   },
   {
     title: `PLANET（Cover：ラムジ）`,
@@ -902,6 +908,6 @@ export const songsList: Song[] = [
     totalTime: '04:03',
     startTime: '00:47',
     endTime: '01:23',
-    ...commonConfig
+    ...commonConfig()
   }
 ];

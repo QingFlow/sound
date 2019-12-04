@@ -6,6 +6,7 @@ import { songsList } from '../guess-song-list/song';
 import { ElectronService } from 'ngx-electron';
 import { AppSettingService } from 'src/app/core/service/setting.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { setLocalStorage, getLocalStorage } from 'src/app/core/common/utils';
 
 @Component({
   selector: 'app-guess-song-header',
@@ -26,7 +27,7 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
   public guessRightHandler(): void {
     this.showKeys = true;
     this.keys = [1, 2, 3];
-    localStorage.setItem('keys', JSON.stringify(this.keys));
+    setLocalStorage('keys', this.keys);
   }
 
   public unlockAll(): void {
@@ -55,15 +56,15 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.songNumber = songsList.length;
-    this.playingTimes = Number.parseInt(JSON.parse(localStorage.getItem('playingTimes')), 10) || 0;
-    const keys = JSON.parse(localStorage.getItem('keys'));
+    this.playingTimes = getLocalStorage('playingTimes') || 0;
+    const keys = getLocalStorage('keys');
     if (keys) {
       this.keys = keys;
       this.showKeys = true;
     }
     this.appGuessSongService.keyExpend$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.keys.length = this.keys.length - 1;
-      localStorage.setItem('keys', JSON.stringify(this.keys));
+      setLocalStorage('keys', this.keys);
     });
     this.appGuessSongService.playNewSong$.pipe(takeUntil(this.unsubscribe$)).subscribe(v => {
       if (!v) {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { setLocalStorage } from '../common/utils';
 
 export interface User {
   level: number; // 等级
@@ -30,7 +31,7 @@ export class AppSettingService {
       this.levelUp();
     }
     this.guessRight$.next();
-    localStorage.setItem('soundUser', JSON.stringify(this.user));
+    setLocalStorage('soundUser', this.user);
   }
 
   // 计算升级所需经验
