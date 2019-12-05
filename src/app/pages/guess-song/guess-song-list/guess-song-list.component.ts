@@ -127,7 +127,9 @@ export class AppGuessSongListComponent implements OnInit, OnDestroy {
         right = true;
       }
     });
-    this.nzMessageService.error('不对哦~ Try again!');
+    if (!right) {
+      this.nzMessageService.error('不对哦~ Try again!');
+    }
   }
 
   /** 解锁歌曲 */
