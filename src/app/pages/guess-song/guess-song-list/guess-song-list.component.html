@@ -28,7 +28,7 @@
           [style.cursor]="item.right ? 'default' : 'pointer'"
           [dragOverClass]="'drag-target-border'"
           (click)="guessStart(item)"
-          (onDrop)="openLock(item, index)">
+          (onDrop)="openLock(item)">
           <ng-container *ngIf="item.right">
             <app-svg type="unlock" class="unlock"></app-svg>
           </ng-container>

@@ -38,8 +38,17 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public github(): void {
+  public projectGithub(): void {
     const url = 'https://github.com/QingFlow/sound';
+    if (this.electronService.isElectronApp) {
+      this.electronService.shell.openExternal(url);
+    } else {
+      window.open(url, '_blank');
+    }
+  }
+
+  public myGithub(): void {
+    const url = 'https://github.com/Mr-Eve';
     if (this.electronService.isElectronApp) {
       this.electronService.shell.openExternal(url);
     } else {
