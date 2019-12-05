@@ -35,6 +35,21 @@
               </div>
             </button>
         </a>
+        <a
+          class="element-container"
+          nz-popconfirm
+          nzPopconfirmTitle="确定要删除所有本地数据吗?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="clearLocalStorage()">
+            <button type="button">
+              <div>
+                <div class="svg-container">
+                  <app-svg type="clear"></app-svg>
+                </div>
+                <span class="button-title">清除缓存</span>
+              </div>
+            </button>
+        </a>
         <button class="element-container" type="button" (click)="projectGithub()">
           <div>
             <div class="svg-container">

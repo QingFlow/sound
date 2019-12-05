@@ -11,6 +11,7 @@ import { AppSidebarComponent } from './layout/sidebar/sidebar.component';
 import { SvgModule } from './core/svg/svg.module';
 import { NgxElectronModule } from 'ngx-electron';
 import { StartupService } from './core/service/startup.service';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd';
 
 export function StartupServiceFactory(startupService: StartupService): () => Promise<any> {
   return () => startupService.load();
@@ -35,7 +36,8 @@ const APPINIT_PROVIDERS: Provider[] = [
     BrowserAnimationsModule,
     PerfectScrollbarModule,
     NgxElectronModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    NzMessageModule
   ],
   declarations: [
     AppSidebarComponent,
@@ -46,7 +48,8 @@ const APPINIT_PROVIDERS: Provider[] = [
     AppComponent
   ],
   providers: [
-    ...APPINIT_PROVIDERS
+    ...APPINIT_PROVIDERS,
+    NzMessageService
   ],
 })
 export class AppModule { }

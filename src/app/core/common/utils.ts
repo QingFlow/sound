@@ -61,7 +61,7 @@ export function shuffle(array: Array<any>) {
  * @param value 需要存储的值
  */
 export function setLocalStorage(name: string, value: any): void {
-  localStorage.setItem(name, JSON.stringify(value));
+  localStorage.setItem(name, escape(JSON.stringify(value)));
 }
 
 /**
@@ -69,5 +69,11 @@ export function setLocalStorage(name: string, value: any): void {
  * @param name 需要取出的名称
  */
 export function getLocalStorage(name: string): any {
-  return JSON.parse(localStorage.getItem(name));
+  let result: any;
+  try {
+    result = JSON.parse(unescape(localStorage.getItem(name)));
+  } catch (error) {
+    return null;
+  }
+  return result;
 }

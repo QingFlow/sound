@@ -56,6 +56,15 @@ export class AppGuessSongHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  public clearLocalStorage(): void {
+    localStorage.clear();
+    if (this.electronService.isElectronApp) {
+      this.nzMessageService.success('清除成功, 请重启应用!');
+    } else {
+      window.location.reload();
+    }
+  }
+
   constructor(
     private electronService: ElectronService,
     private appGuessSongService: AppGuessSongService,
