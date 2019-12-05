@@ -31,6 +31,19 @@
  * 钥匙道具, 点击『获取钥匙』, 猜对特殊歌曲可以用于解锁歌曲
  * 一键解锁, 用户达到6级即可一键解锁全部歌曲
 
+### qing-form
+
+#### 基本介绍
+
+QingForm 是一个用于 Angular 动态创建表单的库，JSON配置，支持字段间的灵活联动 GitHub 地址：https://github.com/tirelyl/qing-form
+希望解决表格间复杂的联动问题。
+
+#### Feature
+- JSON 格式快速配置表单
+- 支持公式表达式给字段赋值
+- 自定义字段之间的显隐
+  
+  [demo 地址](https://tirelyl.github.io/qing-form/docs)
 
 ## 如何使用
 
