@@ -51,6 +51,10 @@ QingForm 是一个用于 Angular 动态创建表单的库，JSON配置，支持�
 
 [https://qingflow.github.io/sound/](https://qingflow.github.io/sound/)
 
+#### 国内镜像站
+
+[https://eve.weishour.com/guess-song](https://eve.weishour.com/guess-song)
+
 #### 桌面app
 
 下载链接(仅支持windows): [sound.exe](https://file.qingflow.com/uploads/file/0432ce66-4437-4aba-883c-fd480c6113f0.exe)
